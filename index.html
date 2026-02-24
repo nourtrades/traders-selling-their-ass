@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior:auto;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
 <title>TRADERS SELLING THEIR ASS // NOUR TRADES INTELLIGENCE</title>
+<script>window.history.scrollRestoration='manual';window.scrollTo(0,0);</script>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a;--panel-bg:rgba(0,20,0,0.85);--declassified-red:#c0392b}
@@ -436,6 +437,7 @@ setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Arr
 // ========== BOOT ==========
 async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> NOUR TRADES INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease'}
 runBoot();
+window.scrollTo(0,0);
 
 // ========== MUGSHOT CARDS ==========
 const grid=document.getElementById('mugGrid');
