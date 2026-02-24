@@ -256,6 +256,26 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
     </div>
   </div>
 
+  <!-- EMAIL SIGNUP -->
+  <div class="section-header"><span class="section-title">◆ INTEL UPDATES — STAY IN THE KNOW ◆</span></div>
+  <div style="max-width:650px;margin:0 auto;padding:0 20px 40px;">
+    <div style="border:1px solid var(--matrix-green);background:rgba(0,20,0,.4);padding:30px;position:relative;">
+      <div style="position:absolute;top:-10px;left:20px;background:var(--bg-black);padding:0 12px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--matrix-green);">MAILING LIST</div>
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:clamp(16px,2.5vw,22px);font-weight:700;color:var(--matrix-green);letter-spacing:3px;text-shadow:0 0 10px rgba(0,255,65,.3);">🚨 GET NOTIFIED WHEN SCAMMERS GET EXPOSED</div>
+        <div style="font-size:13px;color:var(--matrix-mid);margin-top:8px;line-height:1.6;">Be the first to know when new episodes drop and new traders get added to the list.</div>
+      </div>
+      <form id="emailForm" style="display:flex;gap:12px;flex-wrap:wrap;">
+        <input type="email" id="emailInput" placeholder="Enter your email..." required style="flex:1;min-width:200px;background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s;">
+        <button type="submit" id="emailBtn" style="background:transparent;border:2px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;padding:12px 24px;cursor:pointer;transition:all .3s;white-space:nowrap;">SUBSCRIBE</button>
+      </form>
+      <div id="emailSuccess" style="display:none;text-align:center;padding:16px;border:1px solid var(--matrix-green);background:rgba(0,255,65,.03);margin-top:12px;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);">✅ YOU'RE IN — INTEL INCOMING</span>
+      </div>
+      <div id="emailError" style="display:none;text-align:center;padding:10px;border:1px solid var(--cod-red);background:rgba(255,23,68,.05);margin-top:12px;font-size:12px;color:var(--cod-red);"></div>
+    </div>
+  </div>
+
   <!-- NOUR TRADES LINKS -->
   <div class="section-header"><span class="section-title">◆ JOIN THE MOVEMENT ◆</span></div>
   <div style="max-width:850px;margin:0 auto;padding:0 20px 40px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
@@ -451,6 +471,29 @@ document.getElementById('wbForm').addEventListener('submit', async function(e) {
     errEl.classList.add('show');
     btn.disabled = false;
     btn.classList.remove('loading');
+  }
+});
+// ========== EMAIL SIGNUP ==========
+document.getElementById('emailForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('emailBtn');
+  const errEl = document.getElementById('emailError');
+  const email = document.getElementById('emailInput').value.trim();
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'TRANSMITTING...';
+
+  try {
+    if (!supabaseClient) throw new Error('Connection not ready. Try again in a moment.');
+    const { error } = await supabaseClient.from('email_subscribers').insert({ email: email });
+    if (error) throw error;
+    document.getElementById('emailForm').style.display = 'none';
+    document.getElementById('emailSuccess').style.display = 'block';
+  } catch (err) {
+    errEl.textContent = '⚠ ' + (err.message || 'Failed. Try again.');
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'SUBSCRIBE';
   }
 });
 </script>
