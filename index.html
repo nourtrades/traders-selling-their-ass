@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRADERS SELLING THEIR ASS // NOUR TRADES INTELLIGENCE</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a;--panel-bg:rgba(0,20,0,0.85);--classified-red:#c0392b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair}
+#matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
+.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px)}
+.crt-flicker{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;animation:flicker .15s infinite;background:rgba(0,255,65,.01)}
+@keyframes flicker{0%{opacity:.27}30%{opacity:.66}50%{opacity:.96}70%{opacity:.53}100%{opacity:.24}}
+.main-container{position:relative;z-index:2;min-height:100vh}
+.classified-bar{background:var(--classified-red);padding:6px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:6px;color:#fff;text-transform:uppercase;animation:threat-blink 2s step-end infinite}
+@keyframes threat-blink{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,rgba(0,255,65,.08),rgba(255,106,0,.08));border-bottom:1px solid var(--matrix-dark);padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.cta-banner-text{font-size:13px;color:var(--matrix-green);letter-spacing:1px}
+.cta-banner-text strong{color:var(--cod-orange)}
+.cta-banner-btn{background:var(--cod-red);color:#fff;border:none;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;padding:8px 20px;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;animation:cta-pulse 2s ease-in-out infinite}
+.cta-banner-btn:hover{background:#fff;color:var(--cod-red);box-shadow:0 0 20px rgba(255,23,68,.4)}
+@keyframes cta-pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,23,68,.4)}50%{box-shadow:0 0 0 8px rgba(255,23,68,0)}}
+
+.header{text-align:center;padding:50px 20px 30px;border-bottom:1px solid var(--matrix-dark)}
+.gov-seal{width:80px;height:80px;border:3px solid var(--cod-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);position:relative}
+.gov-seal::before{content:'';position:absolute;width:92px;height:92px;border:1px solid rgba(255,106,0,.3);border-radius:50%}
+.gov-seal-inner{text-align:center;line-height:1.4}
+.title-main{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(24px,4.5vw,56px);text-transform:uppercase;letter-spacing:6px;color:var(--cod-red);text-shadow:0 0 10px var(--cod-red),0 0 30px rgba(255,23,68,.4);animation:title-pulse 3s ease-in-out infinite;line-height:1.2}
+@keyframes title-pulse{0%,100%{text-shadow:0 0 10px var(--cod-red),0 0 30px rgba(255,23,68,.4)}50%{text-shadow:0 0 20px var(--cod-red),0 0 50px rgba(255,23,68,.6)}}
+.subtitle{font-family:'Rajdhani',sans-serif;font-weight:300;font-size:clamp(12px,1.8vw,18px);color:var(--matrix-green);letter-spacing:5px;margin-top:12px;text-transform:uppercase;opacity:.7}
+.doc-number{font-size:10px;color:var(--matrix-dark);letter-spacing:3px;margin-top:15px}
+.stats-bar{display:flex;justify-content:center;gap:40px;margin-top:30px;flex-wrap:wrap;padding:20px;border-top:1px solid var(--matrix-dark);border-bottom:1px solid var(--matrix-dark);background:rgba(0,20,0,.3)}
+.stat-item{text-align:center}
+.stat-value{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--cod-orange);text-shadow:0 0 10px rgba(255,106,0,.5)}
+.stat-label{font-size:10px;letter-spacing:3px;color:var(--matrix-mid);margin-top:4px}
+.section-header{max-width:1400px;margin:40px auto 20px;padding:0 20px;display:flex;align-items:center;gap:15px}
+.section-header::before,.section-header::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--matrix-dark))}
+.section-header::after{background:linear-gradient(90deg,var(--matrix-dark),transparent)}
+.section-title{font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:5px;color:var(--cod-yellow);white-space:nowrap}
+
+.mugshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1400px;margin:0 auto;padding:0 20px 40px}
+.mugshot-card{background:var(--panel-bg);border:1px solid var(--matrix-dark);cursor:pointer;transition:all .3s;overflow:hidden;position:relative;opacity:0;transform:translateY(20px);animation:card-enter .5s ease forwards}
+@keyframes card-enter{to{opacity:1;transform:translateY(0)}}
+.mugshot-card:hover{border-color:var(--cod-orange);box-shadow:0 0 20px rgba(255,106,0,.2);transform:translateY(-4px)}
+.classified-stamp{position:absolute;top:12px;right:12px;z-index:3;background:rgba(192,57,43,.9);color:#fff;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;padding:3px 10px;border:1px solid rgba(255,255,255,.3);transform:rotate(3deg)}
+.risk-badge{position:absolute;top:12px;left:12px;z-index:3;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:4px 10px;border:1px solid}
+.risk-critical{background:rgba(255,23,68,.85);color:#fff;border-color:var(--cod-red)}
+.risk-high{background:rgba(255,106,0,.85);color:#fff;border-color:var(--cod-orange)}
+.risk-elevated{background:rgba(255,214,0,.85);color:#000;border-color:var(--cod-yellow)}
+.mugshot-photo{width:100%;height:220px;overflow:hidden;position:relative;border-bottom:2px solid var(--matrix-dark)}
+.mugshot-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(40%) contrast(1.1);transition:filter .3s}
+.mugshot-card:hover .mugshot-photo img{filter:grayscale(0%) contrast(1.05)}
+.mugshot-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.mugshot-ruler{position:absolute;bottom:0;left:0;right:0;height:30px;display:flex;align-items:flex-end;padding:0 10px;z-index:2}
+.ruler-line{flex:1;border-left:1px solid rgba(0,255,65,.2);height:15px}
+.ruler-line:nth-child(5n){border-color:rgba(0,255,65,.5);height:22px}
+.mugshot-info{padding:16px}
+.mugshot-rank{font-family:'Orbitron',sans-serif;font-size:9px;color:var(--cod-red);letter-spacing:3px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.mugshot-rank .rank-num{background:var(--cod-red);color:#000;padding:2px 6px;font-weight:700;font-size:10px}
+.mugshot-name{font-family:'Orbitron',sans-serif;font-weight:700;font-size:18px;color:var(--cod-orange);letter-spacing:2px;text-shadow:0 0 8px rgba(255,106,0,.3)}
+.mugshot-episodes{font-size:10px;color:var(--matrix-mid);letter-spacing:2px;margin-top:4px}
+.mugshot-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tag-sm{padding:2px 6px;border:1px solid var(--matrix-dark);font-size:9px;letter-spacing:1px;color:var(--cod-yellow);background:rgba(255,214,0,.05)}
+.risk-meter{margin-top:12px;display:flex;align-items:center;gap:8px}
+.risk-meter-label{font-size:9px;letter-spacing:2px;color:var(--matrix-mid);min-width:65px}
+.risk-meter-bar{flex:1;height:8px;background:rgba(0,255,65,.08);border:1px solid var(--matrix-dark);overflow:hidden}
+.risk-meter-fill{height:100%}
+.risk-meter-val{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--cod-red);min-width:35px;text-align:right}
+.mugshot-btn{display:block;margin-top:14px;padding:8px;text-align:center;border:1px solid var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:var(--matrix-green);transition:all .3s;background:transparent;cursor:pointer;width:100%}
+.mugshot-btn:hover{background:var(--matrix-green);color:#000;box-shadow:0 0 15px rgba(0,255,65,.3)}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;overflow-y:auto;padding:20px}
+.modal-overlay.active{display:block}
+.file-container{width:100%;max-width:850px;margin:30px auto;background:#0d0d0d;border:1px solid var(--matrix-green);animation:file-open .5s ease}
+@keyframes file-open{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+.file-classified-bar{background:var(--classified-red);padding:4px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;color:#fff}
+.file-header{padding:24px 30px;border-bottom:2px solid var(--cod-red);display:flex;gap:20px;align-items:center;background:rgba(13,13,13,.95);position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}
+.file-mugshot{width:80px;height:80px;border-radius:50%;overflow:hidden;border:2px solid var(--cod-orange);flex-shrink:0}
+.file-mugshot img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%)}
+.file-meta{flex:1;min-width:0}
+.file-subject-name{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(20px,3.5vw,36px);color:var(--cod-orange);text-shadow:0 0 15px rgba(255,106,0,.4);letter-spacing:3px}
+.file-subject-sub{font-size:12px;color:var(--matrix-mid);letter-spacing:2px;margin-top:4px}
+.file-close{width:36px;height:36px;background:transparent;border:1px solid var(--cod-red);color:var(--cod-red);font-size:18px;cursor:pointer;font-family:'Share Tech Mono',monospace;transition:all .3s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-close:hover{background:var(--cod-red);color:#000}
+.file-body{padding:30px}
+.episode-block{margin-bottom:24px;border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3);overflow:hidden}
+.episode-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:rgba(0,255,65,.03);border-bottom:1px solid var(--matrix-dark);cursor:pointer;transition:background .2s}
+.episode-header:hover{background:rgba(0,255,65,.07)}
+.episode-tag{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--cod-orange)}
+.episode-toggle{font-size:14px;color:var(--matrix-mid);transition:transform .3s}
+.episode-header.open .episode-toggle{transform:rotate(180deg)}
+.episode-content{padding:0;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .5s ease}
+.episode-content.open{padding:20px;max-height:8000px}
+.video-wrapper{margin-bottom:16px;border:1px solid var(--matrix-dark);background:#000;overflow:hidden}
+.video-wrapper video{display:block;width:100%;max-height:600px;background:#000}
+.reel-watch-link{display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 20px;background:rgba(0,255,65,.03);border:1px solid var(--matrix-dark);margin-bottom:20px;transition:all .2s;text-decoration:none}
+.reel-watch-link:hover{background:rgba(0,255,65,.08);border-color:var(--matrix-green)}
+.reel-watch-link .icon{font-size:18px}
+.reel-watch-link .label{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--matrix-green)}
+.reel-watch-link .arrow{font-size:14px;color:var(--cod-orange)}
+.evidence-item{padding:12px 0;border-bottom:1px solid rgba(0,255,65,.1);display:flex;gap:12px;align-items:flex-start}
+.evidence-item:last-child{border-bottom:none}
+.evidence-icon{color:var(--cod-red);font-size:14px;min-width:20px;text-align:center;margin-top:2px}
+.evidence-text{font-size:13px;line-height:1.7;color:var(--matrix-green);opacity:.85}
+.evidence-text strong{color:var(--cod-orange);font-weight:normal}
+.connections-section{margin-top:20px;padding:16px 20px;border:1px dashed var(--matrix-dark);background:rgba(255,106,0,.03)}
+.connections-title{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--cod-yellow);margin-bottom:10px}
+.connection-tag{display:inline-block;padding:3px 10px;margin:3px 4px 3px 0;border:1px solid var(--cod-orange);font-size:11px;color:var(--cod-orange);cursor:pointer;transition:all .2s}
+.connection-tag:hover{background:var(--cod-orange);color:#000}
+.verdict-box{text-align:center;padding:25px;border:2px solid var(--cod-red);background:rgba(255,23,68,.05);margin-top:24px}
+.verdict-label{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:4px;color:var(--matrix-mid);margin-bottom:10px}
+.verdict-text{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:var(--cod-red);text-shadow:0 0 15px rgba(255,23,68,.5);letter-spacing:3px}
+
+/* WHISTLEBLOWER */
+.whistleblower-section{max-width:850px;margin:0 auto;padding:40px 20px 60px}
+.wb-container{border:1px solid var(--matrix-green);background:rgba(0,20,0,.4);padding:30px;position:relative}
+.wb-container::before{content:'SECURE CHANNEL';position:absolute;top:-10px;left:20px;background:var(--bg-black);padding:0 12px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--matrix-green)}
+.wb-header{text-align:center;margin-bottom:30px}
+.wb-title{font-family:'Orbitron',sans-serif;font-size:clamp(18px,3vw,28px);font-weight:700;color:var(--matrix-green);letter-spacing:3px;text-shadow:0 0 10px rgba(0,255,65,.3)}
+.wb-subtitle{font-size:13px;color:var(--matrix-mid);margin-top:8px;line-height:1.6}
+.wb-reward{display:inline-block;margin-top:12px;padding:6px 16px;border:1px solid var(--cod-orange);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);background:rgba(255,106,0,.05)}
+.wb-form{display:flex;flex-direction:column;gap:16px}
+.wb-field{display:flex;flex-direction:column;gap:6px}
+.wb-label{font-size:10px;letter-spacing:3px;color:var(--matrix-mid);text-transform:uppercase}
+.wb-input,.wb-textarea,.wb-select{background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s}
+.wb-input:focus,.wb-textarea:focus,.wb-select:focus{border-color:var(--matrix-green);box-shadow:0 0 8px rgba(0,255,65,.1)}
+.wb-input::placeholder,.wb-textarea::placeholder{color:rgba(0,255,65,.25)}
+.wb-textarea{min-height:120px;resize:vertical}
+.wb-select{appearance:none;cursor:pointer}
+.wb-select option{background:#0d0d0d;color:var(--matrix-green)}
+.wb-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wb-file-drop{border:2px dashed var(--matrix-dark);padding:30px;text-align:center;transition:all .2s;cursor:pointer;position:relative}
+.wb-file-drop:hover,.wb-file-drop.dragover{border-color:var(--matrix-green);background:rgba(0,255,65,.03)}
+.wb-file-drop input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.wb-file-icon{font-size:28px;margin-bottom:8px}
+.wb-file-text{font-size:12px;color:var(--matrix-mid);letter-spacing:1px}
+.wb-file-text strong{color:var(--matrix-green)}
+.wb-file-list{margin-top:10px;font-size:11px;color:var(--cod-orange)}
+.wb-disclaimer{font-size:10px;color:var(--matrix-dark);line-height:1.6;margin-top:10px;padding:12px;border:1px solid rgba(0,255,65,.1);background:rgba(0,20,0,.3)}
+.wb-submit{background:transparent;border:2px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:4px;padding:14px 30px;cursor:pointer;transition:all .3s;margin-top:8px}
+.wb-submit:hover{background:var(--matrix-green);color:#000;box-shadow:0 0 20px rgba(0,255,65,.4)}
+.wb-submit:disabled{opacity:.5;cursor:not-allowed}
+.wb-submit.loading{position:relative;color:transparent}
+.wb-submit.loading::after{content:'TRANSMITTING...';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--matrix-green);animation:blink-load .8s step-end infinite}
+@keyframes blink-load{0%,100%{opacity:1}50%{opacity:.3}}
+.wb-error{color:var(--cod-red);font-size:12px;text-align:center;padding:10px;border:1px solid var(--cod-red);background:rgba(255,23,68,.05);display:none}
+.wb-error.show{display:block}
+.wb-success{display:none;text-align:center;padding:40px;border:1px solid var(--matrix-green);background:rgba(0,255,65,.03)}
+.wb-success.show{display:block}
+.wb-success-icon{font-size:40px;margin-bottom:12px}
+.wb-success-text{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:3px;color:var(--matrix-green)}
+.wb-success-sub{font-size:12px;color:var(--matrix-mid);margin-top:8px}
+
+.site-footer{text-align:center;padding:40px 20px 30px;border-top:1px solid var(--matrix-dark)}
+.footer-brand{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:6px;color:var(--matrix-green);text-shadow:0 0 10px rgba(0,255,65,.3)}
+.footer-sub{font-size:10px;color:var(--matrix-dark);letter-spacing:3px;margin-top:8px}
+.boot-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:opacity .8s ease}
+.boot-screen.hidden{opacity:0;pointer-events:none}
+.boot-text{font-size:14px;color:var(--matrix-green);text-align:left;max-width:600px;line-height:1.8}
+.watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-family:'Orbitron',sans-serif;font-size:clamp(50px,10vw,130px);font-weight:900;color:rgba(255,23,68,.03);letter-spacing:20px;pointer-events:none;z-index:1;white-space:nowrap}
+@media(max-width:768px){.stats-bar{gap:20px}.mugshot-grid{grid-template-columns:1fr}.file-body{padding:15px}.file-header{padding:16px;flex-wrap:wrap}.wb-row{grid-template-columns:1fr}.episode-content.open{padding:15px}.cta-banner{flex-direction:column;text-align:center;gap:8px}}
+</style>
+</head>
+<body>
+<div class="boot-screen" id="bootScreen"><div class="boot-text" id="bootText"></div></div>
+<canvas id="matrix-rain"></canvas>
+<div class="scanlines"></div>
+<div class="crt-flicker"></div>
+<div class="watermark">CLASSIFIED</div>
+
+<div class="main-container" id="mainContent" style="opacity:0;">
+  <div class="classified-bar">⚠ CLASSIFIED — NOUR TRADES INTELLIGENCE DIVISION — AUTHORIZED PERSONNEL ONLY ⚠</div>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <span class="cta-banner-text">🚨 <strong>Have you been scammed by a trader?</strong> Submit your story anonymously & get paid in crypto if we use your intel.</span>
+    <a href="#whistleblower" class="cta-banner-btn">SUBMIT YOUR STORY →</a>
+  </div>
+
+  <header class="header">
+    <div class="gov-seal"><div class="gov-seal-inner">NOUR<br>TRADES<br>INTEL</div></div>
+    <div class="title-main">TRADERS SELLING<br>THEIR ASS</div>
+    <div class="subtitle">Fraud Exposure Unit // Intelligence Dossier System</div>
+    <div class="doc-number">DOC# NT-TSTA-2026-CLASSIFIED // DISTRIBUTION: PUBLIC</div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-value">10</div><div class="stat-label">SUBJECTS IDENTIFIED</div></div>
+    <div class="stat-item"><div class="stat-value">17</div><div class="stat-label">EPISODES FILED</div></div>
+    <div class="stat-item"><div class="stat-value">$M+</div><div class="stat-label">EST. COMMUNITY DAMAGE</div></div>
+    <div class="stat-item"><div class="stat-value">ACTIVE</div><div class="stat-label">INVESTIGATION STATUS</div></div>
+  </div>
+
+  <div class="section-header"><span class="section-title">◆ WANTED — RANKED BY RISK FACTOR ◆</span></div>
+  <div class="mugshot-grid" id="mugGrid"></div>
+
+  <div class="section-header" id="whistleblower"><span class="section-title">◆ WHISTLEBLOWER SUBMISSION — SECURE CHANNEL ◆</span></div>
+  <div class="whistleblower-section">
+    <div class="wb-container">
+      <div class="wb-header">
+        <div class="wb-title">🛡️ REPORT A SCAM TRADER</div>
+        <div class="wb-subtitle">Have you been scammed by a trader or influencer? Submit your story anonymously.<br>If we use your intel in our videos, we'll send crypto to your wallet as a reward.</div>
+        <div class="wb-reward">💰 BOUNTY PAID IN CRYPTO FOR VERIFIED INTEL</div>
+      </div>
+      <form class="wb-form" id="wbForm">
+        <div class="wb-row">
+          <div class="wb-field">
+            <label class="wb-label">Name of Influencer / Trader</label>
+            <input class="wb-input" type="text" id="wbName" placeholder="Who scammed you?" required>
+          </div>
+          <div class="wb-field">
+            <label class="wb-label">What is their Social Media?</label>
+            <input class="wb-input" type="text" id="wbSocial" placeholder="@handle or link to their profile" required>
+          </div>
+        </div>
+        <div class="wb-field">
+          <label class="wb-label">How Much Did They Scam? (Estimated $)</label>
+          <input class="wb-input" type="text" id="wbAmount" placeholder="$0.00" required>
+        </div>
+        <div class="wb-field">
+          <label class="wb-label">What Did They Do? (Be specific — dates, details, receipts)</label>
+          <textarea class="wb-textarea" id="wbDescription" placeholder="Describe exactly how you were scammed. The more details, the better our investigation..." required></textarea>
+        </div>
+        <div class="wb-field">
+          <label class="wb-label">Upload Proof (Screenshots, Videos, Receipts)</label>
+          <div class="wb-file-drop" id="fileDrop">
+            <input type="file" multiple accept="image/*,video/*,.pdf" id="fileInput">
+            <div class="wb-file-icon">📁</div>
+            <div class="wb-file-text">Drag files here or <strong>click to browse</strong><br>Images, videos, PDFs accepted (max 50MB each)</div>
+            <div class="wb-file-list" id="fileList"></div>
+          </div>
+        </div>
+        <div class="wb-field">
+          <label class="wb-label">Your Crypto Wallet Address (For Bounty Payment)</label>
+          <input class="wb-input" type="text" id="wbWallet" placeholder="BTC, ETH, SOL, or USDT wallet address" required>
+        </div>
+        <div class="wb-disclaimer">🔒 YOUR IDENTITY STAYS ANONYMOUS. We never reveal sources. Only your wallet address is stored for payment. All submissions are reviewed by the Nour Trades intelligence team. If your intel is featured in an episode, payment is sent within 48 hours.</div>
+        <div class="wb-error" id="wbError"></div>
+        <button type="submit" class="wb-submit" id="wbSubmitBtn">◈ SUBMIT INTEL — STAY ANONYMOUS</button>
+      </form>
+      <div class="wb-success" id="wbSuccess">
+        <div class="wb-success-icon">🛡️</div>
+        <div class="wb-success-text">INTEL RECEIVED</div>
+        <div class="wb-success-sub">Your submission is being reviewed by the Nour Trades intelligence team.<br>If used, bounty will be sent to your wallet within 48 hours.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-brand">NOUR TRADES INTELLIGENCE DIVISION</div>
+    <div class="footer-sub">PROTECTING THE COMMUNITY // ALL INTEL DOCUMENTED // EST. 2024</div>
+  </footer>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="file-container" id="fileContainer"></div>
+</div>
+
+<!-- SUPABASE SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ========== SUPABASE CONFIG ==========
+const SUPABASE_URL = 'https://kjeqzwfxtshgerzkaiqg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ========== SUBJECT DATA ==========
+const subjects=[
+{codename:"TJR",rank:1,riskLevel:98,riskClass:"critical",status:"REPEAT OFFENDER",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/tjr.jpg",tags:["PROP FIRM SCAM","RUG PULLS","MEME COIN FRAUD","MARKET MANIPULATION","HEROFX"],summary:"5 episodes. Rug pulled One of One Funding, HeroFX revenue share, 4 meme coin rug pulls.",connections:["FXALEXG","LAMBO RAUL"],episodes:[
+{title:"EP 1 — SELLING FUNDED ACCOUNTS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep1.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR245vQkwN0/",evidence:[{icon:"⚡",text:"Selling his ass for <strong>40% off funded accounts</strong>. Funded companies don't make money unless you fail."},{icon:"💀",text:"TJR rakes in money every time his followers <strong>buy and fail funded accounts</strong>."}]},
+{title:"EP 11 — HEROFX REBATES & REVENUE SHARE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep11.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DS5mY7CDky3/",evidence:[{icon:"⚡",text:"Posted <strong>6 prop firms with 6 discount codes</strong> in a single day."},{icon:"🔴",text:"<strong>Rebate deal with HeroFX</strong> — unregulated offshore broker illegal for Americans."},{icon:"💀",text:"<strong>Revenue share of 40-50%+</strong> of money followers lose. $3.5-4M collected."},{icon:"📉",text:"Everything TJR does — <strong>through followers losing money</strong>."},{icon:"⚠️",text:"The Koenigsegg? <strong>You're paying for it.</strong>"}]},
+{title:"EP 12 — THE HYPOCRITE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep12.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DTYfO6Rjgg8/",evidence:[{icon:"⚡",text:"Said <strong>mentorships are scams</strong>. Then dropped his own course."},{icon:"🔴",text:"<strong>Koenigsegg up for sale</strong> — marketing done."},{icon:"⚠️",text:"<strong>$100K open bet</strong>: show real trading profits."}]},
+{title:"EP 14 — ONE OF ONE FUNDING RUG PULL",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep14.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUT17-hibay/",evidence:[{icon:"⚡",text:"Created <strong>One of One Funding</strong>."},{icon:"💀",text:"Moved corp from Florida to <strong>Puerto Rico</strong> before rug pull."},{icon:"🔴",text:"Told members to <strong>cancel disputes</strong>."},{icon:"📉",text:"<strong>Failed to pay millions.</strong> Vanished."},{icon:"⚠️",text:"<strong>Unregulated CFDs</strong> — editable backend."},{icon:"🎭",text:"<strong>Complete fraud.</strong>"}]},
+{title:"EP 17 — MEME COIN RUG PULLS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep17.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DVHEIS2ju0i/",evidence:[{icon:"⚡",text:"Told <strong>88,000 live viewers</strong> to pump a meme stock."},{icon:"💀",text:"<strong>4 meme coins rug pulled</strong>. Wallet leaked."},{icon:"🔴",text:"<strong>$HUZZ</strong> — pumped daily, rug pulled."},{icon:"📉",text:"<strong>$DIDDY, $OPSEC, $BERT</strong> — all rug pulls."},{icon:"🎭",text:"Target: <strong>young people with the least money.</strong>"}]}
+],verdict:"SERIAL SCAMMER — PENDING SEC INDICTMENT"},
+{codename:"FXALEXG",rank:2,riskLevel:94,riskClass:"critical",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/fxalexg.jpg",tags:["B-BOOK BROKER","$25M+ COURSES","CFDs","ROCKET21"],summary:"3 episodes. Owns forex broker (B-book), $25M+ from courses. Doesn't trade.",connections:["LAMBO RAUL","ETHAN DURAN","TJR"],episodes:[
+{title:"EP 5 — BROKER WHO DOESN'T TRADE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep5.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSAnXn-AcLi/",evidence:[{icon:"⚡",text:"Does he trade? <strong>Absolutely not.</strong>"},{icon:"💀",text:"<strong>When you lose, Alex collects.</strong>"},{icon:"🔴",text:"Can <strong>wick you out</strong>."},{icon:"⚠️",text:"Last real trade? <strong>Maybe six years ago.</strong>"},{icon:"🎭",text:"Broker manipulation = <strong>fraud</strong>."}]},
+{title:"EP 13 — $25M+ FROM COURSES",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep13.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUBwlRikkd4/",evidence:[{icon:"⚡",text:"<strong>7,000 × $2,000 = $14M</strong> from Discord alone."},{icon:"💀",text:"<strong>$25M+ total</strong> from courses."},{icon:"🔴",text:"<strong>Rocket 21</strong> — never forgot."}]},
+{title:"EP 16 — ADMITS BROKER AFFILIATION",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep16.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUq7xHNCfjz/",evidence:[{icon:"⚡",text:"Says he's <strong>\"heavily affiliated with a broker.\"</strong>"},{icon:"💀",text:"<strong>90%+ on B-book.</strong> They keep everything you lose."},{icon:"🔴",text:"<strong>CFDs — illegal in America.</strong>"},{icon:"⚠️",text:"<strong>Operate offshore.</strong>"}]}
+],verdict:"BROKER FRAUD — $25M+ FROM FOLLOWERS"},
+{codename:"LAMBO RAUL",rank:3,riskLevel:90,riskClass:"critical",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/sci.webp",tags:["$7M ALGO FRAUD","SCAMBO RAUL","PROP FIRM"],summary:"AKA Scambo Raul. $7M from fraudulent algo bot drops.",connections:["FXALEXG","ETHAN DURAN"],episodes:[
+{title:"EP 6 — $7M IN ALGO FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep6.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSDwt5pE3Dh/",evidence:[{icon:"⚡",text:"AKA <strong>Scambo Raul</strong>."},{icon:"💀",text:"Two algo drops. <strong>~$7 million total.</strong>"},{icon:"🔴",text:"<strong>No such thing as a trading algo</strong> — fraud."},{icon:"⚠️",text:"FXAlexG learned <strong>the playbook from him</strong>."}]}
+],verdict:"SCAMBO — $7M ALGO FRAUD"},
+{codename:"ETHAN DURAN",rank:4,riskLevel:88,riskClass:"high",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/ethan.jpg",tags:["BUGATTI MARKETING","ALGO SCAM","HOUSE RAIDED","NOT A TRADER"],summary:"Not a trader. Bugatti bought for marketing, sold 1 month later. House raided.",connections:["FXALEXG","LAMBO RAUL"],episodes:[
+{title:"EP 7 — NON-TRADER SELLING ALGO",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep7.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSI_VqyE2Mi/",evidence:[{icon:"⚡",text:"<strong>Not even a trader.</strong>"},{icon:"💀",text:"Selling <strong>an algo that trades for you</strong>."},{icon:"🔴",text:"<strong>House raided</strong> by Miami PD/FBI."},{icon:"📉",text:"<strong>Tri-State scammer.</strong> Friend locked up for wire fraud."}]},
+{title:"EP 10 — BUGATTI MARKETING",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep10.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSc9wpTDsPC/",evidence:[{icon:"⚡",text:"Bugatti <strong>back for sale after ONE MONTH</strong>."},{icon:"💀",text:"Buy Bugatti → promote → <strong>sell algo bot</strong>."},{icon:"🔴",text:"<strong>Already made his money</strong> from the scam."}]}
+],verdict:"BUGATTI BAIT — NOT EVEN A TRADER"},
+{codename:"SCARFACE TRADES",rank:5,riskLevel:86,riskClass:"high",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/scarface.jpg",tags:["INSPECT ELEMENT","FAKE P&L","TELEKINESIS TRADING"],summary:"Faked January statements with Inspect Element. Caught 'trading' without clicking.",connections:[],episodes:[
+{title:"EP 15 — INSPECT ELEMENT FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep15.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUd-UrcDkvE/",evidence:[{icon:"⚡",text:"<strong>Faked statements</strong> — math didn't add up."},{icon:"💀",text:"<strong>\"Telekinesis\" trading</strong> — no buttons clicked."},{icon:"🔴",text:"<strong>Blocked the URL bar</strong> on purpose."},{icon:"📉",text:"Uses <strong>Inspect Element</strong> repeatedly."},{icon:"⚠️",text:"<strong>Left DM on read.</strong>"},{icon:"🎭",text:"Hangs with <strong>your favorite traders</strong>."}]}
+],verdict:"INSPECT ELEMENT FRAUD"},
+{codename:"SCI",rank:6,riskLevel:84,riskClass:"high",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/sci.webp",tags:["$100M OFFSHORE LIE","UNREGULATED BROKER","PROMOTED BY UMAR"],summary:"Claims $100M in unregulated offshore broker. Makes money from deposits.",connections:["UMAR ASHRAF"],episodes:[
+{title:"EP 9 — THE $100M OFFSHORE LIE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep9.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSS9yJVidQB/",evidence:[{icon:"⚡",text:"Promoted by <strong>TradeZella and Umar Ashraf</strong>."},{icon:"💀",text:"<strong>Unregulated offshore broker</strong>."},{icon:"🔴",text:"Claims <strong>$100M</strong> in a vanishable broker."},{icon:"⚠️",text:"<strong>Challenge:</strong> deposit $20M into Schwab. Nour deletes IG."}]}
+],verdict:"$100M OFFSHORE LIE"},
+{codename:"UMAR ASHRAF",rank:7,riskLevel:82,riskClass:"high",status:"WHITE FLAG",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/umar.jpg",tags:["STOCK MARKET LAB","LEASED MCLAREN","COURSE SELLER"],summary:"Selling courses since 2014 when allegedly not profitable. Leased McLaren.",connections:["USMAN ASHRAF","MASITRADES","SCI"],episodes:[
+{title:"EP 3.5 — COMMENT AND DELETE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep3half.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR8i-c7CUkT/",evidence:[{icon:"⚡",text:"Commented then <strong>deleted it</strong>."},{icon:"💀",text:"Brothers <strong>didn't talk for years</strong>."},{icon:"🔴",text:"Courses since <strong>2014</strong>. $100K bet."},{icon:"📉",text:"McLaren 570S <strong>LEASED</strong>."}]},
+{title:"EP 4 — THE WHITE FLAG",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep4.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR-GrmZgbaT/",evidence:[{icon:"⚡",text:"<strong>Threw the white flag.</strong>"},{icon:"💀",text:"<strong>Umar was the one known for drugs</strong> in Staten Island."},{icon:"🔴",text:"<strong>$100K bet stands.</strong>"}]}
+],verdict:"EXPOSED — WHITE FLAG THROWN"},
+{codename:"JDUN TRADES",rank:8,riskLevel:80,riskClass:"elevated",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/jdun.jpg",tags:["PAPER TRADING PARTNER","TRADIFY","PROP FIRM"],summary:"Partner exposed for paper trading. Now selling Tradify funded accounts.",connections:[],episodes:[
+{title:"EP 2 — PAPER TRADING PARTNER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep2.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR5aCiuE8Ku/",evidence:[{icon:"⚡",text:"Partner <strong>exposed for paper trading</strong>."},{icon:"💀",text:"<strong>What's JDun doing?</strong>"},{icon:"🔴",text:"Selling <strong>Tradify</strong> accounts."},{icon:"📉",text:"Cars <strong>funded by your losses</strong>."}]}
+],verdict:"UNVERIFIED — PAPER TRAIL"},
+{codename:"USMAN ASHRAF",rank:9,riskLevel:78,riskClass:"elevated",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/usman.jpg",tags:["SIGNAL SPAMMER","DISCOUNT CODES","CHEAP AD SPEND"],summary:"25 discount codes in one Thanksgiving week. Tantrums over ad spend.",connections:["UMAR ASHRAF"],episodes:[
+{title:"EP 3 — 25 DISCOUNT CODES",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep3.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR8Rr6Uk9U1/",evidence:[{icon:"⚡",text:"<strong>25 discount codes</strong> in one week."},{icon:"💀",text:"Posts $50K profits, <strong>spams 150 stories</strong>."},{icon:"🔴",text:"<strong>Tantrums over ad spend.</strong>"}]}
+],verdict:"SIGNAL SPAMMER"},
+{codename:"MASITRADES",rank:10,riskLevel:72,riskClass:"elevated",status:"EXPOSED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/masi.jpg",tags:["PHOTOSHOPPED TRADES","KICKED FROM SML"],summary:"Kicked from Stock Market Lab for photoshopping trades.",connections:["UMAR ASHRAF","USMAN ASHRAF"],episodes:[
+{title:"EP 8 — KICKED FROM STOCK MARKET LAB",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep8.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSLfXPVEyzg/",evidence:[{icon:"⚡",text:"Kicked for <strong>faking trades</strong>."},{icon:"💀",text:"<strong>Photoshopping everything.</strong>"},{icon:"🔴",text:"Umar <strong>announced live she was fraud</strong>."},{icon:"📉",text:"Back <strong>making content</strong> as if nothing happened."}]}
+],verdict:"PHOTOSHOP FRAUD"}
+];
+
+// ========== MATRIX ==========
+const canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
+function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
+const ch='アイウエオカキクケコ0123456789',fs=14;let col=~~(canvas.width/fs),dr=Array(col).fill(1);
+function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(let i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
+setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Array(col).fill(1)});
+
+// ========== BOOT ==========
+async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> NOUR TRADES INTELLIGENCE SYSTEM v2.0","> LOADING CLASSIFIED DOSSIERS............ [OK]","> SUPABASE SECURE CHANNEL............... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease'}
+runBoot();
+
+// ========== MUGSHOT CARDS ==========
+const grid=document.getElementById('mugGrid');
+subjects.forEach((s,idx)=>{
+  const card=document.createElement('div');card.className='mugshot-card';card.style.animationDelay=`${idx*.06}s`;card.onclick=()=>openFile(idx);
+  const riskLabel=s.riskLevel>=90?'CRITICAL':s.riskLevel>=80?'HIGH':'ELEVATED';
+  const riskColor=s.riskLevel>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':s.riskLevel>=80?'linear-gradient(90deg,#ff6a00,#ffd600)':'linear-gradient(90deg,#ffd600,#00ff41)';
+  const n=s.episodes.length,t=n===1?'1 EPISODE':n+' EPISODES';
+  card.innerHTML=`<div class="classified-stamp">CLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span> RISK FACTOR: ${s.riskLevel}/100</div><div class="mugshot-name">${s.codename}</div><div class="mugshot-episodes">${t} DOCUMENTED // ${s.status}</div><div class="mugshot-tags">${s.tags.slice(0,3).map(t=>`<span class="tag-sm">${t}</span>`).join('')}</div><div class="risk-meter"><span class="risk-meter-label">RISK</span><div class="risk-meter-bar"><div class="risk-meter-fill" style="width:${s.riskLevel}%;background:${riskColor}"></div></div><span class="risk-meter-val">${s.riskLevel}%</span></div><button class="mugshot-btn">◈ OPEN CLASSIFIED FILE</button></div>`;
+  grid.appendChild(card)});
+
+// ========== FILE MODAL ==========
+function getMedia(ep){let h='';if(ep.video)h+=`<div class="video-wrapper"><video controls preload="metadata" playsinline><source src="${ep.video}" type="video/mp4"></video></div>`;if(ep.reelUrl)h+=`<a href="${ep.reelUrl}" target="_blank" rel="noopener" class="reel-watch-link"><span class="icon">📹</span><span class="label">WATCH ON INSTAGRAM</span><span class="arrow">→</span></a>`;return h}
+
+function openFile(idx){
+  const s=subjects[idx],ov=document.getElementById('modalOverlay'),ct=document.getElementById('fileContainer');
+  const tv=s.episodes.reduce((a,e)=>a+e.evidence.length,0);
+  ct.innerHTML=`<div class="file-classified-bar">CLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>`:''}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div></div>`;
+  ov.classList.add('active');document.body.style.overflow='hidden'}
+
+function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open')}
+function closeFile(){document.querySelectorAll('.file-container video').forEach(v=>v.pause());document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''}
+document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('modalOverlay'))closeFile()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFile()});
+
+// ========== WHISTLEBLOWER — SUPABASE ==========
+const fd=document.getElementById('fileDrop'),fi=document.getElementById('fileInput'),fl=document.getElementById('fileList');
+fd.addEventListener('dragover',e=>{e.preventDefault();fd.classList.add('dragover')});
+fd.addEventListener('dragleave',()=>fd.classList.remove('dragover'));
+fd.addEventListener('drop',e=>{e.preventDefault();fd.classList.remove('dragover');fi.files=e.dataTransfer.files;updateFL()});
+fi.addEventListener('change',updateFL);
+function updateFL(){const f=fi.files;fl.textContent=f.length?`${f.length} file${f.length>1?'s':''} selected`:'';}
+
+document.getElementById('wbForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const btn = document.getElementById('wbSubmitBtn');
+  const errEl = document.getElementById('wbError');
+  errEl.classList.remove('show');
+  btn.disabled = true;
+  btn.classList.add('loading');
+
+  try {
+    // 1. Upload proof files to Supabase Storage
+    const proofUrls = [];
+    const files = document.getElementById('fileInput').files;
+    
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const timestamp = Date.now();
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const filePath = `submissions/${timestamp}_${safeName}`;
+        
+        const { data, error } = await supabase.storage
+          .from('whistleblower-proof')
+          .upload(filePath, file);
+        
+        if (error) {
+          console.error('Upload error:', error);
+          continue; // Skip failed uploads but continue
+        }
+        
+        // Get public URL
+        const { data: urlData } = supabase.storage
+          .from('whistleblower-proof')
+          .getPublicUrl(filePath);
+        
+        if (urlData?.publicUrl) {
+          proofUrls.push(urlData.publicUrl);
+        }
+      }
+    }
+
+    // 2. Insert submission into database
+    const { error: insertError } = await supabase
+      .from('whistleblower_submissions')
+      .insert({
+        influencer_name: document.getElementById('wbName').value.trim(),
+        social_media: document.getElementById('wbSocial').value.trim(),
+        scam_amount: document.getElementById('wbAmount').value.trim(),
+        scam_description: document.getElementById('wbDescription').value.trim(),
+        proof_urls: proofUrls,
+        crypto_wallet: document.getElementById('wbWallet').value.trim()
+      });
+
+    if (insertError) throw insertError;
+
+    // 3. Show success
+    document.getElementById('wbForm').style.display = 'none';
+    document.getElementById('wbSuccess').classList.add('show');
+
+  } catch (err) {
+    console.error('Submission error:', err);
+    errEl.textContent = '⚠ TRANSMISSION FAILED — Please try again. Error: ' + (err.message || 'Unknown error');
+    errEl.classList.add('show');
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  }
+});
+</script>
+</body>
+</html>
