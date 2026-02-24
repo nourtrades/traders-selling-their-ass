@@ -243,14 +243,6 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
     <a href="https://whop.com/stock-hours/stock-hours/?utm_source=store_page&funnelId=store_1a22da23-8ba1-44d6-a2c3-dea287a26d22" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--matrix-green);text-decoration:none;transition:all .2s;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);">💬 JOIN DISCORD</a>
     <a href="https://vanquish.stockhoursllc.com/nour" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--cod-orange);text-decoration:none;transition:all .2s;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--cod-orange);">📈 VANQUISH — CODE NOUR 50% OFF</a>
   </div>
-  <div style="display:flex;justify-content:center;padding:10px 20px;background:rgba(0,255,65,.02);border-bottom:1px solid var(--matrix-dark);">
-    <form id="topEmailForm" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;">
-      <span style="font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);">🚨 GET SCAM ALERTS:</span>
-      <input type="email" id="topEmailInput" placeholder="your@email.com" required style="background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:6px 10px;outline:none;width:200px;">
-      <button type="submit" id="topEmailBtn" style="background:var(--cod-red);border:none;color:#fff;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:2px;padding:7px 14px;cursor:pointer;transition:all .2s;">SUBSCRIBE</button>
-    </form>
-    <div id="topEmailSuccess" style="display:none;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);">✅ YOU'RE IN — INTEL INCOMING</div>
-  </div>
 
   <header class="header">
     <div class="title-main">TRADERS SELLING<br>THEIR ASS</div>
@@ -435,7 +427,7 @@ function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,can
 setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Array(col).fill(1)});
 
 // ========== BOOT ==========
-async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> NOUR TRADES INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease'}
+async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> NOUR TRADES INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease';triggerPopup()}
 runBoot();
 window.scrollTo(0,0);
 
@@ -563,13 +555,15 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
   }
 });
 
-// TOP EMAIL POPUP (5 second delay)
-setTimeout(function(){
+// TOP EMAIL POPUP (5 seconds after boot finishes)
+function triggerPopup(){
   if (!sessionStorage.getItem('popupShown')) {
-    document.getElementById('emailPopup').classList.add('active');
-    sessionStorage.setItem('popupShown', '1');
+    setTimeout(function(){
+      document.getElementById('emailPopup').classList.add('active');
+      sessionStorage.setItem('popupShown', '1');
+    }, 5000);
   }
-}, 5000);
+}
 
 function closePopup(){
   document.getElementById('emailPopup').classList.remove('active');
