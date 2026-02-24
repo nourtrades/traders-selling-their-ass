@@ -6,7 +6,7 @@
 <title>TRADERS SELLING THEIR ASS // NOUR TRADES INTELLIGENCE</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a;--panel-bg:rgba(0,20,0,0.85);--classified-red:#c0392b}
+:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a;--panel-bg:rgba(0,20,0,0.85);--declassified-red:#c0392b}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair}
 #matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
@@ -14,7 +14,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .crt-flicker{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;animation:flicker .15s infinite;background:rgba(0,255,65,.01)}
 @keyframes flicker{0%{opacity:.27}30%{opacity:.66}50%{opacity:.96}70%{opacity:.53}100%{opacity:.24}}
 .main-container{position:relative;z-index:2;min-height:100vh}
-.classified-bar{background:var(--classified-red);padding:6px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:6px;color:#fff;text-transform:uppercase;animation:threat-blink 2s step-end infinite}
+.declassified-bar{background:var(--declassified-red);padding:6px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:6px;color:#fff;text-transform:uppercase;animation:threat-blink 2s step-end infinite}
 @keyframes threat-blink{0%,100%{opacity:1}50%{opacity:.6}}
 
 /* CTA BANNER */
@@ -46,7 +46,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .mugshot-card{background:var(--panel-bg);border:1px solid var(--matrix-dark);cursor:pointer;transition:all .3s;overflow:hidden;position:relative;opacity:0;transform:translateY(20px);animation:card-enter .5s ease forwards}
 @keyframes card-enter{to{opacity:1;transform:translateY(0)}}
 .mugshot-card:hover{border-color:var(--cod-orange);box-shadow:0 0 20px rgba(255,106,0,.2);transform:translateY(-4px)}
-.classified-stamp{position:absolute;top:12px;right:12px;z-index:3;background:rgba(192,57,43,.9);color:#fff;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;padding:3px 10px;border:1px solid rgba(255,255,255,.3);transform:rotate(3deg)}
+.declassified-stamp{position:absolute;top:12px;right:12px;z-index:3;background:rgba(192,57,43,.9);color:#fff;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;padding:3px 10px;border:1px solid rgba(255,255,255,.3);transform:rotate(3deg)}
 .risk-badge{position:absolute;top:12px;left:12px;z-index:3;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:4px 10px;border:1px solid}
 .risk-critical{background:rgba(255,23,68,.85);color:#fff;border-color:var(--cod-red)}
 .risk-high{background:rgba(255,106,0,.85);color:#fff;border-color:var(--cod-orange)}
@@ -78,7 +78,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .modal-overlay.active{display:block}
 .file-container{width:100%;max-width:850px;margin:30px auto;background:#0d0d0d;border:1px solid var(--matrix-green);animation:file-open .5s ease}
 @keyframes file-open{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
-.file-classified-bar{background:var(--classified-red);padding:4px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;color:#fff}
+.file-declassified-bar{background:var(--declassified-red);padding:4px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;color:#fff}
 .file-header{padding:24px 30px;border-bottom:2px solid var(--cod-red);display:flex;gap:20px;align-items:center;background:rgba(13,13,13,.95);position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}
 .file-mugshot{width:80px;height:80px;border-radius:50%;overflow:hidden;border:2px solid var(--cod-orange);flex-shrink:0}
 .file-mugshot img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%)}
@@ -171,10 +171,10 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 <canvas id="matrix-rain"></canvas>
 <div class="scanlines"></div>
 <div class="crt-flicker"></div>
-<div class="watermark">CLASSIFIED</div>
+<div class="watermark">DECLASSIFIED</div>
 
 <div class="main-container" id="mainContent" style="opacity:0;">
-  <div class="classified-bar">⚠ CLASSIFIED — NOUR TRADES INTELLIGENCE DIVISION — AUTHORIZED PERSONNEL ONLY ⚠</div>
+  <div class="declassified-bar">⚠ DECLASSIFIED — NOUR TRADES INTELLIGENCE DIVISION — AUTHORIZED PERSONNEL ONLY ⚠</div>
 
   <!-- CTA BANNER -->
   <div class="cta-banner">
@@ -186,13 +186,13 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
     <div class="gov-seal"><div class="gov-seal-inner">NOUR<br>TRADES<br>INTEL</div></div>
     <div class="title-main">TRADERS SELLING<br>THEIR ASS</div>
     <div class="subtitle">Fraud Exposure Unit // Intelligence Dossier System</div>
-    <div class="doc-number">DOC# NT-TSTA-2026-CLASSIFIED // DISTRIBUTION: PUBLIC</div>
+    <div class="doc-number">DOC# NT-TSTA-2026-DECLASSIFIED // DISTRIBUTION: PUBLIC</div>
   </header>
 
   <div class="stats-bar">
     <div class="stat-item"><div class="stat-value">10</div><div class="stat-label">SUBJECTS IDENTIFIED</div></div>
     <div class="stat-item"><div class="stat-value">17</div><div class="stat-label">EPISODES FILED</div></div>
-    <div class="stat-item"><div class="stat-value">$M+</div><div class="stat-label">EST. COMMUNITY DAMAGE</div></div>
+    <div class="stat-item"><div class="stat-value">$200M+</div><div class="stat-label">EST. COMMUNITY DAMAGE</div></div>
     <div class="stat-item"><div class="stat-value">ACTIVE</div><div class="stat-label">INVESTIGATION STATUS</div></div>
   </div>
 
@@ -288,7 +288,7 @@ const subjects=[
 {title:"EP 14 — ONE OF ONE FUNDING RUG PULL",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep14.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUT17-hibay/",evidence:[{icon:"⚡",text:"Created <strong>One of One Funding</strong>."},{icon:"💀",text:"Moved corp from Florida to <strong>Puerto Rico</strong> before rug pull."},{icon:"🔴",text:"Told members to <strong>cancel disputes</strong>."},{icon:"📉",text:"<strong>Failed to pay millions.</strong> Vanished."},{icon:"⚠️",text:"<strong>Unregulated CFDs</strong> — editable backend."},{icon:"🎭",text:"<strong>Complete fraud.</strong>"}]},
 {title:"EP 17 — MEME COIN RUG PULLS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep17.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DVHEIS2ju0i/",evidence:[{icon:"⚡",text:"Told <strong>88,000 live viewers</strong> to pump a meme stock."},{icon:"💀",text:"<strong>4 meme coins rug pulled</strong>. Wallet leaked."},{icon:"🔴",text:"<strong>$HUZZ</strong> — pumped daily, rug pulled."},{icon:"📉",text:"<strong>$DIDDY, $OPSEC, $BERT</strong> — all rug pulls."},{icon:"🎭",text:"Target: <strong>young people with the least money.</strong>"}]}
 ],verdict:"SERIAL SCAMMER — PENDING SEC INDICTMENT"},
-{codename:"FXALEXG",rank:2,riskLevel:94,riskClass:"critical",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/fxalexg.jpg",tags:["B-BOOK BROKER","$25M+ COURSES","CFDs","ROCKET21"],summary:"3 episodes. Owns forex broker (B-book), $25M+ from courses. Doesn't trade.",connections:["LAMBO RAUL","ETHAN DURAN","TJR"],episodes:[
+{codename:"FXALEXG",rank:2,riskLevel:94,riskClass:"critical",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/fxalexg.jpeg",tags:["B-BOOK BROKER","$25M+ COURSES","CFDs","ROCKET21"],summary:"3 episodes. Owns forex broker (B-book), $25M+ from courses. Doesn't trade.",connections:["LAMBO RAUL","ETHAN DURAN","TJR"],episodes:[
 {title:"EP 5 — BROKER WHO DOESN'T TRADE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep5.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSAnXn-AcLi/",evidence:[{icon:"⚡",text:"Does he trade? <strong>Absolutely not.</strong>"},{icon:"💀",text:"<strong>When you lose, Alex collects.</strong>"},{icon:"🔴",text:"Can <strong>wick you out</strong>."},{icon:"⚠️",text:"Last real trade? <strong>Maybe six years ago.</strong>"},{icon:"🎭",text:"Broker manipulation = <strong>fraud</strong>."}]},
 {title:"EP 13 — $25M+ FROM COURSES",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep13.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUBwlRikkd4/",evidence:[{icon:"⚡",text:"<strong>7,000 × $2,000 = $14M</strong> from Discord alone."},{icon:"💀",text:"<strong>$25M+ total</strong> from courses."},{icon:"🔴",text:"<strong>Rocket 21</strong> — never forgot."}]},
 {title:"EP 16 — ADMITS BROKER AFFILIATION",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep16.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUq7xHNCfjz/",evidence:[{icon:"⚡",text:"Says he's <strong>\"heavily affiliated with a broker.\"</strong>"},{icon:"💀",text:"<strong>90%+ on B-book.</strong> They keep everything you lose."},{icon:"🔴",text:"<strong>CFDs — illegal in America.</strong>"},{icon:"⚠️",text:"<strong>Operate offshore.</strong>"}]}
@@ -296,7 +296,7 @@ const subjects=[
 {codename:"LAMBO RAUL",rank:3,riskLevel:90,riskClass:"critical",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/sci.webp",tags:["$7M ALGO FRAUD","SCAMBO RAUL","PROP FIRM"],summary:"AKA Scambo Raul. $7M from fraudulent algo bot drops.",connections:["FXALEXG","ETHAN DURAN"],episodes:[
 {title:"EP 6 — $7M IN ALGO FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep6.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSDwt5pE3Dh/",evidence:[{icon:"⚡",text:"AKA <strong>Scambo Raul</strong>."},{icon:"💀",text:"Two algo drops. <strong>~$7 million total.</strong>"},{icon:"🔴",text:"<strong>No such thing as a trading algo</strong> — fraud."},{icon:"⚠️",text:"FXAlexG learned <strong>the playbook from him</strong>."}]}
 ],verdict:"SCAMBO — $7M ALGO FRAUD"},
-{codename:"ETHAN DURAN",rank:4,riskLevel:88,riskClass:"high",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/ethan.jpg",tags:["BUGATTI MARKETING","ALGO SCAM","HOUSE RAIDED","NOT A TRADER"],summary:"Not a trader. Bugatti bought for marketing, sold 1 month later. House raided.",connections:["FXALEXG","LAMBO RAUL"],episodes:[
+{codename:"ETHAN DURAN",rank:4,riskLevel:88,riskClass:"high",status:"WANTED",image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/ethan.jpeg",tags:["BUGATTI MARKETING","ALGO SCAM","HOUSE RAIDED","NOT A TRADER"],summary:"Not a trader. Bugatti bought for marketing, sold 1 month later. House raided.",connections:["FXALEXG","LAMBO RAUL"],episodes:[
 {title:"EP 7 — NON-TRADER SELLING ALGO",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep7.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSI_VqyE2Mi/",evidence:[{icon:"⚡",text:"<strong>Not even a trader.</strong>"},{icon:"💀",text:"Selling <strong>an algo that trades for you</strong>."},{icon:"🔴",text:"<strong>House raided</strong> by Miami PD/FBI."},{icon:"📉",text:"<strong>Tri-State scammer.</strong> Friend locked up for wire fraud."}]},
 {title:"EP 10 — BUGATTI MARKETING",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep10.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSc9wpTDsPC/",evidence:[{icon:"⚡",text:"Bugatti <strong>back for sale after ONE MONTH</strong>."},{icon:"💀",text:"Buy Bugatti → promote → <strong>sell algo bot</strong>."},{icon:"🔴",text:"<strong>Already made his money</strong> from the scam."}]}
 ],verdict:"BUGATTI BAIT — NOT EVEN A TRADER"},
@@ -329,7 +329,7 @@ function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,can
 setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Array(col).fill(1)});
 
 // ========== BOOT ==========
-async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> NOUR TRADES INTELLIGENCE SYSTEM v2.0","> LOADING CLASSIFIED DOSSIERS............ [OK]","> SUPABASE SECURE CHANNEL............... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease'}
+async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> NOUR TRADES INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SUPABASE SECURE CHANNEL............... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease'}
 runBoot();
 
 // ========== MUGSHOT CARDS ==========
@@ -339,7 +339,7 @@ subjects.forEach((s,idx)=>{
   const riskLabel=s.riskLevel>=90?'CRITICAL':s.riskLevel>=80?'HIGH':'ELEVATED';
   const riskColor=s.riskLevel>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':s.riskLevel>=80?'linear-gradient(90deg,#ff6a00,#ffd600)':'linear-gradient(90deg,#ffd600,#00ff41)';
   const n=s.episodes.length,t=n===1?'1 EPISODE':n+' EPISODES';
-  card.innerHTML=`<div class="classified-stamp">CLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span> RISK FACTOR: ${s.riskLevel}/100</div><div class="mugshot-name">${s.codename}</div><div class="mugshot-episodes">${t} DOCUMENTED // ${s.status}</div><div class="mugshot-tags">${s.tags.slice(0,3).map(t=>`<span class="tag-sm">${t}</span>`).join('')}</div><div class="risk-meter"><span class="risk-meter-label">RISK</span><div class="risk-meter-bar"><div class="risk-meter-fill" style="width:${s.riskLevel}%;background:${riskColor}"></div></div><span class="risk-meter-val">${s.riskLevel}%</span></div><button class="mugshot-btn">◈ OPEN CLASSIFIED FILE</button></div>`;
+  card.innerHTML=`<div class="declassified-stamp">DECLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span> RISK FACTOR: ${s.riskLevel}/100</div><div class="mugshot-name">${s.codename}</div><div class="mugshot-episodes">${t} DOCUMENTED // ${s.status}</div><div class="mugshot-tags">${s.tags.slice(0,3).map(t=>`<span class="tag-sm">${t}</span>`).join('')}</div><div class="risk-meter"><span class="risk-meter-label">RISK</span><div class="risk-meter-bar"><div class="risk-meter-fill" style="width:${s.riskLevel}%;background:${riskColor}"></div></div><span class="risk-meter-val">${s.riskLevel}%</span></div><button class="mugshot-btn">◈ OPEN DECLASSIFIED FILE</button></div>`;
   grid.appendChild(card)});
 
 // ========== FILE MODAL ==========
@@ -348,7 +348,7 @@ function getMedia(ep){let h='';if(ep.video)h+=`<div class="video-wrapper"><video
 function openFile(idx){
   const s=subjects[idx],ov=document.getElementById('modalOverlay'),ct=document.getElementById('fileContainer');
   const tv=s.episodes.reduce((a,e)=>a+e.evidence.length,0);
-  ct.innerHTML=`<div class="file-classified-bar">CLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>`:''}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div></div>`;
+  ct.innerHTML=`<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>`:''}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div></div>`;
   ov.classList.add('active');document.body.style.overflow='hidden'}
 
 function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open')}
