@@ -186,6 +186,14 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
     <a href="https://whop.com/stock-hours/stock-hours/?utm_source=store_page&funnelId=store_1a22da23-8ba1-44d6-a2c3-dea287a26d22" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--matrix-green);text-decoration:none;transition:all .2s;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);">💬 JOIN DISCORD</a>
     <a href="https://vanquish.stockhoursllc.com/nour" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--cod-orange);text-decoration:none;transition:all .2s;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--cod-orange);">📈 VANQUISH — CODE NOUR 50% OFF</a>
   </div>
+  <div style="display:flex;justify-content:center;padding:10px 20px;background:rgba(0,255,65,.02);border-bottom:1px solid var(--matrix-dark);">
+    <form id="topEmailForm" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;">
+      <span style="font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);">🚨 GET SCAM ALERTS:</span>
+      <input type="email" id="topEmailInput" placeholder="your@email.com" required style="background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:6px 10px;outline:none;width:200px;">
+      <button type="submit" id="topEmailBtn" style="background:var(--cod-red);border:none;color:#fff;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:2px;padding:7px 14px;cursor:pointer;transition:all .2s;">SUBSCRIBE</button>
+    </form>
+    <div id="topEmailSuccess" style="display:none;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);">✅ YOU'RE IN — INTEL INCOMING</div>
+  </div>
 
   <header class="header">
     <div class="title-main">TRADERS SELLING<br>THEIR ASS</div>
@@ -492,6 +500,26 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
   } catch (err) {
     errEl.textContent = '⚠ ' + (err.message || 'Failed. Try again.');
     errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'SUBSCRIBE';
+  }
+});
+
+// TOP EMAIL FORM
+document.getElementById('topEmailForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('topEmailBtn');
+  const email = document.getElementById('topEmailInput').value.trim();
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    if (!supabaseClient) throw new Error('Not ready');
+    const { error } = await supabaseClient.from('email_subscribers').insert({ email: email });
+    if (error) throw error;
+    document.getElementById('topEmailForm').style.display = 'none';
+    document.getElementById('topEmailSuccess').style.display = 'block';
+  } catch (err) {
     btn.disabled = false;
     btn.textContent = 'SUBSCRIBE';
   }
