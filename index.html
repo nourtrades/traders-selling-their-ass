@@ -49,6 +49,27 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .popup-disclaimer{font-size:9px;color:var(--matrix-dark);text-align:center;margin-top:8px}
 @media(max-width:500px){.popup-row{grid-template-columns:1fr}}
 
+/* COMMENTS */
+.comments-section{margin-top:16px;border-top:1px solid var(--matrix-dark);padding-top:16px}
+.comments-title{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--matrix-mid);margin-bottom:12px}
+.comment-form{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.comment-name{background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--cod-orange);font-family:'Share Tech Mono',monospace;font-size:12px;padding:8px 10px;outline:none;width:120px;transition:border-color .2s}
+.comment-input{background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:8px 10px;outline:none;flex:1;min-width:150px;transition:border-color .2s}
+.comment-name:focus,.comment-input:focus{border-color:var(--matrix-green)}
+.comment-name::placeholder,.comment-input::placeholder{color:rgba(0,255,65,.2)}
+.comment-btn{background:transparent;border:1px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:2px;padding:8px 14px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.comment-btn:hover{background:var(--matrix-green);color:#000}
+.comment-btn:disabled{opacity:.4;cursor:not-allowed}
+.comments-list{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--matrix-dark) transparent}
+.comments-list::-webkit-scrollbar{width:4px}
+.comments-list::-webkit-scrollbar-thumb{background:var(--matrix-dark)}
+.comment-item{padding:10px;border:1px solid rgba(0,255,65,.08);background:rgba(0,20,0,.3)}
+.comment-author{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);margin-bottom:4px}
+.comment-time{font-size:9px;color:var(--matrix-dark);margin-left:8px;letter-spacing:1px}
+.comment-text{font-size:12px;color:var(--matrix-green);opacity:.8;line-height:1.5}
+.comments-loading{font-size:11px;color:var(--matrix-dark);text-align:center;padding:10px}
+.no-comments{font-size:11px;color:var(--matrix-dark);text-align:center;padding:10px;font-style:italic}
+
 .header{text-align:center;padding:50px 20px 30px;border-bottom:1px solid var(--matrix-dark)}
 .gov-seal{width:80px;height:80px;border:3px solid var(--cod-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);position:relative}
 .gov-seal::before{content:'';position:absolute;width:92px;height:92px;border:1px solid rgba(255,106,0,.3);border-radius:50%}
@@ -464,18 +485,86 @@ subjects.forEach((s,idx)=>{
   grid.appendChild(card)});
 
 // ========== FILE MODAL ==========
-function getMedia(ep){let h='';if(ep.video)h+=`<div class="video-wrapper"><video controls preload="metadata" playsinline><source src="${ep.video}" type="video/mp4"></video></div>`;if(ep.reelUrl)h+=`<a href="${ep.reelUrl}" target="_blank" rel="noopener" class="reel-watch-link"><span class="icon">📹</span><span class="label">WATCH ON INSTAGRAM</span><span class="arrow">→</span></a>`;return h}
+// MEDIA + COMMENTS
+function getMedia(ep, subjectCode, epIdx){
+  let h='';
+  if(ep.video)h+=`<div class="video-wrapper"><video controls preload="metadata" playsinline><source src="${ep.video}" type="video/mp4"></video></div>`;
+  if(ep.reelUrl)h+=`<a href="${ep.reelUrl}" target="_blank" rel="noopener" class="reel-watch-link"><span class="icon">📹</span><span class="label">WATCH ON INSTAGRAM</span><span class="arrow">→</span></a>`;
+  const commentId = `${subjectCode}_ep${epIdx}`;
+  h+=`<div class="comments-section">
+    <div class="comments-title">💬 ANONYMOUS COMMENTS</div>
+    <div class="comment-form">
+      <input class="comment-name" type="text" placeholder="Your name" id="cname_${commentId}">
+      <input class="comment-input" type="text" placeholder="Drop a comment..." id="cinput_${commentId}" onkeydown="if(event.key==='Enter'){event.preventDefault();postComment('${commentId}')}">
+      <button class="comment-btn" onclick="postComment('${commentId}')">POST</button>
+    </div>
+    <div class="comments-list" id="clist_${commentId}"><div class="comments-loading">Loading comments...</div></div>
+  </div>`;
+  return h;
+}
 
 function openFile(idx){
   const s=subjects[idx],ov=document.getElementById('modalOverlay'),ct=document.getElementById('fileContainer');
   const tv=s.episodes.reduce((a,e)=>a+e.evidence.length,0);
-  ct.innerHTML=`<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>`:''}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div></div>`;
-  ov.classList.add('active');document.body.style.overflow='hidden'}
+  const sc=s.codename.replace(/\s+/g,'_').toLowerCase();
+  ct.innerHTML=`<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep,sc,i)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>`:''}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div></div>`;
+  ov.classList.add('active');document.body.style.overflow='hidden';
+  loadComments(`${sc}_ep0`);
+}
 
-function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open')}
+function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open');
+  // Load comments when opening an episode
+  if(c.classList.contains('open')){const cl=c.querySelector('.comments-list');if(cl&&cl.id){loadComments(cl.id.replace('clist_',''))}}
+}
 function closeFile(){document.querySelectorAll('.file-container video').forEach(v=>v.pause());document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''}
 document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('modalOverlay'))closeFile()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFile()});
+
+// ========== COMMENTS SYSTEM ==========
+async function loadComments(commentId){
+  const list=document.getElementById('clist_'+commentId);
+  if(!list)return;
+  list.innerHTML='<div class="comments-loading">Loading...</div>';
+  try{
+    if(!supabaseClient){list.innerHTML='<div class="no-comments">Comments loading...</div>';return}
+    const{data,error}=await supabaseClient.from('comments').select('*').eq('episode_id',commentId).order('created_at',{ascending:false}).limit(50);
+    if(error)throw error;
+    if(!data||data.length===0){list.innerHTML='<div class="no-comments">No comments yet. Be the first.</div>';return}
+    list.innerHTML=data.map(c=>{
+      const t=new Date(c.created_at);
+      const ago=timeAgo(t);
+      return`<div class="comment-item"><div class="comment-author">${escHtml(c.author_name)}<span class="comment-time">${ago}</span></div><div class="comment-text">${escHtml(c.comment_text)}</div></div>`
+    }).join('');
+  }catch(e){list.innerHTML='<div class="no-comments">Could not load comments.</div>'}
+}
+
+async function postComment(commentId){
+  const nameEl=document.getElementById('cname_'+commentId);
+  const inputEl=document.getElementById('cinput_'+commentId);
+  const name=nameEl.value.trim()||'Anonymous';
+  const text=inputEl.value.trim();
+  if(!text)return;
+  const btn=inputEl.parentElement.querySelector('.comment-btn');
+  btn.disabled=true;btn.textContent='POSTING...';
+  try{
+    if(!supabaseClient)throw new Error('Not connected');
+    const{error}=await supabaseClient.from('comments').insert({episode_id:commentId,author_name:name,comment_text:text});
+    if(error)throw error;
+    inputEl.value='';
+    await loadComments(commentId);
+  }catch(e){console.error(e)}
+  btn.disabled=false;btn.textContent='POST';
+}
+
+function escHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+function timeAgo(date){
+  const s=Math.floor((Date.now()-date.getTime())/1000);
+  if(s<60)return'just now';
+  if(s<3600)return Math.floor(s/60)+'m ago';
+  if(s<86400)return Math.floor(s/3600)+'h ago';
+  return Math.floor(s/86400)+'d ago';
+}
 
 // ========== WHISTLEBLOWER — SUPABASE ==========
 const fd=document.getElementById('fileDrop'),fi=document.getElementById('fileInput'),fl=document.getElementById('fileList');
