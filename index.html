@@ -261,13 +261,23 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
   <div class="file-container" id="fileContainer"></div>
 </div>
 
-<!-- SUPABASE SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ========== SUPABASE CONFIG ==========
+// ========== SUPABASE CONFIG (loaded async) ==========
 const SUPABASE_URL = 'https://kjeqzwfxtshgerzkaiqg.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabaseClient = null;
+
+// Load Supabase SDK async so it doesn't block the page
+(function loadSupabase(){
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  s.onload = function(){
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    console.log('Supabase connected');
+  };
+  s.onerror = function(){ console.warn('Supabase SDK failed to load — form will show error on submit'); };
+  document.head.appendChild(s);
+})();
 
 // ========== SUBJECT DATA ==========
 const subjects=[
@@ -364,6 +374,8 @@ document.getElementById('wbForm').addEventListener('submit', async function(e) {
   btn.classList.add('loading');
 
   try {
+    if (!supabaseClient) throw new Error('Connection not ready. Please wait a moment and try again.');
+
     // 1. Upload proof files to Supabase Storage
     const proofUrls = [];
     const files = document.getElementById('fileInput').files;
@@ -375,17 +387,16 @@ document.getElementById('wbForm').addEventListener('submit', async function(e) {
         const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
         const filePath = `submissions/${timestamp}_${safeName}`;
         
-        const { data, error } = await supabase.storage
+        const { data, error } = await supabaseClient.storage
           .from('whistleblower-proof')
           .upload(filePath, file);
         
         if (error) {
           console.error('Upload error:', error);
-          continue; // Skip failed uploads but continue
+          continue;
         }
         
-        // Get public URL
-        const { data: urlData } = supabase.storage
+        const { data: urlData } = supabaseClient.storage
           .from('whistleblower-proof')
           .getPublicUrl(filePath);
         
@@ -396,7 +407,7 @@ document.getElementById('wbForm').addEventListener('submit', async function(e) {
     }
 
     // 2. Insert submission into database
-    const { error: insertError } = await supabase
+    const { error: insertError } = await supabaseClient
       .from('whistleblower_submissions')
       .insert({
         influencer_name: document.getElementById('wbName').value.trim(),
