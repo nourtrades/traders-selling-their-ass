@@ -26,6 +26,28 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .cta-banner-btn:hover{background:#fff;color:var(--cod-red);box-shadow:0 0 20px rgba(255,23,68,.4)}
 @keyframes cta-pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,23,68,.4)}50%{box-shadow:0 0 0 8px rgba(255,23,68,0)}}
 
+/* EMAIL POPUP */
+.popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:500;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(4px)}
+.popup-overlay.active{display:flex}
+.popup-box{background:#0d0d0d;border:1px solid var(--matrix-green);max-width:460px;width:100%;padding:30px;position:relative;animation:file-open .4s ease}
+.popup-close{position:absolute;top:12px;right:12px;width:30px;height:30px;background:transparent;border:1px solid var(--cod-red);color:var(--cod-red);font-size:16px;cursor:pointer;font-family:'Share Tech Mono',monospace;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.popup-close:hover{background:var(--cod-red);color:#000}
+.popup-title{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:var(--matrix-green);letter-spacing:3px;text-align:center;text-shadow:0 0 10px rgba(0,255,65,.3);margin-bottom:6px}
+.popup-sub{font-size:13px;color:var(--matrix-mid);text-align:center;line-height:1.6;margin-bottom:24px}
+.popup-form{display:flex;flex-direction:column;gap:14px}
+.popup-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.popup-label{font-size:9px;letter-spacing:3px;color:var(--matrix-mid);text-transform:uppercase;margin-bottom:4px;display:block}
+.popup-input{background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:14px;padding:10px 12px;outline:none;transition:border-color .2s;width:100%}
+.popup-input:focus{border-color:var(--matrix-green);box-shadow:0 0 8px rgba(0,255,65,.1)}
+.popup-input::placeholder{color:rgba(0,255,65,.25)}
+.popup-btn{background:transparent;border:2px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;padding:12px;cursor:pointer;transition:all .3s;margin-top:4px}
+.popup-btn:hover{background:var(--matrix-green);color:#000;box-shadow:0 0 20px rgba(0,255,65,.4)}
+.popup-btn:disabled{opacity:.5;cursor:not-allowed}
+.popup-success{display:none;text-align:center;padding:30px 10px}
+.popup-success.show{display:block}
+.popup-disclaimer{font-size:9px;color:var(--matrix-dark);text-align:center;margin-top:8px}
+@media(max-width:500px){.popup-row{grid-template-columns:1fr}}
+
 .header{text-align:center;padding:50px 20px 30px;border-bottom:1px solid var(--matrix-dark)}
 .gov-seal{width:80px;height:80px;border:3px solid var(--cod-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);position:relative}
 .gov-seal::before{content:'';position:absolute;width:92px;height:92px;border:1px solid rgba(255,106,0,.3);border-radius:50%}
@@ -173,6 +195,40 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 <div class="scanlines"></div>
 <div class="crt-flicker"></div>
 <div class="watermark">DECLASSIFIED</div>
+
+<!-- EMAIL POPUP -->
+<div class="popup-overlay" id="emailPopup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div id="popupFormWrap">
+      <div class="popup-title">🚨 SCAM ALERTS</div>
+      <div class="popup-sub">Get notified when new scammers get exposed.<br>Be the first to know when episodes drop.</div>
+      <form class="popup-form" id="popupForm">
+        <div class="popup-row">
+          <div>
+            <label class="popup-label">First Name</label>
+            <input class="popup-input" type="text" id="popupFirst" placeholder="First name" required>
+          </div>
+          <div>
+            <label class="popup-label">Last Name</label>
+            <input class="popup-input" type="text" id="popupLast" placeholder="Last name" required>
+          </div>
+        </div>
+        <div>
+          <label class="popup-label">Email</label>
+          <input class="popup-input" type="email" id="popupEmail" placeholder="your@email.com" required>
+        </div>
+        <button type="submit" class="popup-btn" id="popupBtn">GET INTEL UPDATES</button>
+      </form>
+      <div class="popup-disclaimer">No spam. Only fraud alerts. Unsubscribe anytime.</div>
+    </div>
+    <div class="popup-success" id="popupSuccess">
+      <div style="font-size:36px;margin-bottom:12px;">🛡️</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:3px;color:var(--matrix-green);">YOU'RE IN</div>
+      <div style="font-size:12px;color:var(--matrix-mid);margin-top:8px;">Intel updates will hit your inbox when new scammers get exposed.</div>
+    </div>
+  </div>
+</div>
 
 <div class="main-container" id="mainContent" style="opacity:0;">
   <div class="declassified-bar">⚠ DECLASSIFIED — NOUR TRADES INTELLIGENCE DIVISION — AUTHORIZED PERSONNEL ONLY ⚠</div>
@@ -505,23 +561,41 @@ document.getElementById('emailForm').addEventListener('submit', async function(e
   }
 });
 
-// TOP EMAIL FORM
-document.getElementById('topEmailForm').addEventListener('submit', async function(e) {
+// TOP EMAIL POPUP (5 second delay)
+setTimeout(function(){
+  if (!sessionStorage.getItem('popupShown')) {
+    document.getElementById('emailPopup').classList.add('active');
+    sessionStorage.setItem('popupShown', '1');
+  }
+}, 5000);
+
+function closePopup(){
+  document.getElementById('emailPopup').classList.remove('active');
+}
+document.getElementById('emailPopup').addEventListener('click', function(e){
+  if(e.target === document.getElementById('emailPopup')) closePopup();
+});
+
+document.getElementById('popupForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = document.getElementById('topEmailBtn');
-  const email = document.getElementById('topEmailInput').value.trim();
+  const btn = document.getElementById('popupBtn');
   btn.disabled = true;
-  btn.textContent = '...';
+  btn.textContent = 'TRANSMITTING...';
 
   try {
     if (!supabaseClient) throw new Error('Not ready');
-    const { error } = await supabaseClient.from('email_subscribers').insert({ email: email });
+    const { error } = await supabaseClient.from('email_subscribers').insert({
+      first_name: document.getElementById('popupFirst').value.trim(),
+      last_name: document.getElementById('popupLast').value.trim(),
+      email: document.getElementById('popupEmail').value.trim()
+    });
     if (error) throw error;
-    document.getElementById('topEmailForm').style.display = 'none';
-    document.getElementById('topEmailSuccess').style.display = 'block';
+    document.getElementById('popupFormWrap').style.display = 'none';
+    document.getElementById('popupSuccess').classList.add('show');
+    setTimeout(closePopup, 3000);
   } catch (err) {
     btn.disabled = false;
-    btn.textContent = 'SUBSCRIBE';
+    btn.textContent = 'GET INTEL UPDATES';
   }
 });
 </script>
