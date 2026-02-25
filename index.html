@@ -805,8 +805,7 @@ function getMedia(ep, subjectCode, epIdx){
   h+=`<div class="comments-section">
     <div class="comments-title">💬 ANONYMOUS COMMENTS</div>
     <div class="comment-form">
-      <input class="comment-name" type="text" placeholder="Your name" id="cname_${commentId}">
-      <input class="comment-input" type="text" placeholder="Drop a comment..." id="cinput_${commentId}" onkeydown="if(event.key==='Enter'){event.preventDefault();postComment('${commentId}')}">
+      <input class="comment-input" type="text" placeholder="Drop an anonymous comment..." id="cinput_${commentId}" onkeydown="if(event.key==='Enter'){event.preventDefault();postComment('${commentId}')}">
       <button class="comment-btn" onclick="postComment('${commentId}')">POST</button>
     </div>
     <div class="comments-list" id="clist_${commentId}"><div class="comments-loading">Loading comments...</div></div>
@@ -910,9 +909,8 @@ async function loadComments(commentId){
 }
 
 async function postComment(commentId){
-  const nameEl=document.getElementById('cname_'+commentId);
   const inputEl=document.getElementById('cinput_'+commentId);
-  const name=nameEl.value.trim()||'Anonymous';
+  const name='Anonymous';
   const text=inputEl.value.trim();
   if(!text)return;
   const btn=inputEl.parentElement.querySelector('.comment-btn');
