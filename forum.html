@@ -52,7 +52,12 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .forum-post{padding:14px 16px;border-bottom:1px solid rgba(0,255,65,.05);transition:background .2s}
 .forum-post:hover{background:rgba(0,255,65,.02)}
 .forum-post-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.forum-post-author{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-yellow)}
+.forum-post-author{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-yellow);display:flex;align-items:center;gap:6px}
+.author-badge{font-size:7px;padding:2px 5px;letter-spacing:1px;border-radius:2px}
+.badge-verified{background:rgba(0,255,65,.1);border:1px solid var(--matrix-green);color:var(--matrix-green)}
+.badge-anon{background:rgba(255,255,255,.05);border:1px solid var(--matrix-dark);color:var(--matrix-dark)}
+.author-link{color:var(--cod-yellow);text-decoration:none;cursor:pointer}
+.author-link:hover{text-decoration:underline}
 .forum-post-time{font-size:10px;color:var(--matrix-dark)}
 .forum-post-body{font-size:13px;color:var(--matrix-green);line-height:1.6;opacity:.85}
 .forum-post-actions{display:flex;gap:12px;margin-top:8px}
@@ -86,6 +91,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
       <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
       <a href="/forum.html" class="site-nav-link active">💬 FORUM</a>
       <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
+      <a href="/login.html" class="site-nav-link" id="navAuth">👤 LOGIN</a>
     </div>
     <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
   </nav>
@@ -101,11 +107,26 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
       <div class="forum-tab" onclick="switchForum('general')" id="ftab_general"><span class="tab-count">💬</span>GENERAL</div>
     </div>
     <div class="forum-body">
-      <div class="forum-compose">
-        <div class="forum-compose-row">
-          <input class="forum-name-input" type="text" placeholder="Your name" id="forumName" maxlength="30">
-          <textarea class="forum-msg-input" placeholder="Start a discussion..." id="forumMsg" rows="2" maxlength="1000"></textarea>
-          <button class="forum-post-btn" onclick="postForumMessage()">POST</button>
+      <div class="forum-compose" id="composeSection">
+        <div id="composeLoggedIn" style="display:none">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--cod-yellow)" id="postingAs">POSTING AS: —</span>
+            <a href="/profile.html" style="font-size:9px;color:var(--matrix-mid);text-decoration:none;border:1px solid var(--matrix-dark);padding:3px 8px">PROFILE</a>
+          </div>
+          <div class="forum-compose-row">
+            <textarea class="forum-msg-input" placeholder="Start a discussion..." id="forumMsg" rows="2" maxlength="1000"></textarea>
+            <button class="forum-post-btn" onclick="postForumMessage()">POST</button>
+          </div>
+        </div>
+        <div id="composeAnon">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-dark)">POSTING ANONYMOUSLY</span>
+            <a href="/login.html" style="font-size:9px;color:var(--matrix-green);text-decoration:none;border:1px solid var(--matrix-green);padding:3px 8px">LOGIN FOR IDENTITY →</a>
+          </div>
+          <div class="forum-compose-row">
+            <textarea class="forum-msg-input" placeholder="Post anonymously..." id="forumMsgAnon" rows="2" maxlength="1000"></textarea>
+            <button class="forum-post-btn" onclick="postAnonMessage()">POST ANON</button>
+          </div>
         </div>
       </div>
       <div class="forum-posts" id="forumPosts">
@@ -116,18 +137,29 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
   <div class="footer">NOUR TRADES INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
 </div>
 <script>
-// Matrix rain
 var canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
 function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
 var ch='アイウエオカキクケコ0123456789',fs=14,col=~~(canvas.width/fs),dr=Array(col).fill(1);
 function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
 setInterval(dm,35);addEventListener('resize',function(){col=~~(canvas.width/fs);dr=Array(col).fill(1)});
 
-// Supabase
 var SUPABASE_URL='https://kjeqzwfxtshgerzkaiqg.supabase.co';
 var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
-var supabaseClient=null;
-(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=function(){supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);loadForumPosts()};document.head.appendChild(s)})();
+var sb=null,currentUser=null,currentProfile=null;
+
+(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=async function(){
+  sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  var sess=await sb.auth.getSession();
+  if(sess.data.session){
+    currentUser=sess.data.session.user;
+    var pr=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
+    currentProfile=pr.data;
+    document.getElementById('composeLoggedIn').style.display='block';
+    document.getElementById('composeAnon').style.display='none';
+    document.getElementById('postingAs').textContent='POSTING AS: '+(currentProfile?currentProfile.display_name:'Agent');
+  }
+  loadForumPosts();
+};document.head.appendChild(s)})();
 
 var currentForum='stocks';
 function switchForum(channel){currentForum=channel;document.querySelectorAll('.forum-tab').forEach(function(t){t.classList.remove('active')});document.getElementById('ftab_'+channel).classList.add('active');loadForumPosts()}
@@ -136,42 +168,68 @@ async function loadForumPosts(){
   var container=document.getElementById('forumPosts');
   container.innerHTML='<div class="forum-empty">Loading...</div>';
   try{
-    if(!supabaseClient)throw new Error('No connection');
-    var resp=await supabaseClient.from('forum_posts').select('*').eq('channel',currentForum).is('parent_id',null).order('created_at',{ascending:false}).limit(50);
+    if(!sb)throw new Error('No connection');
+    var resp=await sb.from('forum_posts').select('*').eq('channel',currentForum).is('parent_id',null).order('created_at',{ascending:false}).limit(50);
     if(resp.error)throw resp.error;
     var posts=resp.data||[];
     if(!posts.length){container.innerHTML='<div class="forum-empty">No posts yet. Be the first to start a discussion.</div>';return}
     var postIds=posts.map(function(p){return p.id});
-    var repliesResp=await supabaseClient.from('forum_posts').select('*').in('parent_id',postIds).order('created_at',{ascending:true});
+    var repliesResp=await sb.from('forum_posts').select('*').in('parent_id',postIds).order('created_at',{ascending:true});
     var allReplies=repliesResp.data||[];
     var replyMap={};allReplies.forEach(function(r){if(!replyMap[r.parent_id])replyMap[r.parent_id]=[];replyMap[r.parent_id].push(r)});
-    var likesResp=await supabaseClient.from('forum_likes').select('post_id').in('post_id',postIds.concat(allReplies.map(function(r){return r.id})));
+    var likesResp=await sb.from('forum_likes').select('post_id').in('post_id',postIds.concat(allReplies.map(function(r){return r.id})));
     var likeCounts={};(likesResp.data||[]).forEach(function(l){likeCounts[l.post_id]=(likeCounts[l.post_id]||0)+1});
     var html='';posts.forEach(function(p){html+=renderPost(p,likeCounts[p.id]||0,replyMap[p.id]||[],likeCounts)});
     container.innerHTML=html;
   }catch(e){container.innerHTML='<div class="forum-empty">Could not load posts. Try again later.</div>'}
 }
+
 function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function getTimeAgo(ts){var d=Math.floor((Date.now()-new Date(ts).getTime())/1000);if(d<60)return'just now';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago'}
+
+function renderAuthor(p){
+  var isAnon=!p.user_id||p.is_anonymous;
+  if(isAnon){
+    return '<span class="forum-post-author"><span>'+escHtml(p.author_name)+'</span><span class="author-badge badge-anon">ANON</span></span>';
+  }else{
+    return '<span class="forum-post-author"><a href="/profile.html?id='+p.user_id+'" class="author-link">'+escHtml(p.author_name)+'</a><span class="author-badge badge-verified">✓ VERIFIED</span></span>';
+  }
+}
+
 function renderPost(p,likes,replies,lc){
   var t=getTimeAgo(p.created_at);
-  var h='<div class="forum-post" id="fpost_'+p.id+'"><div class="forum-post-header"><span class="forum-post-author">'+escHtml(p.author_name)+'</span><span class="forum-post-time">'+t+'</span></div><div class="forum-post-body">'+escHtml(p.body)+'</div><div class="forum-post-actions"><button class="forum-post-action" onclick="likePost(\''+p.id+'\')">▲ <span class="forum-like-count">'+(likes||0)+'</span></button><button class="forum-post-action" onclick="toggleReply(\''+p.id+'\')">↩ REPLY</button></div><div class="forum-reply-form" id="freply_'+p.id+'"><input class="forum-reply-input" placeholder="Reply..." id="freply_input_'+p.id+'" maxlength="500"><button class="forum-reply-btn" onclick="postReply(\''+p.id+'\')">SEND</button></div>';
-  if(replies.length){h+='<div class="forum-replies">';replies.forEach(function(r){var rt=getTimeAgo(r.created_at);h+='<div class="forum-post"><div class="forum-post-header"><span class="forum-post-author">'+escHtml(r.author_name)+'</span><span class="forum-post-time">'+rt+'</span></div><div class="forum-post-body">'+escHtml(r.body)+'</div><div class="forum-post-actions"><button class="forum-post-action" onclick="likePost(\''+r.id+'\')">▲ <span class="forum-like-count">'+(lc[r.id]||0)+'</span></button></div></div>'});h+='</div>'}
+  var h='<div class="forum-post" id="fpost_'+p.id+'"><div class="forum-post-header">'+renderAuthor(p)+'<span class="forum-post-time">'+t+'</span></div><div class="forum-post-body">'+escHtml(p.body)+'</div><div class="forum-post-actions"><button class="forum-post-action" onclick="likePost(\''+p.id+'\')">▲ <span class="forum-like-count">'+(likes||0)+'</span></button><button class="forum-post-action" onclick="toggleReply(\''+p.id+'\')">↩ REPLY</button></div><div class="forum-reply-form" id="freply_'+p.id+'"><input class="forum-reply-input" placeholder="Reply..." id="freply_input_'+p.id+'" maxlength="500"><button class="forum-reply-btn" onclick="postReply(\''+p.id+'\')">SEND</button></div>';
+  if(replies.length){h+='<div class="forum-replies">';replies.forEach(function(r){var rt=getTimeAgo(r.created_at);h+='<div class="forum-post"><div class="forum-post-header">'+renderAuthor(r)+'<span class="forum-post-time">'+rt+'</span></div><div class="forum-post-body">'+escHtml(r.body)+'</div><div class="forum-post-actions"><button class="forum-post-action" onclick="likePost(\''+r.id+'\')">▲ <span class="forum-like-count">'+(lc[r.id]||0)+'</span></button></div></div>'});h+='</div>'}
   return h+'</div>';
 }
+
+function genAnonName(){return'ANON-'+Math.random().toString(36).substr(2,4).toUpperCase()}
+
 async function postForumMessage(){
-  var name=document.getElementById('forumName').value.trim(),body=document.getElementById('forumMsg').value.trim();
-  if(!name){document.getElementById('forumName').style.borderColor='var(--cod-red)';return}
+  var body=document.getElementById('forumMsg').value.trim();
   if(!body){document.getElementById('forumMsg').style.borderColor='var(--cod-red)';return}
-  try{await supabaseClient.from('forum_posts').insert({channel:currentForum,author_name:name,body:body,parent_id:null});document.getElementById('forumMsg').value='';loadForumPosts()}catch(e){alert('Could not post.')}
+  var name=currentProfile?currentProfile.display_name:'Agent';
+  try{await sb.from('forum_posts').insert({channel:currentForum,author_name:name,body:body,parent_id:null,user_id:currentUser.id,is_anonymous:false});document.getElementById('forumMsg').value='';loadForumPosts()}catch(e){alert('Could not post.')}
 }
+
+async function postAnonMessage(){
+  var body=document.getElementById('forumMsgAnon').value.trim();
+  if(!body){document.getElementById('forumMsgAnon').style.borderColor='var(--cod-red)';return}
+  var anonName=genAnonName();
+  try{await sb.from('forum_posts').insert({channel:currentForum,author_name:anonName,body:body,parent_id:null,user_id:null,is_anonymous:true});document.getElementById('forumMsgAnon').value='';loadForumPosts()}catch(e){alert('Could not post.')}
+}
+
 async function postReply(parentId){
-  var input=document.getElementById('freply_input_'+parentId),body=input.value.trim(),name=document.getElementById('forumName').value.trim()||'Anon';
+  var input=document.getElementById('freply_input_'+parentId),body=input.value.trim();
   if(!body)return;
-  try{await supabaseClient.from('forum_posts').insert({channel:currentForum,author_name:name,body:body,parent_id:parentId});input.value='';loadForumPosts()}catch(e){alert('Could not reply.')}
+  var name,uid,isAnon;
+  if(currentUser&&currentProfile){name=currentProfile.display_name;uid=currentUser.id;isAnon=false}
+  else{name=genAnonName();uid=null;isAnon=true}
+  try{await sb.from('forum_posts').insert({channel:currentForum,author_name:name,body:body,parent_id:parentId,user_id:uid,is_anonymous:isAnon});input.value='';loadForumPosts()}catch(e){alert('Could not reply.')}
 }
+
 function toggleReply(id){var f=document.getElementById('freply_'+id);f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus()}
-async function likePost(id){try{await supabaseClient.from('forum_likes').insert({post_id:id});loadForumPosts()}catch(e){}}
+async function likePost(id){try{await sb.from('forum_likes').insert({post_id:id});loadForumPosts()}catch(e){}}
 </script>
 </body>
 </html>
