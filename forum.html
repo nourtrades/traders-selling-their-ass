@@ -62,6 +62,7 @@ canvas{position:fixed;top:0;left:0;z-index:0;opacity:.08}
 .post-actions{display:flex;gap:15px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.05)}
 .post-action{font-size:10px;color:var(--matrix-mid);cursor:pointer;transition:color .2s;background:none;border:none;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
 .post-action:hover{color:var(--matrix-green)}
+.join-btn{color:var(--cod-yellow)!important;font-weight:bold}
 .replies{border-top:1px solid var(--matrix-dark);background:rgba(0,0,0,.2);padding:0 15px}
 .reply{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
 .reply:last-child{border-bottom:none}
@@ -185,6 +186,7 @@ async function loadPosts(){
       html+='<div class="post-actions">';
       html+='<button class="post-action" onclick="likePost(\''+p.id+'\')">▲ '+likes+'</button>';
       html+='<button class="post-action" onclick="toggleReply(\''+p.id+'\')">💬 '+replies.length+' REPLIES</button>';
+      html+='<button class="post-action join-btn" onclick="toggleReply(\''+p.id+'\')">✦ JOIN THE DISCUSSION</button>';
       if(currentUser&&p.user_id===currentUser.id)html+='<button class="post-action" style="color:var(--cod-red)" onclick="deletePost(\''+p.id+'\')">🗑 DELETE</button>';
       html+='</div></div>';
       html+='<div class="replies" id="replies_'+p.id+'">';
