@@ -180,8 +180,9 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .declassified-stamp{position:absolute;top:12px;right:12px;z-index:3;background:rgba(192,57,43,.9);color:#fff;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;padding:3px 10px;border:1px solid rgba(255,255,255,.3);transform:rotate(3deg)}
 .risk-badge{position:absolute;top:12px;left:12px;z-index:3;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:4px 10px;border:1px solid}
 .risk-critical{background:rgba(255,23,68,.85);color:#fff;border-color:var(--cod-red)}
-.risk-high{background:rgba(255,106,0,.85);color:#fff;border-color:var(--cod-orange)}
-.risk-elevated{background:rgba(255,214,0,.85);color:#000;border-color:var(--cod-yellow)}
+.risk-high{background:rgba(255,106,0,.85);color:#fff;border-color:#ff6a00}
+.risk-medium{background:rgba(255,214,0,.85);color:#000;border-color:var(--cod-yellow)}
+.risk-low{background:rgba(0,255,65,.85);color:#000;border-color:#00ff41}
 .mugshot-photo{width:100%;height:220px;overflow:hidden;position:relative;border-bottom:2px solid var(--matrix-dark)}
 .mugshot-photo img{width:100%;height:100%;object-fit:cover;image-rendering:auto;transition:filter .3s}
 .mugshot-card:hover .mugshot-photo img{filter:brightness(1.05)}
@@ -580,13 +581,13 @@ const subjects=[
 {title:"EP 3.5 — COMMENT AND DELETE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep3half.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR8i-c7CUkT/",evidence:[]},
 {title:"EP 4 — THE WHITE FLAG",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep4.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR-GrmZgbaT/",evidence:[]}
 ],verdict:"EXPOSED — WHITE FLAG THROWN"},
-{codename:"JDUN TRADES",rank:8,riskLevel:80,riskClass:"elevated",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/jdun.png",tags:["PAPER TRADING PARTNER","TRADIFY","PROP FIRM"],summary:"Partner exposed for paper trading. Now selling Tradify funded accounts.",connections:[],episodes:[
+{codename:"JDUN TRADES",rank:8,riskLevel:80,riskClass:"medium",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/jdun.png",tags:["PAPER TRADING PARTNER","TRADIFY","PROP FIRM"],summary:"Partner exposed for paper trading. Now selling Tradify funded accounts.",connections:[],episodes:[
 {title:"EP 2 — PAPER TRADING PARTNER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep2.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR5aCiuE8Ku/",evidence:[]}
 ],verdict:"UNVERIFIED — PAPER TRAIL"},
-{codename:"USMAN ASHRAF",rank:9,riskLevel:78,riskClass:"elevated",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/usman.jpg",tags:["SIGNAL SPAMMER","DISCOUNT CODES","CHEAP AD SPEND"],summary:"25 discount codes in one Thanksgiving week. Tantrums over ad spend.",connections:["UMAR ASHRAF"],episodes:[
+{codename:"USMAN ASHRAF",rank:9,riskLevel:78,riskClass:"medium",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/usman.jpg",tags:["SIGNAL SPAMMER","DISCOUNT CODES","CHEAP AD SPEND"],summary:"25 discount codes in one Thanksgiving week. Tantrums over ad spend.",connections:["UMAR ASHRAF"],episodes:[
 {title:"EP 3 — 25 DISCOUNT CODES",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep3.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR8Rr6Uk9U1/",evidence:[]}
 ],verdict:"SIGNAL SPAMMER"},
-{codename:"MASITRADES",rank:10,riskLevel:72,riskClass:"elevated",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/masi.jpg",tags:["PHOTOSHOPPED TRADES","KICKED FROM SML"],summary:"Kicked from Stock Market Lab for photoshopping trades.",connections:["UMAR ASHRAF","USMAN ASHRAF"],episodes:[
+{codename:"MASITRADES",rank:10,riskLevel:72,riskClass:"medium",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/masi.jpg",tags:["PHOTOSHOPPED TRADES","KICKED FROM SML"],summary:"Kicked from Stock Market Lab for photoshopping trades.",connections:["UMAR ASHRAF","USMAN ASHRAF"],episodes:[
 {title:"EP 8 — KICKED FROM STOCK MARKET LAB",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep8.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSLfXPVEyzg/",evidence:[]}
 ],verdict:"PHOTOSHOP FRAUD"}
 ];
@@ -607,8 +608,8 @@ window.scrollTo(0,0);
 const grid=document.getElementById('mugGrid');
 subjects.forEach((s,idx)=>{
   const card=document.createElement('div');card.className='mugshot-card';card.style.animationDelay=`${idx*.06}s`;card.onclick=()=>openFile(idx);
-  const riskLabel=s.riskLevel>=90?'CRITICAL':s.riskLevel>=80?'HIGH':'ELEVATED';
-  const riskColor=s.riskLevel>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':s.riskLevel>=80?'linear-gradient(90deg,#ff6a00,#ffd600)':'linear-gradient(90deg,#ffd600,#00ff41)';
+  const riskLabel=s.riskLevel>=90?'CRITICAL':s.riskLevel>=80?'HIGH':s.riskLevel>=60?'MEDIUM':'LOW';
+  const riskColor=s.riskLevel>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':s.riskLevel>=80?'linear-gradient(90deg,#ff6a00,#ffd600)':s.riskLevel>=60?'linear-gradient(90deg,#ffd600,#00ff41)':'linear-gradient(90deg,#00ff41,#00cc33)';
   const n=s.episodes.length,t=n===1?'1 EPISODE':n+' EPISODES';
   card.innerHTML=`<div class="declassified-stamp">DECLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span> RISK FACTOR: ${s.riskLevel}/100</div><div class="mugshot-name">${s.codename}</div><div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">${(s.markets||[]).map(m=>`<span class="market-tag market-${m.toLowerCase()}">${m}</span>`).join('')}</div><div class="mugshot-episodes">${t}</div><div class="risk-meter"><span class="risk-meter-label">RISK</span><div class="risk-meter-bar"><div class="risk-meter-fill" style="width:${s.riskLevel}%;background:${riskColor}"></div></div><span class="risk-meter-val">${s.riskLevel}%</span></div><button class="mugshot-btn">◈ OPEN DECLASSIFIED FILE</button></div>`;
   grid.appendChild(card)});
