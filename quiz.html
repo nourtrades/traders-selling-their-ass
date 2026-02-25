@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+<title>SCAM SPOTTER QUIZ // NOUR TRADES INTELLIGENCE</title>
+<script defer src="/_vercel/insights/script.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XLYG9PBFK7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XLYG9PBFK7');</script>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a;--panel-bg:rgba(0,20,0,0.85)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair;min-height:100vh}
+#matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
+.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px)}
+.page-wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(0,10,0,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.site-nav-links{display:flex;gap:4px;align-items:center}
+.site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+.site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(0,255,65,.03)}
+.site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
+.site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
+@media(max-width:600px){
+  .site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(0,10,0,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}
+  .site-nav-links.open{display:flex}
+  .site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(0,255,65,.05)}
+  .site-nav-toggle{display:block}
+}
+.page-header{text-align:center;padding:40px 20px 30px}
+.page-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:4px;color:var(--cod-yellow);text-shadow:0 0 20px rgba(255,214,0,.3)}
+.page-sub{font-size:13px;color:var(--matrix-mid);margin-top:8px;letter-spacing:1px}
+
+/* QUIZ STYLES */
+.quiz-section{max-width:700px;margin:0 auto;padding:0 20px 60px;width:100%}
+.quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.quiz-progress>span{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--matrix-mid);white-space:nowrap}
+.quiz-prog-bar{flex:1;height:4px;background:rgba(0,255,65,.1);border-radius:2px;overflow:hidden}
+.quiz-prog-fill{height:100%;background:var(--matrix-green);transition:width .4s ease;border-radius:2px}
+.quiz-score{color:var(--cod-yellow)!important}
+.quiz-card{border:1px solid var(--matrix-dark);background:rgba(0,20,0,.4);padding:28px;min-height:200px}
+.quiz-scenario{font-size:15px;line-height:1.7;color:var(--matrix-green);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(0,255,65,.1)}
+.quiz-scenario .quiz-q-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:4px;color:var(--cod-yellow);display:block;margin-bottom:10px}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:14px 18px;border:1px solid var(--matrix-dark);background:rgba(0,20,0,.2);color:var(--matrix-green);font-size:13px;cursor:pointer;transition:all .2s;text-align:left;display:flex;align-items:center;gap:12px}
+.quiz-opt:hover{border-color:var(--matrix-green);background:rgba(0,255,65,.03)}
+.quiz-opt .opt-letter{font-family:'Orbitron',sans-serif;font-size:11px;color:var(--matrix-mid);min-width:20px}
+.quiz-opt.correct{border-color:var(--matrix-green)!important;background:rgba(0,255,65,.08)!important;color:#fff}
+.quiz-opt.wrong{border-color:var(--cod-red)!important;background:rgba(255,23,68,.08)!important;color:var(--cod-red)}
+.quiz-opt.disabled{pointer-events:none;opacity:.5}
+.quiz-opt.correct .opt-letter{color:var(--matrix-green)}
+.quiz-opt.wrong .opt-letter{color:var(--cod-red)}
+.quiz-feedback{margin-top:16px;padding:14px;border-left:3px solid var(--cod-yellow);background:rgba(255,214,0,.03);font-size:12px;line-height:1.6;color:var(--matrix-mid);display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback strong{color:var(--cod-yellow)}
+.quiz-guilty{margin-top:12px;display:none;padding:10px;border:1px dashed var(--cod-red);font-size:11px;color:var(--cod-red)}
+.quiz-guilty.show{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.quiz-guilty-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;white-space:nowrap}
+.quiz-guilty-name{background:rgba(255,23,68,.1);padding:3px 8px;border:1px solid rgba(255,23,68,.3);cursor:pointer;transition:all .2s;font-size:10px;letter-spacing:1px;text-decoration:none;color:var(--cod-red)}
+.quiz-guilty-name:hover{background:rgba(255,23,68,.2)}
+.quiz-next-btn{margin-top:16px;padding:10px 24px;background:transparent;border:1px solid var(--cod-yellow);color:var(--cod-yellow);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;cursor:pointer;transition:all .2s;display:none}
+.quiz-next-btn.show{display:inline-block}
+.quiz-next-btn:hover{background:var(--cod-yellow);color:#000}
+.quiz-results{text-align:center;padding:40px 20px;border:1px solid var(--matrix-green);background:rgba(0,255,65,.02)}
+.quiz-results-icon{font-size:50px;margin-bottom:16px}
+.quiz-results-title{font-family:'Orbitron',sans-serif;font-size:18px;letter-spacing:3px;color:var(--matrix-green);margin-bottom:8px}
+.quiz-results-score{font-family:'Orbitron',sans-serif;font-size:42px;font-weight:700;color:var(--cod-yellow);margin:12px 0;text-shadow:0 0 20px rgba(255,214,0,.4)}
+.quiz-results-breakdown{font-size:12px;color:var(--matrix-mid);margin-bottom:20px;line-height:1.8}
+.quiz-restart-btn{padding:12px 28px;background:transparent;border:2px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;cursor:pointer;transition:all .2s;margin-right:10px}
+.quiz-restart-btn:hover{background:var(--matrix-green);color:#000}
+.quiz-share{margin-top:16px;font-size:11px;color:var(--matrix-dark);letter-spacing:1px}
+.quiz-home-btn{padding:12px 28px;background:transparent;border:2px solid var(--cod-orange);color:var(--cod-orange);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.quiz-home-btn:hover{background:var(--cod-orange);color:#000}
+.footer{text-align:center;padding:30px 20px;border-top:1px solid var(--matrix-dark);font-size:10px;color:var(--matrix-dark);letter-spacing:2px;margin-top:auto}
+</style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<div class="scanlines"></div>
+<div class="page-wrap">
+  <nav class="site-nav">
+    <a href="/" class="site-nav-brand">🍑 NOUR TRADES</a>
+    <div class="site-nav-links">
+      <a href="/" class="site-nav-link">📁 DOSSIERS</a>
+      <a href="/quiz.html" class="site-nav-link active">🔍 QUIZ</a>
+      <a href="/forum.html" class="site-nav-link">💬 FORUM</a>
+      <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
+    </div>
+    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+  </nav>
+  <div class="page-header">
+    <div class="page-title">🔍 SCAM SPOTTER QUIZ</div>
+    <div class="page-sub">8 real scenarios. Can you spot the red flags before it's too late?</div>
+  </div>
+  <div class="quiz-section">
+    <div class="quiz-progress"><span id="quizProg">1/8</span><div class="quiz-prog-bar"><div class="quiz-prog-fill" id="quizProgFill" style="width:12.5%"></div></div><span class="quiz-score" id="quizScoreDisplay">SCORE: 0</span></div>
+    <div id="quizCard" class="quiz-card">
+      <div class="quiz-scenario" id="quizScenario"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <div class="quiz-guilty" id="quizGuilty"></div>
+    </div>
+    <div id="quizResults" class="quiz-results" style="display:none">
+      <div class="quiz-results-icon">🔍</div>
+      <div class="quiz-results-title" id="quizResultTitle"></div>
+      <div class="quiz-results-score" id="quizResultScore"></div>
+      <div class="quiz-results-breakdown" id="quizResultBreakdown"></div>
+      <button class="quiz-restart-btn" onclick="startQuiz()">🔁 RETAKE QUIZ</button>
+      <a href="/" class="quiz-home-btn">📁 VIEW DOSSIERS</a>
+      <div class="quiz-share" id="quizShare"></div>
+    </div>
+  </div>
+  <div class="footer">NOUR TRADES INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
+</div>
+<script>
+// Matrix rain
+var canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
+function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
+var ch='アイウエオカキクケコ0123456789',fs=14,col=~~(canvas.width/fs),dr=Array(col).fill(1);
+function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
+setInterval(dm,35);addEventListener('resize',function(){col=~~(canvas.width/fs);dr=Array(col).fill(1)});
+
+// Quiz data
+var quizQuestions=[
+  {scenario:"A forex trader posts a Lamborghini, a Dubai penthouse, and a $50K profit screenshot — all in 24 hours. But they've never shown a single live trade on a verified brokerage. What should you do?",options:["Sign up for their course — those results speak for themselves","Ask to see a verified brokerage statement before trusting anything","Follow them and copy their trades from screenshots","Report them — the lifestyle is the marketing"],correct:1,explanation:"<strong>Lifestyle IS the product.</strong> Lambos and Dubai shots are designed to make you ask 'how?' — so they can sell you a $2,000 course. Real traders show brokerage statements, not car keys.",guilty:["TJR","LAMBO RAUL","FXALEXG"]},
+  {scenario:"Someone DMs you offering an algorithm that 'trades for you' with a guaranteed 10% monthly return. All you need to do is deposit $5,000 into their recommended broker. What's really happening?",options:["It's a great passive income opportunity","The algo is the bait — the broker deposit is where they make money","10% monthly is conservative for a good algo","You should negotiate for a better algo first"],correct:1,explanation:"<strong>You're the product.</strong> No algo consistently beats the market hands-free. They earn commissions when you deposit into their partner broker. When you lose, they still get paid.",guilty:["TJR","ETHAN DURAN"]},
+  {scenario:"A stock influencer posts 25 different discount codes for prop firms in a single week — including on Thanksgiving. They're constantly pushing new codes in Instagram stories. Why?",options:["They genuinely want to help their followers save money","They earn affiliate commissions every time someone signs up and fails","The firms must be really good if they keep promoting them","It's normal marketing — everyone does it"],correct:1,explanation:"<strong>Affiliate revenue is the business model.</strong> Every signup = commission for them. They don't care if you pass the challenge. The more codes they push, the more desperate they are for that affiliate check.",guilty:["USMAN ASHRAF","FXALEXG"]},
+  {scenario:"Your 'mentor' recommends a broker that operates offshore with no regulation and uses CFDs. They say the spreads are better and there's more leverage. Should you trust this?",options:["Better spreads and leverage sounds great — sign up","Never. Unregulated offshore brokers can manipulate your trades on the backend","It's fine if your mentor uses it too","Offshore just means lower taxes — it's actually smart"],correct:1,explanation:"<strong>Offshore = no protection.</strong> Unregulated CFD brokers can edit your trades, widen spreads, and take your money with zero accountability. They're unregulated for a reason.",guilty:["TJR","FXALEXG","ETHAN DURAN"]},
+  {scenario:"An influencer shows you an incredible trade — a $20,000 profit in one day. But it's a screenshot posted to their Instagram story, not a live recording. How confident should you be?",options:["Screenshots don't lie — that's solid proof","Zero confidence. Screenshots can be faked with Inspect Element in 30 seconds","If they have multiple screenshots it must be real","Trust them — why would they lie?"],correct:1,explanation:"<strong>Inspect Element exists.</strong> Anyone can fake a trading screenshot in seconds. If they won't live-trade on a verified, regulated brokerage in real time — assume it's fake until proven otherwise.",guilty:["MASITRADES","SCARFACE TRADES","SCI"]},
+  {scenario:"You discover that your trading mentor gets a 40-50% revenue share from the broker they recommended to you — meaning they earn money every time you trade and lose. What does this mean?",options:["At least they're making money — must be a good broker","They literally profit from your losses. You ARE the business model.","Revenue share is normal in every industry","The percentage seems high but the broker is still legit"],correct:1,explanation:"<strong>You ARE the business model.</strong> When your mentor earns 40-50% of your losses, they don't need you to win. They need you to deposit, trade, and lose. That's their real income stream.",guilty:["TJR","FXALEXG","LAMBO RAUL"]},
+  {scenario:"A trader with 500K followers launched a $2,000 Discord course before they had any verified profitable trading history. They say 'I learned so you don't have to.' Red flag?",options:["Biggest red flag possible — they're selling what they can't do","If they have followers, they must know something","$2,000 is reasonable for good education","At least they're transparent about their journey"],correct:0,explanation:"<strong>Course before profits = scam.</strong> If their trading actually made money, they wouldn't need thousands of people paying $2,000 for Discord access. The course IS the business — not trading.",guilty:["UMAR ASHRAF","SCI","JDUN TRADES"]},
+  {scenario:"You notice that 5 different 'competing' trading influencers all live in the same city, promote the same brokers, appear in each other's content, and use the exact same marketing playbook. Coincidence?",options:["Coincidence — lots of traders live in the same cities","It's a coordinated network. They share playbooks, referrals, and cover for each other.","Competition is healthy — they push each other to be better","They probably just went to the same trading school"],correct:1,explanation:"<strong>It's a network, not a coincidence.</strong> Same friend groups, same brokers, same offshore platforms, same playbook. When scammers are all connected, they're protecting each other's revenue streams.",guilty:["LAMBO RAUL","FXALEXG","ETHAN DURAN","UMAR ASHRAF","SCARFACE TRADES"]}
+];
+var quizCurrent=0,quizScore=0;
+
+function startQuiz(){
+  quizCurrent=0;quizScore=0;
+  document.getElementById('quizResults').style.display='none';
+  document.getElementById('quizCard').style.display='block';
+  renderQuestion();
+}
+function renderQuestion(){
+  var q=quizQuestions[quizCurrent];
+  document.getElementById('quizProg').textContent=(quizCurrent+1)+'/'+quizQuestions.length;
+  document.getElementById('quizProgFill').style.width=((quizCurrent+1)/quizQuestions.length*100)+'%';
+  document.getElementById('quizScoreDisplay').textContent='SCORE: '+quizScore;
+  document.getElementById('quizScenario').innerHTML='<span class="quiz-q-label">SCENARIO '+(quizCurrent+1)+'</span>'+q.scenario;
+  var letters=['A','B','C','D'],optsHtml='';
+  q.options.forEach(function(opt,i){optsHtml+='<div class="quiz-opt" onclick="answerQuiz('+i+')" id="qopt_'+i+'"><span class="opt-letter">'+letters[i]+'</span><span>'+opt+'</span></div>'});
+  document.getElementById('quizOptions').innerHTML=optsHtml;
+  document.getElementById('quizFeedback').className='quiz-feedback';
+  document.getElementById('quizFeedback').innerHTML='';
+  document.getElementById('quizGuilty').className='quiz-guilty';
+  document.getElementById('quizGuilty').innerHTML='';
+  var oldBtn=document.querySelector('.quiz-next-btn');if(oldBtn)oldBtn.remove();
+}
+function answerQuiz(chosen){
+  var q=quizQuestions[quizCurrent];
+  var isCorrect=chosen===q.correct;
+  if(isCorrect)quizScore++;
+  for(var i=0;i<q.options.length;i++){var el=document.getElementById('qopt_'+i);el.classList.add('disabled');if(i===q.correct)el.classList.add('correct');else if(i===chosen&&!isCorrect)el.classList.add('wrong')}
+  document.getElementById('quizScoreDisplay').textContent='SCORE: '+quizScore;
+  var fb=document.getElementById('quizFeedback');
+  fb.innerHTML=(isCorrect?'✅ CORRECT. ':'❌ WRONG. ')+q.explanation;
+  fb.className='quiz-feedback show';
+  if(q.guilty&&q.guilty.length){
+    var gh=document.getElementById('quizGuilty');
+    var ghHtml='<span class="quiz-guilty-label">🚨 GUILTY:</span>';
+    q.guilty.forEach(function(name){ghHtml+='<a href="/" class="quiz-guilty-name">'+name+'</a>'});
+    gh.innerHTML=ghHtml;gh.className='quiz-guilty show';
+  }
+  var nextBtn=document.createElement('button');
+  nextBtn.className='quiz-next-btn show';
+  nextBtn.textContent=quizCurrent<quizQuestions.length-1?'NEXT SCENARIO →':'SEE RESULTS →';
+  nextBtn.onclick=function(){quizCurrent++;if(quizCurrent<quizQuestions.length){renderQuestion()}else{showQuizResults()}};
+  document.getElementById('quizCard').appendChild(nextBtn);
+}
+function showQuizResults(){
+  document.getElementById('quizCard').style.display='none';
+  var pct=Math.round(quizScore/quizQuestions.length*100);
+  var title=pct>=88?'SCAM DETECTOR ELITE':pct>=63?'STREET SMART':pct>=38?'NEEDS TRAINING':'EASY TARGET';
+  document.getElementById('quizResultTitle').textContent=title;
+  document.getElementById('quizResultScore').textContent=quizScore+'/'+quizQuestions.length;
+  document.getElementById('quizResultBreakdown').innerHTML='You scored '+pct+'% — '+(pct>=88?'You can spot scams from a mile away.':pct>=63?'Solid awareness, but some scams could still slip through.':pct>=38?'You\'d fall for some of these. Study the dossiers.':'You need to study up ASAP.');
+  document.getElementById('quizShare').innerHTML='Share: "I scored '+quizScore+'/'+quizQuestions.length+' on the Scam Spotter Quiz at traderssellingass.com 🍑"';
+  document.getElementById('quizResults').style.display='block';
+}
+startQuiz();
+</script>
+</body>
+</html>

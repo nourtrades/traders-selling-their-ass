@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+<title>REPORT A SCAMMER // NOUR TRADES INTELLIGENCE</title>
+<script defer src="/_vercel/insights/script.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XLYG9PBFK7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XLYG9PBFK7');</script>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair;min-height:100vh}
+#matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
+.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px)}
+.page-wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(0,10,0,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.site-nav-links{display:flex;gap:4px;align-items:center}
+.site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+.site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(0,255,65,.03)}
+.site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
+.site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
+@media(max-width:600px){
+  .site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(0,10,0,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}
+  .site-nav-links.open{display:flex}
+  .site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(0,255,65,.05)}
+  .site-nav-toggle{display:block}
+}
+.page-header{text-align:center;padding:40px 20px 30px}
+.page-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:4px;color:var(--cod-red);text-shadow:0 0 20px rgba(255,23,68,.3)}
+.page-sub{font-size:13px;color:var(--matrix-mid);margin-top:8px;letter-spacing:1px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+.bounty-badge{display:inline-block;margin-top:12px;padding:8px 20px;border:2px solid var(--cod-yellow);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--cod-yellow);animation:pulse-glow 2s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 rgba(255,214,0,.3)}50%{box-shadow:0 0 15px 5px rgba(255,214,0,0)}}
+
+/* WHISTLEBLOWER FORM */
+.wb-section{max-width:700px;margin:0 auto;padding:0 20px 60px;width:100%}
+.wb-form{display:flex;flex-direction:column;gap:20px}
+.wb-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wb-field{display:flex;flex-direction:column;gap:6px}
+.wb-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:var(--matrix-mid);text-transform:uppercase}
+.wb-input,.wb-textarea{background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:13px;padding:12px;outline:none;transition:border-color .2s}
+.wb-input:focus,.wb-textarea:focus{border-color:var(--matrix-green);box-shadow:0 0 8px rgba(0,255,65,.1)}
+.wb-input::placeholder,.wb-textarea::placeholder{color:rgba(0,255,65,.25)}
+.wb-textarea{min-height:120px;resize:vertical}
+.wb-file-drop{border:2px dashed var(--matrix-dark);padding:24px;text-align:center;position:relative;transition:all .2s;background:rgba(0,20,0,.2)}
+.wb-file-drop:hover,.wb-file-drop.dragover{border-color:var(--matrix-green);background:rgba(0,255,65,.03)}
+.wb-file-drop input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.wb-file-icon{font-size:28px;margin-bottom:8px}
+.wb-file-text{font-size:12px;color:var(--matrix-mid);letter-spacing:1px}
+.wb-file-text strong{color:var(--matrix-green)}
+.wb-file-list{margin-top:10px;font-size:11px;color:var(--cod-orange)}
+.wb-disclaimer{font-size:10px;color:var(--matrix-dark);line-height:1.6;padding:12px;border:1px solid rgba(0,255,65,.1);background:rgba(0,20,0,.3)}
+.wb-submit{background:transparent;border:2px solid var(--cod-red);color:var(--cod-red);font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:4px;padding:14px 30px;cursor:pointer;transition:all .3s}
+.wb-submit:hover{background:var(--cod-red);color:#fff;box-shadow:0 0 20px rgba(255,23,68,.4)}
+.wb-submit:disabled{opacity:.5;cursor:not-allowed}
+.wb-submit.loading{position:relative;color:transparent}
+.wb-submit.loading::after{content:'TRANSMITTING...';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--cod-red);animation:blink-load .8s step-end infinite}
+@keyframes blink-load{0%,100%{opacity:1}50%{opacity:.3}}
+.wb-error{color:var(--cod-red);font-size:12px;text-align:center;padding:10px;border:1px solid var(--cod-red);background:rgba(255,23,68,.05);display:none}
+.wb-error.show{display:block}
+.wb-success{display:none;text-align:center;padding:40px;border:1px solid var(--matrix-green);background:rgba(0,255,65,.03)}
+.wb-success.show{display:block}
+.wb-success-icon{font-size:40px;margin-bottom:12px}
+.wb-success-text{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:3px;color:var(--matrix-green)}
+.wb-success-sub{font-size:12px;color:var(--matrix-mid);margin-top:8px;line-height:1.6}
+.footer{text-align:center;padding:30px 20px;border-top:1px solid var(--matrix-dark);font-size:10px;color:var(--matrix-dark);letter-spacing:2px;margin-top:auto}
+@media(max-width:768px){.wb-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<div class="scanlines"></div>
+<div class="page-wrap">
+  <nav class="site-nav">
+    <a href="/" class="site-nav-brand">🍑 NOUR TRADES</a>
+    <div class="site-nav-links">
+      <a href="/" class="site-nav-link">📁 DOSSIERS</a>
+      <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
+      <a href="/forum.html" class="site-nav-link">💬 FORUM</a>
+      <a href="/report.html" class="site-nav-link active">🛡️ REPORT</a>
+    </div>
+    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+  </nav>
+  <div class="page-header">
+    <div class="page-title">🛡️ REPORT A SCAM TRADER</div>
+    <div class="page-sub">Submit your story anonymously. If we use your intel in our videos, we'll send crypto to your wallet as a reward.</div>
+    <div class="bounty-badge">💰 BOUNTY PAID IN CRYPTO FOR VERIFIED INTEL</div>
+  </div>
+  <div class="wb-section">
+    <form class="wb-form" id="wbForm">
+      <div class="wb-row">
+        <div class="wb-field">
+          <label class="wb-label">Name of Influencer / Trader</label>
+          <input class="wb-input" type="text" id="wbName" placeholder="Who scammed you?" required>
+        </div>
+        <div class="wb-field">
+          <label class="wb-label">What is their Social Media?</label>
+          <input class="wb-input" type="text" id="wbSocial" placeholder="@handle or link to their profile" required>
+        </div>
+      </div>
+      <div class="wb-field">
+        <label class="wb-label">How Much Did They Scam? (Estimated $)</label>
+        <input class="wb-input" type="text" id="wbAmount" placeholder="$0.00" required>
+      </div>
+      <div class="wb-field">
+        <label class="wb-label">What Did They Do? (Be specific — dates, details, receipts)</label>
+        <textarea class="wb-textarea" id="wbDescription" placeholder="Describe exactly how you were scammed. The more details, the better our investigation..." required></textarea>
+      </div>
+      <div class="wb-field">
+        <label class="wb-label">Upload Proof (Screenshots, Videos, Receipts)</label>
+        <div class="wb-file-drop" id="fileDrop">
+          <input type="file" multiple accept="image/*,video/*,.pdf" id="fileInput">
+          <div class="wb-file-icon">📁</div>
+          <div class="wb-file-text">Drag files here or <strong>click to browse</strong><br>Images, videos, PDFs accepted (max 50MB each)</div>
+          <div class="wb-file-list" id="fileList"></div>
+        </div>
+      </div>
+      <div class="wb-field">
+        <label class="wb-label">Your Crypto Wallet Address (For Bounty Payment)</label>
+        <input class="wb-input" type="text" id="wbWallet" placeholder="BTC, ETH, SOL, or USDT wallet address" required>
+      </div>
+      <div class="wb-disclaimer">🔒 YOUR IDENTITY STAYS ANONYMOUS. We never reveal sources. Only your wallet address is stored for payment. All submissions are reviewed by the Nour Trades intelligence team. If your intel is featured in an episode, payment is sent within 48 hours.</div>
+      <div class="wb-error" id="wbError"></div>
+      <button type="submit" class="wb-submit" id="wbSubmitBtn">◈ SUBMIT INTEL — STAY ANONYMOUS</button>
+    </form>
+    <div class="wb-success" id="wbSuccess">
+      <div class="wb-success-icon">🛡️</div>
+      <div class="wb-success-text">INTEL RECEIVED</div>
+      <div class="wb-success-sub">Your submission is being reviewed by the Nour Trades intelligence team.<br>If used, bounty will be sent to your wallet within 48 hours.</div>
+    </div>
+  </div>
+  <div class="footer">NOUR TRADES INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
+</div>
+<script>
+// Matrix rain
+var canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
+function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
+var ch='アイウエオカキクケコ0123456789',fs=14,col=~~(canvas.width/fs),dr=Array(col).fill(1);
+function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
+setInterval(dm,35);addEventListener('resize',function(){col=~~(canvas.width/fs);dr=Array(col).fill(1)});
+
+// Supabase
+var SUPABASE_URL='https://kjeqzwfxtshgerzkaiqg.supabase.co';
+var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
+var supabaseClient=null;
+(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=function(){supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY)};document.head.appendChild(s)})();
+
+// File upload
+var fd=document.getElementById('fileDrop'),fi=document.getElementById('fileInput'),fl=document.getElementById('fileList');
+fd.addEventListener('dragover',function(e){e.preventDefault();fd.classList.add('dragover')});
+fd.addEventListener('dragleave',function(){fd.classList.remove('dragover')});
+fd.addEventListener('drop',function(e){e.preventDefault();fd.classList.remove('dragover');fi.files=e.dataTransfer.files;updateFL()});
+fi.addEventListener('change',updateFL);
+function updateFL(){var f=fi.files;fl.textContent=f.length?f.length+' file'+(f.length>1?'s':'')+' selected':'';}
+
+// Form submit
+document.getElementById('wbForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var btn=document.getElementById('wbSubmitBtn'),errEl=document.getElementById('wbError');
+  errEl.classList.remove('show');btn.disabled=true;btn.classList.add('loading');
+  try{
+    if(!supabaseClient)throw new Error('Connection not ready. Please try again.');
+    var proofUrls=[];
+    if(fi.files.length>0){
+      for(var i=0;i<fi.files.length;i++){
+        var file=fi.files[i];
+        var fileName=Date.now()+'_'+Math.random().toString(36).substr(2,9)+'_'+file.name;
+        var r=await supabaseClient.storage.from('whistleblower-proof').upload(fileName,file);
+        if(r.error)throw new Error('File upload failed: '+r.error.message);
+        var u=supabaseClient.storage.from('whistleblower-proof').getPublicUrl(fileName);
+        proofUrls.push(u.data.publicUrl);
+      }
+    }
+    var ins=await supabaseClient.from('whistleblower_submissions').insert({
+      influencer_name:document.getElementById('wbName').value.trim(),
+      social_media:document.getElementById('wbSocial').value.trim(),
+      scam_amount:document.getElementById('wbAmount').value.trim(),
+      scam_description:document.getElementById('wbDescription').value.trim(),
+      proof_urls:proofUrls,
+      crypto_wallet:document.getElementById('wbWallet').value.trim()
+    });
+    if(ins.error)throw ins.error;
+    document.getElementById('wbForm').style.display='none';
+    document.getElementById('wbSuccess').classList.add('show');
+  }catch(err){
+    errEl.textContent='⚠ TRANSMISSION FAILED — '+( err.message||'Unknown error');
+    errEl.classList.add('show');btn.disabled=false;btn.classList.remove('loading');
+  }
+});
+</script>
+</body>
+</html>
