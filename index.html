@@ -966,14 +966,34 @@ async function submitVote(subjectCode){
   var slider=document.getElementById('slider_'+pollId);
   var btn=document.querySelector('#form_'+pollId+' .guilt-vote-btn');
   if(!slider||!btn)return;
+
+  // Check if user is logged in
+  if(!supabaseClient){btn.textContent='ERROR';return}
+  var session=await supabaseClient.auth.getSession();
+  if(!session.data.session){
+    btn.textContent='LOGIN TO VOTE';btn.style.borderColor='#ffd600';btn.style.color='#ffd600';
+    setTimeout(function(){window.location.href='/login.html'},1500);
+    return;
+  }
+
+  var userId=session.data.session.user.id;
   var rating=parseInt(slider.value);
   btn.disabled=true;btn.textContent='SUBMITTING...';
   try{
-    if(!supabaseClient)throw new Error('Not connected');
-    var{error}=await supabaseClient.from('guilt_votes').insert({subject_code:subjectCode,rating:rating});
-    if(error)throw error;
+    // Check if user already voted for this subject
+    var{data:existing}=await supabaseClient.from('guilt_votes').select('id').eq('subject_code',subjectCode).eq('user_id',userId).limit(1);
+    if(existing&&existing.length>0){
+      // Update existing vote
+      var{error}=await supabaseClient.from('guilt_votes').update({rating:rating}).eq('id',existing[0].id);
+      if(error)throw error;
+    }else{
+      // Insert new vote
+      var{error}=await supabaseClient.from('guilt_votes').insert({subject_code:subjectCode,rating:rating,user_id:userId});
+      if(error)throw error;
+    }
     document.getElementById('form_'+pollId).style.display='none';
     await loadVotes(subjectCode);
+    await loadAllCardVotes();
   }catch(e){
     console.error(e);
     btn.disabled=false;btn.textContent='CAST YOUR VOTE';
