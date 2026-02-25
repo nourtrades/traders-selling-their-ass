@@ -193,5 +193,22 @@ document.getElementById('wbForm').addEventListener('submit',async function(e){
   }
 });
 </script>
+<script>
+(function checkAuth(){
+  var iv=setInterval(function(){
+    if(!window.supabase)return;
+    clearInterval(iv);
+    var url="https://kjeqzwfxtshgerzkaiqg.supabase.co";
+    var key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc3NjQ2NjMsImV4cCI6MjA1MzM0MDY2M30.wmQ7AJyGFRhMIhCb3lHGBqMPNzDkEGOr_NKAJ6v1bSQ";
+    var s=window.supabase.createClient(url,key);
+    s.auth.getSession().then(function(r){
+      if(r.data.session){
+        var el=document.getElementById("navAuth");
+        if(el){el.href="/profile.html";el.textContent="\u{1f464} PROFILE"}
+      }
+    });
+  },100);
+})();
+</script>
 </body>
 </html>
