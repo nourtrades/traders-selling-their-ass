@@ -611,7 +611,8 @@ subjects.forEach((s,idx)=>{
   const riskLabel=s.riskLevel>=90?'CRITICAL':s.riskLevel>=80?'HIGH':s.riskLevel>=60?'MEDIUM':'LOW';
   const riskColor=s.riskLevel>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':s.riskLevel>=80?'linear-gradient(90deg,#ff6a00,#ffd600)':s.riskLevel>=60?'linear-gradient(90deg,#ffd600,#00ff41)':'linear-gradient(90deg,#00ff41,#00cc33)';
   const n=s.episodes.length,t=n===1?'1 EPISODE':n+' EPISODES';
-  card.innerHTML=`<div class="declassified-stamp">DECLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span> RISK FACTOR: ${s.riskLevel}/100</div><div class="mugshot-name">${s.codename}</div><div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">${(s.markets||[]).map(m=>`<span class="market-tag market-${m.toLowerCase()}">${m}</span>`).join('')}</div><div class="mugshot-episodes">${t}</div><div class="risk-meter"><span class="risk-meter-label">RISK</span><div class="risk-meter-bar"><div class="risk-meter-fill" style="width:${s.riskLevel}%;background:${riskColor}"></div></div><span class="risk-meter-val">${s.riskLevel}%</span></div><button class="mugshot-btn">◈ OPEN DECLASSIFIED FILE</button></div>`;
+  const sc=s.codename.replace(/\s+/g,'_').toLowerCase();
+  card.innerHTML=`<div class="declassified-stamp">DECLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span></div><div class="mugshot-name">${s.codename}</div><div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">${(s.markets||[]).map(m=>`<span class="market-tag market-${m.toLowerCase()}">${m}</span>`).join('')}</div><div class="mugshot-episodes">${t}</div><div class="risk-meter" id="riskmeter_${sc}"><span class="risk-meter-label">GUILT</span><div class="risk-meter-bar"><div class="risk-meter-fill" id="riskfill_${sc}" style="width:0%;background:#333"></div></div><span class="risk-meter-val" id="riskval_${sc}">—</span></div><button class="mugshot-btn">◈ OPEN DECLASSIFIED FILE</button></div>`;
   grid.appendChild(card)});
 
 // ========== FILE MODAL ==========
@@ -928,6 +929,38 @@ function timeAgo(date){
 }
 
 // ========== GUILT VOTE SYSTEM ==========
+async function loadAllCardVotes(){
+  if(!supabaseClient)return;
+  try{
+    var{data,error}=await supabaseClient.from('guilt_votes').select('subject_code,rating');
+    if(error||!data)return;
+    var grouped={};
+    data.forEach(function(v){
+      if(!grouped[v.subject_code])grouped[v.subject_code]=[];
+      grouped[v.subject_code].push(v.rating);
+    });
+    subjects.forEach(function(s){
+      var sc=s.codename.replace(/\s+/g,'_').toLowerCase();
+      var votes=grouped[sc];
+      var fill=document.getElementById('riskfill_'+sc);
+      var val=document.getElementById('riskval_'+sc);
+      if(!fill||!val)return;
+      if(!votes||votes.length===0){
+        fill.style.width='0%';fill.style.background='#333';
+        val.textContent='NO VOTES';val.style.fontSize='8px';val.style.color='#666';
+        return;
+      }
+      var avg=votes.reduce(function(a,b){return a+b},0)/votes.length;
+      var pct=Math.round(avg*10);
+      var color=pct>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':pct>=70?'linear-gradient(90deg,#ff6a00,#ffd600)':pct>=40?'linear-gradient(90deg,#ffd600,#00ff41)':'linear-gradient(90deg,#00ff41,#00cc33)';
+      fill.style.width=pct+'%';fill.style.background=color;
+      val.textContent=avg.toFixed(1)+'/10';val.style.color=pct>=70?'#ff1744':pct>=40?'#ffd600':'#00ff41';
+    });
+  }catch(e){console.error(e)}
+}
+// Load card votes once Supabase is ready
+(function waitForSupa(){var iv=setInterval(function(){if(supabaseClient){clearInterval(iv);loadAllCardVotes()}},500)})();
+
 async function submitVote(subjectCode){
   var pollId='poll_'+subjectCode;
   var slider=document.getElementById('slider_'+pollId);
