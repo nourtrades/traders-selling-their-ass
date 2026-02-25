@@ -112,8 +112,9 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
       </div>
       <div class="profile-edit-section" id="editSection">
         <div class="profile-field">
-          <label class="profile-label">Display Name</label>
-          <input class="profile-input" type="text" id="editName" maxlength="24">
+          <label class="profile-label">Screen Name</label>
+          <input class="profile-input" type="text" id="editName" maxlength="24" readonly style="opacity:.6;cursor:not-allowed">
+          <div style="font-size:10px;color:#666;margin-top:4px;letter-spacing:1px">SET AT SIGNUP — CANNOT BE CHANGED</div>
         </div>
         <div class="profile-field">
           <label class="profile-label">Bio</label>
