@@ -3,149 +3,133 @@
 <head>
 <meta charset="UTF-8"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
 <title>TRADERS FORUM // TSA INTELLIGENCE</title>
 <script defer src="/_vercel/insights/script.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XLYG9PBFK7"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XLYG9PBFK7');</script>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Teko:wght@700&display=swap" rel="stylesheet">
 <style>
-:root{--matrix-green:#ffffff;--matrix-dark:#333333;--matrix-mid:#cccccc;--cod-orange:#00ff41;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair;min-height:100vh}
-#matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
-.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.03) 2px,rgba(255,255,255,.03) 4px)}
-.page-wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
-.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(10,10,10,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);height:48px}
+:root{--matrix-green:#ffffff;--matrix-dark:#333333;--matrix-mid:#cccccc;--cod-orange:#00ff41;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a;--panel-bg:rgba(10,10,10,0.85)}
+body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden}
+canvas{position:fixed;top:0;left:0;z-index:0;opacity:.08}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(10,10,10,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap}
 .site-nav-logo{height:32px;width:auto;margin-right:6px}
-.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(255,255,255,.3)}
 .site-nav-links{display:flex;gap:4px;align-items:center}
 .site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
 .site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(255,255,255,.03)}
 .site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(255,255,255,.05)}
 .site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
-@media(max-width:600px){
+@media(max-width:768px){
   .site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(10,10,10,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}
   .site-nav-links.open{display:flex}
   .site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(255,255,255,.05)}
   .site-nav-toggle{display:block}
 }
-.page-header{text-align:center;padding:40px 20px 30px}
-.page-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:4px;color:var(--matrix-green);text-shadow:0 0 20px rgba(255,255,255,.3)}
-.page-sub{font-size:13px;color:var(--matrix-mid);margin-top:8px;letter-spacing:1px}
-
-/* FORUM */
-.forum-section{max-width:900px;margin:0 auto;padding:0 20px 60px;width:100%}
-.forum-tabs{display:flex;gap:0;border-bottom:1px solid var(--matrix-dark)}
-.forum-tab{flex:1;padding:14px 8px;background:rgba(10,10,10,.2);border:1px solid var(--matrix-dark);border-bottom:none;color:var(--matrix-mid);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;text-align:center;cursor:pointer;transition:all .2s}
-.forum-tab:hover{background:rgba(255,255,255,.03);color:var(--matrix-green)}
-.forum-tab.active{background:rgba(255,255,255,.05);color:var(--matrix-green);border-color:var(--matrix-green);border-bottom:2px solid var(--matrix-green)}
-.forum-tab .tab-count{display:block;font-size:18px;margin-bottom:4px}
-.forum-body{border:1px solid var(--matrix-dark);border-top:none;background:rgba(10,10,10,.2);min-height:400px}
-.forum-compose{padding:16px;border-bottom:1px solid rgba(255,255,255,.08)}
-.forum-compose-row{display:flex;gap:8px}
-.forum-name-input{width:120px;background:rgba(0,0,0,.4);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:10px;outline:none}
-.forum-msg-input{flex:1;background:rgba(0,0,0,.4);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:10px;outline:none;resize:none;min-height:40px}
-.forum-msg-input:focus,.forum-name-input:focus{border-color:var(--matrix-green)}
-.forum-post-btn{padding:10px 18px;background:transparent;border:1px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;cursor:pointer;transition:all .2s;white-space:nowrap}
-.forum-post-btn:hover{background:var(--matrix-green);color:#000}
-.forum-posts{max-height:600px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--matrix-dark) transparent}
-.forum-post{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s}
-.forum-post:hover{background:rgba(255,255,255,.02)}
-.forum-post-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.forum-post-author{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-yellow);display:flex;align-items:center;gap:6px}
-.author-badge{font-size:7px;padding:2px 5px;letter-spacing:1px;border-radius:2px}
-.badge-verified{background:rgba(255,255,255,.1);border:1px solid var(--matrix-green);color:var(--matrix-green)}
-.badge-anon{background:rgba(255,255,255,.05);border:1px solid var(--matrix-dark);color:var(--matrix-dark)}
-.author-link{color:var(--cod-yellow);text-decoration:none;cursor:pointer}
-.author-link:hover{text-decoration:underline}
-.forum-post-time{font-size:10px;color:var(--matrix-dark)}
-.forum-post-body{font-size:13px;color:var(--matrix-green);line-height:1.6;opacity:.85}
-.forum-post-actions{display:flex;gap:12px;margin-top:8px}
-.forum-post-action{font-size:10px;color:var(--matrix-dark);cursor:pointer;transition:color .2s;background:none;border:none;font-family:'Share Tech Mono',monospace;padding:0}
-.forum-post-action:hover{color:var(--matrix-green)}
-.forum-replies{margin-left:20px;border-left:2px solid rgba(255,255,255,.08);padding-left:12px}
-.forum-reply-form{display:none;padding:8px 0;margin-top:6px}
-.forum-reply-form.show{display:flex;gap:6px}
-.forum-reply-input{flex:1;background:rgba(0,0,0,.3);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:11px;padding:8px;outline:none}
-.forum-reply-btn{padding:8px 12px;background:transparent;border:1px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:1px;cursor:pointer}
-.forum-reply-btn:hover{background:var(--matrix-green);color:#000}
-.forum-empty{text-align:center;padding:40px;color:var(--matrix-dark);font-size:12px;letter-spacing:2px}
-.forum-like-count{color:var(--cod-yellow)}
-.footer{text-align:center;padding:30px 20px;border-top:1px solid var(--matrix-dark);font-size:10px;color:var(--matrix-dark);letter-spacing:2px;margin-top:auto}
-@media(max-width:768px){
-  .forum-compose-row{flex-direction:column}
-  .forum-name-input{width:100%}
-  .forum-tab{font-size:8px;letter-spacing:1px;padding:10px 4px}
-  .forum-tab .tab-count{font-size:14px}
+.page-header{text-align:center;padding:25px 20px 15px;position:relative;z-index:1}
+.page-title{font-family:'Teko',sans-serif;font-weight:700;font-size:clamp(32px,6vw,56px);letter-spacing:6px;color:var(--cod-yellow)}
+.page-sub{font-family:'Rajdhani',sans-serif;font-size:13px;color:var(--matrix-mid);letter-spacing:3px;margin-top:4px}
+.forum-section{max-width:800px;margin:0 auto;padding:0 15px 40px;position:relative;z-index:1}
+.forum-tabs{display:flex;border:1px solid var(--matrix-dark);margin-bottom:15px;border-radius:4px;overflow:hidden}
+.forum-tab{flex:1;text-align:center;padding:10px;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);cursor:pointer;border-right:1px solid var(--matrix-dark);transition:all .2s}
+.forum-tab:last-child{border-right:none}
+.forum-tab:hover{background:rgba(255,255,255,.03)}
+.forum-tab.active{background:rgba(255,255,255,.08);color:var(--matrix-green);border-bottom:2px solid var(--cod-yellow)}
+.compose-box{background:rgba(255,255,255,.03);border:1px solid var(--matrix-dark);border-radius:4px;padding:15px;margin-bottom:20px}
+.compose-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.compose-label{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid)}
+.compose-login{font-size:9px;color:var(--cod-orange);text-decoration:none;border:1px solid var(--cod-orange);padding:3px 8px;font-family:'Orbitron',sans-serif;letter-spacing:1px}
+.compose-title{width:100%;background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:14px;padding:10px 12px;outline:none;margin-bottom:8px;border-radius:2px}
+.compose-body{width:100%;background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:13px;padding:10px 12px;outline:none;resize:vertical;min-height:60px;border-radius:2px}
+.compose-title:focus,.compose-body:focus{border-color:var(--cod-yellow)}
+.compose-title::placeholder,.compose-body::placeholder{color:rgba(255,255,255,.2)}
+.compose-footer{display:flex;justify-content:flex-end;margin-top:10px}
+.compose-btn{background:var(--cod-yellow);color:#000;border:none;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;padding:8px 20px;cursor:pointer;font-weight:700;border-radius:2px;transition:all .2s}
+.compose-btn:hover{background:#fff}
+.post{background:rgba(255,255,255,.03);border:1px solid var(--matrix-dark);border-radius:4px;margin-bottom:10px;transition:border-color .2s}
+.post:hover{border-color:rgba(255,255,255,.15)}
+.post-main{padding:15px}
+.post-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.post-author{font-size:12px;color:var(--cod-orange);font-weight:bold}
+.post-author a{color:var(--cod-orange);text-decoration:none}
+.post-author a:hover{text-decoration:underline}
+.badge-anon{font-size:8px;background:rgba(255,255,255,.1);color:var(--matrix-mid);padding:2px 5px;letter-spacing:1px;border-radius:2px}
+.badge-verified{font-size:8px;background:rgba(0,255,65,.15);color:#00ff41;padding:2px 5px;letter-spacing:1px;border-radius:2px}
+.post-time{font-size:10px;color:var(--matrix-mid)}
+.post-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.3}
+.post-body{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;margin-top:4px}
+.post-actions{display:flex;gap:15px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.05)}
+.post-action{font-size:10px;color:var(--matrix-mid);cursor:pointer;transition:color .2s;background:none;border:none;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
+.post-action:hover{color:var(--matrix-green)}
+.replies{border-top:1px solid var(--matrix-dark);background:rgba(0,0,0,.2);padding:0 15px}
+.reply{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.reply:last-child{border-bottom:none}
+.reply-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.reply-author{font-size:11px;color:var(--cod-orange)}
+.reply-author a{color:var(--cod-orange);text-decoration:none}
+.reply-time{font-size:9px;color:var(--matrix-mid)}
+.reply-text{font-size:12px;color:rgba(255,255,255,.7);line-height:1.6}
+.reply-form{display:none;padding:10px 0}
+.reply-form.show{display:flex;gap:8px}
+.reply-input{flex:1;background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:8px 10px;outline:none;border-radius:2px}
+.reply-input:focus{border-color:var(--cod-yellow)}
+.reply-input::placeholder{color:rgba(255,255,255,.2)}
+.reply-btn{background:var(--cod-yellow);color:#000;border:none;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:1px;padding:8px 14px;cursor:pointer;font-weight:700;border-radius:2px}
+.forum-empty{text-align:center;padding:40px;color:var(--matrix-mid);font-size:13px;letter-spacing:2px}
+.footer{text-align:center;padding:30px 20px;font-size:10px;color:var(--matrix-dark);letter-spacing:3px;position:relative;z-index:1}
+@media(max-width:600px){
+  .post-title{font-size:16px}
+  .compose-title{font-size:13px}
 }
 </style>
 </head>
 <body>
-<canvas id="matrix-rain"></canvas>
-<div class="scanlines"></div>
-<div class="page-wrap">
-  <nav class="site-nav">
-    <a href="/" class="site-nav-brand"><img src="/logo.png" alt="TSA" class="site-nav-logo"></a>
-    <div class="site-nav-links">
-      <a href="/" class="site-nav-link">📁 DOSSIERS</a>
-      <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
-      <a href="/forum.html" class="site-nav-link active">💬 FORUM</a>
-      <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
-      <a href="https://whop.com/stock-hours/stock-hours/?utm_source=store_page&funnelId=store_1a22da23-8ba1-44d6-a2c3-dea287a26d22" target="_blank" rel="noopener" class="site-nav-link">💬 DISCORD</a>
-      <a href="https://vanquish.stockhoursllc.com/nour" target="_blank" rel="noopener" class="site-nav-link" style="color:#00ff41;border-color:#00ff41">📈 VANQUISH</a>
-      <a href="/login.html" class="site-nav-link" id="navAuth">👤 LOGIN</a>
-    </div>
-    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
-  </nav>
-  <div class="page-header">
-    <div class="page-title">💬 TRADERS FORUM</div>
-    <div class="page-sub">Discuss stocks, forex, crypto — and call out scammers. Anonymous. Uncensored.</div>
+<canvas id="c"></canvas>
+<nav class="site-nav">
+  <a href="/" class="site-nav-brand"><img src="/logo.png" alt="TSA" class="site-nav-logo"></a>
+  <div class="site-nav-links">
+    <a href="/" class="site-nav-link">📁 DOSSIERS</a>
+    <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
+    <a href="/forum.html" class="site-nav-link active">💬 FORUM</a>
+    <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
+    <a href="https://whop.com/stock-hours/stock-hours/?utm_source=store_page&funnelId=store_1a22da23-8ba1-44d6-a2c3-dea287a26d22" target="_blank" rel="noopener" class="site-nav-link">💬 DISCORD</a>
+    <a href="https://vanquish.stockhoursllc.com/nour" target="_blank" rel="noopener" class="site-nav-link" style="color:#00ff41;border-color:#00ff41">📈 VANQUISH</a>
+    <a href="/login.html" class="site-nav-link" id="navAuth">👤 LOGIN</a>
   </div>
-  <div class="forum-section">
-    <div class="forum-tabs">
-      <div class="forum-tab active" onclick="switchForum('stocks')" id="ftab_stocks"><span class="tab-count">📊</span>STOCKS</div>
-      <div class="forum-tab" onclick="switchForum('forex')" id="ftab_forex"><span class="tab-count">💱</span>FOREX</div>
-      <div class="forum-tab" onclick="switchForum('crypto')" id="ftab_crypto"><span class="tab-count">🪙</span>CRYPTO</div>
-      <div class="forum-tab" onclick="switchForum('general')" id="ftab_general"><span class="tab-count">💬</span>GENERAL</div>
-    </div>
-    <div class="forum-body">
-      <div class="forum-compose" id="composeSection">
-        <div id="composeLoggedIn" style="display:none">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span style="font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--cod-yellow)" id="postingAs">POSTING AS: —</span>
-            <a href="/profile.html" style="font-size:9px;color:var(--matrix-mid);text-decoration:none;border:1px solid var(--matrix-dark);padding:3px 8px">PROFILE</a>
-          </div>
-          <div class="forum-compose-row">
-            <textarea class="forum-msg-input" placeholder="Start a discussion..." id="forumMsg" rows="2" maxlength="1000"></textarea>
-            <button class="forum-post-btn" onclick="postForumMessage()">POST</button>
-          </div>
-        </div>
-        <div id="composeAnon">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span style="font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-dark)">POSTING ANONYMOUSLY</span>
-            <a href="/login.html" style="font-size:9px;color:var(--matrix-green);text-decoration:none;border:1px solid var(--matrix-green);padding:3px 8px">LOGIN FOR IDENTITY →</a>
-          </div>
-          <div class="forum-compose-row">
-            <textarea class="forum-msg-input" placeholder="Post anonymously..." id="forumMsgAnon" rows="2" maxlength="1000"></textarea>
-            <button class="forum-post-btn" onclick="postAnonMessage()">POST ANON</button>
-          </div>
-        </div>
-      </div>
-      <div class="forum-posts" id="forumPosts">
-        <div class="forum-empty">Loading discussions...</div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">TSA INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
+  <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')">☰</button>
+</nav>
+<div class="page-header">
+  <div class="page-title">TRADERS FORUM</div>
+  <div class="page-sub">Discuss stocks, forex, crypto — call out scammers. Anonymous. Uncensored.</div>
 </div>
+<div class="forum-section">
+  <div class="forum-tabs">
+    <div class="forum-tab active" onclick="switchForum('stocks')" id="ftab_stocks">📊 STOCKS</div>
+    <div class="forum-tab" onclick="switchForum('forex')" id="ftab_forex">💱 FOREX</div>
+    <div class="forum-tab" onclick="switchForum('crypto')" id="ftab_crypto">🪙 CRYPTO</div>
+    <div class="forum-tab" onclick="switchForum('general')" id="ftab_general">💬 GENERAL</div>
+  </div>
+  <div class="compose-box">
+    <div class="compose-header">
+      <span class="compose-label" id="composeLabel">POSTING ANONYMOUSLY</span>
+      <a href="/login.html" class="compose-login" id="composeAuth">LOGIN FOR IDENTITY →</a>
+    </div>
+    <input class="compose-title" type="text" placeholder="Title — what's the topic?" id="postTitle" maxlength="120">
+    <textarea class="compose-body" placeholder="Description (optional)" id="postBody" rows="3" maxlength="2000"></textarea>
+    <div class="compose-footer">
+      <button class="compose-btn" onclick="submitPost()">POST</button>
+    </div>
+  </div>
+  <div id="forumPosts"><div class="forum-empty">Loading discussions...</div></div>
+</div>
+<div class="footer">TSA INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
 <script>
-var canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
-function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
-var ch='アイウエオカキクケコ0123456789',fs=14,col=~~(canvas.width/fs),dr=Array(col).fill(1);
-function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
-setInterval(dm,35);addEventListener('resize',function(){col=~~(canvas.width/fs);dr=Array(col).fill(1)});
-
+var ch='0123456789ABCDEFabcdef$%&';var c=document.getElementById('c'),ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;var fs=14,dr=[];for(var i=0;i<Math.ceil(c.width/fs);i++)dr[i]=Math.random()*c.height/fs;
+function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>c.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
+setInterval(dm,50);window.addEventListener('resize',function(){c.width=window.innerWidth;c.height=window.innerHeight});
+</script>
+<script>
 var SUPABASE_URL='https://kjeqzwfxtshgerzkaiqg.supabase.co';
 var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
 var sb=null,currentUser=null,currentProfile=null;
@@ -157,69 +141,84 @@ var sb=null,currentUser=null,currentProfile=null;
     currentUser=sess.data.session.user;
     var pr=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
     currentProfile=pr.data;
-    document.getElementById('composeLoggedIn').style.display='block';
-    document.getElementById('composeAnon').style.display='none';
-    document.getElementById('postingAs').textContent='POSTING AS: '+(currentProfile?currentProfile.display_name:'Agent');
+    document.getElementById('composeLabel').textContent='POSTING AS: '+(currentProfile?currentProfile.display_name:'Agent');
+    document.getElementById('composeLabel').style.color='#ffd600';
+    document.getElementById('composeAuth').textContent='PROFILE';
+    document.getElementById('composeAuth').href='/profile.html';
   }
-  loadForumPosts();
+  loadPosts();
 };document.head.appendChild(s)})();
 
 var currentForum='stocks';
-function switchForum(channel){currentForum=channel;document.querySelectorAll('.forum-tab').forEach(function(t){t.classList.remove('active')});document.getElementById('ftab_'+channel).classList.add('active');loadForumPosts()}
+function switchForum(ch){currentForum=ch;document.querySelectorAll('.forum-tab').forEach(function(t){t.classList.remove('active')});document.getElementById('ftab_'+ch).classList.add('active');loadPosts()}
+function escHtml(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function timeAgo(ts){var d=Math.floor((Date.now()-new Date(ts).getTime())/1000);if(d<60)return'just now';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago'}
+function genAnonName(){return'ANON-'+'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('').sort(function(){return .5-Math.random()}).slice(0,4).join('')}
 
-async function loadForumPosts(){
+async function loadPosts(){
   var container=document.getElementById('forumPosts');
   container.innerHTML='<div class="forum-empty">Loading...</div>';
   try{
-    if(!sb)throw new Error('No connection');
+    if(!sb)throw new Error('Loading');
     var resp=await sb.from('forum_posts').select('*').eq('channel',currentForum).is('parent_id',null).order('created_at',{ascending:false}).limit(50);
     if(resp.error)throw resp.error;
     var posts=resp.data||[];
-    if(!posts.length){container.innerHTML='<div class="forum-empty">No posts yet. Be the first to start a discussion.</div>';return}
+    if(!posts.length){container.innerHTML='<div class="forum-empty">No discussions yet. Be the first to start one.</div>';return}
     var postIds=posts.map(function(p){return p.id});
     var repliesResp=await sb.from('forum_posts').select('*').in('parent_id',postIds).order('created_at',{ascending:true});
     var allReplies=repliesResp.data||[];
     var replyMap={};allReplies.forEach(function(r){if(!replyMap[r.parent_id])replyMap[r.parent_id]=[];replyMap[r.parent_id].push(r)});
-    var likesResp=await sb.from('forum_likes').select('post_id').in('post_id',postIds.concat(allReplies.map(function(r){return r.id})));
+    var likesResp=await sb.from('forum_likes').select('post_id').in('post_id',postIds);
     var likeCounts={};(likesResp.data||[]).forEach(function(l){likeCounts[l.post_id]=(likeCounts[l.post_id]||0)+1});
-    var html='';posts.forEach(function(p){html+=renderPost(p,likeCounts[p.id]||0,replyMap[p.id]||[],likeCounts)});
+    var html='';
+    posts.forEach(function(p){
+      var replies=replyMap[p.id]||[];
+      var likes=likeCounts[p.id]||0;
+      var isAnon=!p.user_id||p.is_anonymous;
+      var authorHtml=isAnon?
+        '<span class="post-author">'+escHtml(p.author_name)+'</span><span class="badge-anon">ANON</span>':
+        '<span class="post-author"><a href="/profile.html?id='+p.user_id+'">'+escHtml(p.author_name)+'</a></span><span class="badge-verified">✓ VERIFIED</span>';
+      html+='<div class="post"><div class="post-main">';
+      html+='<div class="post-meta">'+authorHtml+'<span class="post-time">'+timeAgo(p.created_at)+'</span></div>';
+      html+='<div class="post-title">'+escHtml(p.title||p.body||'')+'</div>';
+      if(p.body&&p.title)html+='<div class="post-body">'+escHtml(p.body)+'</div>';
+      html+='<div class="post-actions">';
+      html+='<button class="post-action" onclick="likePost(\''+p.id+'\')">▲ '+likes+'</button>';
+      html+='<button class="post-action" onclick="toggleReply(\''+p.id+'\')">💬 '+replies.length+' REPLIES</button>';
+      html+='</div></div>';
+      html+='<div class="replies" id="replies_'+p.id+'">';
+      replies.forEach(function(r){
+        var rAnon=!r.user_id||r.is_anonymous;
+        var rAuthor=rAnon?
+          '<span class="reply-author">'+escHtml(r.author_name)+'</span><span class="badge-anon">ANON</span>':
+          '<span class="reply-author"><a href="/profile.html?id='+r.user_id+'">'+escHtml(r.author_name)+'</a></span><span class="badge-verified">✓</span>';
+        html+='<div class="reply"><div class="reply-meta">'+rAuthor+'<span class="reply-time">'+timeAgo(r.created_at)+'</span></div>';
+        html+='<div class="reply-text">'+escHtml(r.body||r.title||'')+'</div></div>';
+      });
+      html+='<div class="reply-form" id="freply_'+p.id+'">';
+      html+='<input class="reply-input" type="text" placeholder="Write a reply..." id="freply_input_'+p.id+'" maxlength="1000" onkeydown="if(event.key===\'Enter\'){event.preventDefault();postReply(\''+p.id+'\')}">';
+      html+='<button class="reply-btn" onclick="postReply(\''+p.id+'\')">REPLY</button>';
+      html+='</div></div></div>';
+    });
     container.innerHTML=html;
-  }catch(e){container.innerHTML='<div class="forum-empty">Could not load posts. Try again later.</div>'}
+  }catch(e){container.innerHTML='<div class="forum-empty">Could not load posts. Try again later.</div>';console.error(e)}
 }
 
-function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function getTimeAgo(ts){var d=Math.floor((Date.now()-new Date(ts).getTime())/1000);if(d<60)return'just now';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago'}
-
-function renderAuthor(p){
-  var isAnon=!p.user_id||p.is_anonymous;
-  if(isAnon){
-    return '<span class="forum-post-author"><span>'+escHtml(p.author_name)+'</span><span class="author-badge badge-anon">ANON</span></span>';
-  }else{
-    return '<span class="forum-post-author"><a href="/profile.html?id='+p.user_id+'" class="author-link">'+escHtml(p.author_name)+'</a><span class="author-badge badge-verified">✓ VERIFIED</span></span>';
-  }
-}
-
-function renderPost(p,likes,replies,lc){
-  var t=getTimeAgo(p.created_at);
-  var h='<div class="forum-post" id="fpost_'+p.id+'"><div class="forum-post-header">'+renderAuthor(p)+'<span class="forum-post-time">'+t+'</span></div><div class="forum-post-body">'+escHtml(p.body)+'</div><div class="forum-post-actions"><button class="forum-post-action" onclick="likePost(\''+p.id+'\')">▲ <span class="forum-like-count">'+(likes||0)+'</span></button><button class="forum-post-action" onclick="toggleReply(\''+p.id+'\')">↩ REPLY</button></div><div class="forum-reply-form" id="freply_'+p.id+'"><input class="forum-reply-input" placeholder="Reply..." id="freply_input_'+p.id+'" maxlength="500"><button class="forum-reply-btn" onclick="postReply(\''+p.id+'\')">SEND</button></div>';
-  if(replies.length){h+='<div class="forum-replies">';replies.forEach(function(r){var rt=getTimeAgo(r.created_at);h+='<div class="forum-post"><div class="forum-post-header">'+renderAuthor(r)+'<span class="forum-post-time">'+rt+'</span></div><div class="forum-post-body">'+escHtml(r.body)+'</div><div class="forum-post-actions"><button class="forum-post-action" onclick="likePost(\''+r.id+'\')">▲ <span class="forum-like-count">'+(lc[r.id]||0)+'</span></button></div></div>'});h+='</div>'}
-  return h+'</div>';
-}
-
-function genAnonName(){return'ANON-'+Math.random().toString(36).substr(2,4).toUpperCase()}
-
-async function postForumMessage(){
-  var body=document.getElementById('forumMsg').value.trim();
-  if(!body){document.getElementById('forumMsg').style.borderColor='var(--cod-red)';return}
-  var name=currentProfile?currentProfile.display_name:'Agent';
-  try{await sb.from('forum_posts').insert({channel:currentForum,author_name:name,body:body,parent_id:null,user_id:currentUser.id,is_anonymous:false});document.getElementById('forumMsg').value='';loadForumPosts()}catch(e){alert('Could not post.')}
-}
-
-async function postAnonMessage(){
-  var body=document.getElementById('forumMsgAnon').value.trim();
-  if(!body){document.getElementById('forumMsgAnon').style.borderColor='var(--cod-red)';return}
-  var anonName=genAnonName();
-  try{await sb.from('forum_posts').insert({channel:currentForum,author_name:anonName,body:body,parent_id:null,user_id:null,is_anonymous:true});document.getElementById('forumMsgAnon').value='';loadForumPosts()}catch(e){alert('Could not post.')}
+async function submitPost(){
+  var title=document.getElementById('postTitle').value.trim();
+  var body=document.getElementById('postBody').value.trim();
+  if(!title){document.getElementById('postTitle').style.borderColor='var(--cod-red)';return}
+  document.getElementById('postTitle').style.borderColor='';
+  var name,uid,isAnon;
+  if(currentUser&&currentProfile){name=currentProfile.display_name;uid=currentUser.id;isAnon=false}
+  else{name=genAnonName();uid=null;isAnon=true}
+  try{
+    var r=await sb.from('forum_posts').insert({channel:currentForum,author_name:name,title:title,body:body||null,parent_id:null,user_id:uid,is_anonymous:isAnon});
+    if(r.error)throw r.error;
+    document.getElementById('postTitle').value='';
+    document.getElementById('postBody').value='';
+    loadPosts();
+  }catch(e){alert('Could not post: '+e.message);console.error(e)}
 }
 
 async function postReply(parentId){
@@ -228,11 +227,16 @@ async function postReply(parentId){
   var name,uid,isAnon;
   if(currentUser&&currentProfile){name=currentProfile.display_name;uid=currentUser.id;isAnon=false}
   else{name=genAnonName();uid=null;isAnon=true}
-  try{await sb.from('forum_posts').insert({channel:currentForum,author_name:name,body:body,parent_id:parentId,user_id:uid,is_anonymous:isAnon});input.value='';loadForumPosts()}catch(e){alert('Could not reply.')}
+  try{
+    var r=await sb.from('forum_posts').insert({channel:currentForum,author_name:name,title:null,body:body,parent_id:parentId,user_id:uid,is_anonymous:isAnon});
+    if(r.error)throw r.error;
+    input.value='';
+    loadPosts();
+  }catch(e){alert('Could not reply: '+e.message);console.error(e)}
 }
 
 function toggleReply(id){var f=document.getElementById('freply_'+id);f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus()}
-async function likePost(id){try{await sb.from('forum_likes').insert({post_id:id});loadForumPosts()}catch(e){}}
+async function likePost(id){try{await sb.from('forum_likes').insert({post_id:id});loadPosts()}catch(e){}}
 </script>
 <script>
 (function checkAuth(){
