@@ -372,6 +372,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 </head>
 <body>
 <div class="boot-screen" id="bootScreen"><img src="/logo.png" alt="TSA" class="boot-logo" id="bootLogo"><div class="boot-text" id="bootText"></div></div>
+<script>if(localStorage.getItem('tsaBooted')){document.getElementById('bootScreen').style.display='none'}</script>
 <canvas id="matrix-rain"></canvas>
 <div class="scanlines"></div>
 <div class="crt-flicker"></div>
@@ -612,7 +613,7 @@ setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Arr
 
 // ========== BOOT ==========
 async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> TSA INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 10 // EPISODES: 17","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease';triggerPopup()}
-runBoot();
+if(!localStorage.getItem('tsaBooted')){localStorage.setItem('tsaBooted','1');runBoot()}else{document.getElementById('bootScreen').style.display='none';document.getElementById('mainContent').style.opacity='1';triggerPopup()}
 window.scrollTo(0,0);
 
 // ========== MUGSHOT CARDS ==========
