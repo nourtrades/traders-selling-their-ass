@@ -806,19 +806,46 @@ function getGuiltPoll(subjectCode){
   return '<div class="guilt-poll">'+
     '<div class="guilt-title">⚖️ HOW GUILTY IS THIS SCAMMER?</div>'+
     '<div id="form_'+pollId+'">'+
-    '<div class="guilt-slider-wrap">'+
-    '<span style="font-size:10px;color:var(--matrix-green)">1</span>'+
-    '<input type="range" class="guilt-slider" min="1" max="10" value="5" id="slider_'+pollId+'" oninput="document.getElementById(\'val_'+pollId+'\').textContent=this.value">'+
-    '<span style="font-size:10px;color:var(--cod-red)">10</span>'+
-    '<span class="guilt-val" id="val_'+pollId+'">5</span>'+
-    '</div>'+
-    '<button class="guilt-vote-btn" onclick="submitVote(\''+subjectCode+'\')">CAST YOUR VOTE</button>'+
+    '<div style="text-align:center;padding:10px;color:#666;font-size:11px;">Loading...</div>'+
     '</div>'+
     '<div class="guilt-results" id="results_'+pollId+'">'+
     '<div class="guilt-avg" id="avg_'+pollId+'">—</div>'+
     '<div class="guilt-avg-label">COMMUNITY GUILT RATING</div>'+
     '<div class="guilt-count" id="count_'+pollId+'"></div>'+
     '</div></div>';
+}
+
+async function initGuiltPoll(subjectCode){
+  var pollId='poll_'+subjectCode;
+  var formEl=document.getElementById('form_'+pollId);
+  if(!formEl||!supabaseClient)return;
+
+  var session=await supabaseClient.auth.getSession();
+  
+  // Not logged in — show create account button
+  if(!session.data.session){
+    formEl.innerHTML='<a href="/login.html" class="guilt-vote-btn" style="display:inline-block;text-decoration:none;text-align:center;background:transparent;border:2px solid #ffd600;color:#ffd600;font-family:Orbitron,sans-serif;font-size:11px;letter-spacing:3px;padding:12px 24px;cursor:pointer;margin-top:8px;">CREATE ACCOUNT TO VOTE</a>';
+    return;
+  }
+
+  var userId=session.data.session.user.id;
+  // Check if already voted
+  var{data:existing}=await supabaseClient.from('guilt_votes').select('id,rating').eq('subject_code',subjectCode).eq('user_id',userId).limit(1);
+  
+  if(existing&&existing.length>0){
+    // Already voted — hide the form
+    formEl.style.display='none';
+  }else{
+    // Show vote form
+    formEl.innerHTML=
+      '<div class="guilt-slider-wrap">'+
+      '<span style="font-size:10px;color:var(--matrix-green)">1</span>'+
+      '<input type="range" class="guilt-slider" min="1" max="10" value="5" id="slider_'+pollId+'" oninput="document.getElementById(\'val_'+pollId+'\').textContent=this.value">'+
+      '<span style="font-size:10px;color:var(--cod-red)">10</span>'+
+      '<span class="guilt-val" id="val_'+pollId+'">5</span>'+
+      '</div>'+
+      '<button class="guilt-vote-btn" onclick="submitVote(\''+subjectCode+'\')">CAST YOUR VOTE</button>';
+  }
 }
 
 function openFile(idx){
@@ -853,16 +880,6 @@ function openFile(idx){
     <div class="comments-list" id="clist_${sc}"><div class="comments-loading">Loading comments...</div></div>
   </div>`;
 
-  if(s.connections.length){
-    html+='<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>';
-    s.connections.forEach(function(c){
-      var ci=subjects.findIndex(function(x){return x.codename===c});
-      if(ci>=0){html+='<span class="connection-tag" onclick="closeFile();setTimeout(function(){openFile('+ci+')},400)">'+c+'</span>'}
-      else{html+='<span class="connection-tag" style="opacity:.5;cursor:default">'+c+'</span>'}
-    });
-    html+='</div>';
-  }
-
   html+=getGuiltPoll(sc);
   html+='<div class="next-scammer" onclick="closeFile();setTimeout(function(){openFile('+nextIdx+')},300)">';
   html+='<div class="next-scammer-img"><img src="'+ns.image+'" alt="'+ns.codename+'"></div>';
@@ -876,6 +893,7 @@ function openFile(idx){
   ov.classList.add('active');document.body.style.overflow='hidden';
   loadComments(sc);
   loadVotes(sc);
+  initGuiltPoll(sc);
 }
 
 function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open');}
@@ -982,19 +1000,19 @@ async function submitVote(subjectCode){
   try{
     // Check if user already voted for this subject
     var{data:existing,error:checkErr}=await supabaseClient.from('guilt_votes').select('id').eq('subject_code',subjectCode).eq('user_id',userId).limit(1);
-    if(checkErr){btn.disabled=false;btn.textContent='ERR: '+checkErr.message;return}
+    if(checkErr){btn.disabled=false;btn.textContent='VOTE FAILED';return}
     if(existing&&existing.length>0){
       var{error:upErr}=await supabaseClient.from('guilt_votes').update({rating:rating}).eq('id',existing[0].id);
-      if(upErr){btn.disabled=false;btn.textContent='ERR: '+upErr.message;return}
+      if(upErr){btn.disabled=false;btn.textContent='VOTE FAILED';return}
     }else{
       var{error:insErr}=await supabaseClient.from('guilt_votes').insert({subject_code:subjectCode,rating:rating,user_id:userId});
-      if(insErr){btn.disabled=false;btn.textContent='ERR: '+insErr.message;return}
+      if(insErr){btn.disabled=false;btn.textContent='VOTE FAILED';return}
     }
     document.getElementById('form_'+pollId).style.display='none';
     await loadVotes(subjectCode);
     await loadAllCardVotes();
   }catch(e){
-    btn.disabled=false;btn.textContent='ERR: '+e.message;
+    btn.disabled=false;btn.textContent='CAST YOUR VOTE';
   }
 }
 
