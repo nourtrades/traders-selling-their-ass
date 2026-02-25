@@ -16,13 +16,19 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 #matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
 .scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px)}
 .page-wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
-.top-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--matrix-dark);background:rgba(0,20,0,.6);flex-wrap:wrap;gap:8px}
-.nav-back{display:inline-flex;align-items:center;gap:6px;color:var(--matrix-green);text-decoration:none;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;padding:6px 14px;border:1px solid var(--matrix-dark);transition:all .2s}
-.nav-back:hover{border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
-.nav-links{display:flex;gap:8px;flex-wrap:wrap}
-.nav-link{color:var(--matrix-mid);text-decoration:none;font-size:10px;letter-spacing:1px;padding:6px 10px;border:1px solid transparent;transition:all .2s}
-.nav-link:hover,.nav-link.active{color:var(--matrix-green);border-color:var(--matrix-dark)}
-.nav-link.active{border-color:var(--matrix-green)}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(0,10,0,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.site-nav-links{display:flex;gap:4px;align-items:center}
+.site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+.site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(0,255,65,.03)}
+.site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
+.site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
+@media(max-width:600px){
+  .site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(0,10,0,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}
+  .site-nav-links.open{display:flex}
+  .site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(0,255,65,.05)}
+  .site-nav-toggle{display:block}
+}
 .page-header{text-align:center;padding:40px 20px 30px}
 .page-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:4px;color:var(--matrix-green);text-shadow:0 0 20px rgba(0,255,65,.3)}
 .page-sub{font-size:13px;color:var(--matrix-mid);margin-top:8px;letter-spacing:1px}
@@ -73,13 +79,15 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 <canvas id="matrix-rain"></canvas>
 <div class="scanlines"></div>
 <div class="page-wrap">
-  <nav class="top-nav">
-    <a href="/" class="nav-back">← BACK TO DOSSIERS</a>
-    <div class="nav-links">
-      <a href="/quiz.html" class="nav-link">🔍 QUIZ</a>
-      <a href="/forum.html" class="nav-link active">💬 FORUM</a>
-      <a href="/report.html" class="nav-link">🛡️ REPORT</a>
+  <nav class="site-nav">
+    <a href="/" class="site-nav-brand">🍑 NOUR TRADES</a>
+    <div class="site-nav-links">
+      <a href="/" class="site-nav-link">📁 DOSSIERS</a>
+      <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
+      <a href="/forum.html" class="site-nav-link active">💬 FORUM</a>
+      <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
     </div>
+    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
   </nav>
   <div class="page-header">
     <div class="page-title">💬 TRADERS FORUM</div>
