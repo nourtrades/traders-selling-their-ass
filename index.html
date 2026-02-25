@@ -73,6 +73,42 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .comments-loading{font-size:11px;color:var(--matrix-dark);text-align:center;padding:10px}
 .no-comments{font-size:11px;color:var(--matrix-dark);text-align:center;padding:10px;font-style:italic}
 
+/* GUILT POLL */
+.guilt-poll{margin-top:16px;padding:16px;border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3)}
+.guilt-title{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--cod-yellow);margin-bottom:12px;text-align:center}
+.guilt-slider-wrap{display:flex;align-items:center;gap:12px}
+.guilt-slider{flex:1;-webkit-appearance:none;appearance:none;height:6px;background:linear-gradient(90deg,var(--matrix-green),var(--cod-yellow),var(--cod-orange),var(--cod-red));outline:none;border-radius:3px;cursor:pointer}
+.guilt-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--cod-red);border:2px solid #fff;border-radius:50%;cursor:pointer}
+.guilt-slider::-moz-range-thumb{width:22px;height:22px;background:var(--cod-red);border:2px solid #fff;border-radius:50%;cursor:pointer}
+.guilt-val{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:700;color:var(--cod-red);min-width:35px;text-align:center}
+.guilt-vote-btn{display:block;width:100%;margin-top:10px;padding:8px;background:transparent;border:1px solid var(--cod-yellow);color:var(--cod-yellow);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;cursor:pointer;transition:all .2s}
+.guilt-vote-btn:hover{background:var(--cod-yellow);color:#000}
+.guilt-results{margin-top:10px;text-align:center;display:none}
+.guilt-results.show{display:block}
+.guilt-avg{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:700;color:var(--cod-red);text-shadow:0 0 15px rgba(255,23,68,.5)}
+.guilt-avg-label{font-size:9px;letter-spacing:3px;color:var(--matrix-mid);margin-top:2px}
+.guilt-count{font-size:10px;color:var(--matrix-dark);margin-top:4px}
+
+/* NEXT SCAMMER SUGGESTION */
+.next-scammer{margin-top:24px;border:1px solid var(--cod-orange);background:rgba(255,106,0,.03);padding:16px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s}
+.next-scammer:hover{background:rgba(255,106,0,.08);box-shadow:0 0 15px rgba(255,106,0,.2)}
+.next-scammer-img{width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid var(--cod-orange);flex-shrink:0}
+.next-scammer-img img{width:100%;height:100%;object-fit:cover}
+.next-scammer-info{flex:1}
+.next-scammer-label{font-size:9px;letter-spacing:3px;color:var(--matrix-mid)}
+.next-scammer-name{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--cod-orange);letter-spacing:2px;margin-top:2px}
+.next-scammer-risk{font-size:10px;color:var(--cod-red);margin-top:2px}
+.next-scammer-arrow{font-size:24px;color:var(--cod-orange);animation:arrow-pulse 1s ease-in-out infinite}
+@keyframes arrow-pulse{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+/* RED FLAGS SECTION */
+.red-flags-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;max-width:900px;margin:0 auto;padding:0 20px 40px}
+.red-flag-card{border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3);padding:20px;transition:all .2s}
+.red-flag-card:hover{border-color:var(--cod-red);background:rgba(255,23,68,.03)}
+.red-flag-icon{font-size:28px;margin-bottom:10px}
+.red-flag-title{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;color:var(--cod-red);margin-bottom:8px}
+.red-flag-desc{font-size:12px;color:var(--matrix-green);opacity:.7;line-height:1.6}
+
 .header{text-align:center;padding:50px 20px 30px;border-bottom:1px solid var(--matrix-dark)}
 .gov-seal{width:80px;height:80px;border:3px solid var(--cod-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);position:relative}
 .gov-seal::before{content:'';position:absolute;width:92px;height:92px;border:1px solid rgba(255,106,0,.3);border-radius:50%}
@@ -336,6 +372,18 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
       </div>
       <canvas id="networkCanvas" style="width:100%;height:500px;display:block;cursor:pointer;"></canvas>
     </div>
+  </div>
+
+  <div class="section-header"><span class="section-title">◆ RED FLAGS — HOW TO SPOT A SCAM TRADER ◆</span></div>
+  <div class="red-flags-grid">
+    <div class="red-flag-card"><div class="red-flag-icon">🚗</div><div class="red-flag-title">LIFESTYLE OVER CHARTS</div><div class="red-flag-desc">Lambos, jets, and penthouses in every post but never a real brokerage statement. The lifestyle IS the product — they need you to ask "how?" so they can sell you the answer.</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">🤖</div><div class="red-flag-title">ALGO THAT TRADES FOR YOU</div><div class="red-flag-desc">No algorithm consistently beats the market hands-free. If they're selling a bot that "trades for you," you're the product. The algo doesn't make money — your purchase does.</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">💰</div><div class="red-flag-title">DISCOUNT CODES EVERYWHERE</div><div class="red-flag-desc">6 prop firms, 6 discount codes, all in one day. They make money every time you sign up and fail. The more codes they push, the more desperate they are for affiliate revenue.</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">🏝️</div><div class="red-flag-title">OFFSHORE & UNREGULATED</div><div class="red-flag-desc">If the broker operates offshore with CFDs, they can edit your trades on the backend. They're unregulated for a reason — so nobody can stop them from taking your money.</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">📸</div><div class="red-flag-title">NO LIVE VERIFIED TRADES</div><div class="red-flag-desc">Screenshots can be photoshopped. Inspect Element exists. If they won't live-trade on a verified, regulated brokerage in real time — they're probably not trading at all.</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">🔄</div><div class="red-flag-title">REVENUE SHARE WITH BROKER</div><div class="red-flag-desc">When your "mentor" gets 40-50% of everything you lose on their recommended broker, they don't need you to win. They need you to deposit and lose. You ARE the business model.</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">📉</div><div class="red-flag-title">COURSE BEFORE PROFITS</div><div class="red-flag-desc">Started selling courses before they were profitable. If their trading made real money, why would they need to sell $2,000 Discord access to thousands of people?</div></div>
+    <div class="red-flag-card"><div class="red-flag-icon">🎭</div><div class="red-flag-title">THEY ALL KNOW EACH OTHER</div><div class="red-flag-desc">Same friend groups, same cities, same playbook. When scammers are all connected, it's not a coincidence — it's a network. Check who they hang out with.</div></div>
   </div>
 
   <div class="section-header" id="whistleblower"><span class="section-title">◆ WHISTLEBLOWER SUBMISSION — SECURE CHANNEL ◆</span></div>
@@ -714,13 +762,38 @@ function getMedia(ep, subjectCode, epIdx){
   return h;
 }
 
+// GUILT POLL HTML
+function getGuiltPoll(subjectCode){
+  const pollId=`poll_${subjectCode}`;
+  return `<div class="guilt-poll">
+    <div class="guilt-title">⚖️ HOW GUILTY IS THIS SCAMMER?</div>
+    <div id="form_${pollId}">
+      <div class="guilt-slider-wrap">
+        <span style="font-size:10px;color:var(--matrix-green)">1</span>
+        <input type="range" class="guilt-slider" min="1" max="10" value="5" id="slider_${pollId}" oninput="document.getElementById('val_${pollId}').textContent=this.value">
+        <span style="font-size:10px;color:var(--cod-red)">10</span>
+        <span class="guilt-val" id="val_${pollId}">5</span>
+      </div>
+      <button class="guilt-vote-btn" onclick="submitVote('${subjectCode}')">CAST YOUR VOTE</button>
+    </div>
+    <div class="guilt-results" id="results_${pollId}">
+      <div class="guilt-avg" id="avg_${pollId}">—</div>
+      <div class="guilt-avg-label">COMMUNITY GUILT RATING</div>
+      <div class="guilt-count" id="count_${pollId}"></div>
+    </div>
+  </div>`
+}
+
 function openFile(idx){
   const s=subjects[idx],ov=document.getElementById('modalOverlay'),ct=document.getElementById('fileContainer');
   const tv=s.episodes.reduce((a,e)=>a+e.evidence.length,0);
   const sc=s.codename.replace(/\s+/g,'_').toLowerCase();
-  ct.innerHTML=`<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep,sc,i)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>`:''}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div></div>`;
+  const nextIdx=(idx+1)%subjects.length;
+  const ns=subjects[nextIdx];
+  ct.innerHTML=`<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep,sc,i)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>':''}${getGuiltPoll(sc)}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div><div class="next-scammer" onclick="closeFile();setTimeout(()=>openFile(${nextIdx}),300)"><div class="next-scammer-img"><img src="${ns.image}" alt="${ns.codename}"></div><div class="next-scammer-info"><div class="next-scammer-label">NEXT DECLASSIFIED FILE ▸</div><div class="next-scammer-name">${ns.codename}</div><div class="next-scammer-risk">RISK: ${ns.riskLevel}% // ${ns.episodes.length} EPISODE${ns.episodes.length>1?'S':''}</div></div><div class="next-scammer-arrow">→</div></div></div>`;
   ov.classList.add('active');document.body.style.overflow='hidden';
   loadComments(`${sc}_ep0`);
+  loadVotes(sc);
 }
 
 function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open');
@@ -853,6 +926,39 @@ document.getElementById('wbForm').addEventListener('submit', async function(e) {
     btn.classList.remove('loading');
   }
 });
+// ========== GUILT POLL ==========
+async function submitVote(subjectCode){
+  const pollId=`poll_${subjectCode}`;
+  const slider=document.getElementById(`slider_${pollId}`);
+  const val=parseInt(slider.value);
+  const form=document.getElementById(`form_${pollId}`);
+  const btn=form.querySelector('.guilt-vote-btn');
+  btn.disabled=true;btn.textContent='VOTING...';
+  try{
+    if(!supabaseClient)throw new Error('Not connected');
+    await supabaseClient.from('guilt_votes').insert({subject_code:subjectCode,vote:val});
+    form.style.display='none';
+    await loadVotes(subjectCode);
+  }catch(e){
+    btn.disabled=false;btn.textContent='CAST YOUR VOTE';
+  }
+}
+
+async function loadVotes(subjectCode){
+  const pollId=`poll_${subjectCode}`;
+  const results=document.getElementById(`results_${pollId}`);
+  if(!results)return;
+  try{
+    if(!supabaseClient)return;
+    const{data,error}=await supabaseClient.from('guilt_votes').select('vote').eq('subject_code',subjectCode);
+    if(error||!data||data.length===0)return;
+    const avg=(data.reduce((a,v)=>a+v.vote,0)/data.length).toFixed(1);
+    document.getElementById(`avg_${pollId}`).textContent=avg+'/10';
+    document.getElementById(`count_${pollId}`).textContent=data.length+' vote'+(data.length!==1?'s':'');
+    results.classList.add('show');
+  }catch(e){}
+}
+
 // ========== EMAIL SIGNUP ==========
 document.getElementById('emailForm').addEventListener('submit', async function(e) {
   e.preventDefault();
