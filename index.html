@@ -764,24 +764,23 @@ function getMedia(ep, subjectCode, epIdx){
 
 // GUILT POLL HTML
 function getGuiltPoll(subjectCode){
-  const pollId=`poll_${subjectCode}`;
-  return `<div class="guilt-poll">
-    <div class="guilt-title">⚖️ HOW GUILTY IS THIS SCAMMER?</div>
-    <div id="form_${pollId}">
-      <div class="guilt-slider-wrap">
-        <span style="font-size:10px;color:var(--matrix-green)">1</span>
-        <input type="range" class="guilt-slider" min="1" max="10" value="5" id="slider_${pollId}" oninput="document.getElementById('val_${pollId}').textContent=this.value">
-        <span style="font-size:10px;color:var(--cod-red)">10</span>
-        <span class="guilt-val" id="val_${pollId}">5</span>
-      </div>
-      <button class="guilt-vote-btn" onclick="submitVote('${subjectCode}')">CAST YOUR VOTE</button>
-    </div>
-    <div class="guilt-results" id="results_${pollId}">
-      <div class="guilt-avg" id="avg_${pollId}">—</div>
-      <div class="guilt-avg-label">COMMUNITY GUILT RATING</div>
-      <div class="guilt-count" id="count_${pollId}"></div>
-    </div>
-  </div>`
+  var pollId='poll_'+subjectCode;
+  return '<div class="guilt-poll">'+
+    '<div class="guilt-title">⚖️ HOW GUILTY IS THIS SCAMMER?</div>'+
+    '<div id="form_'+pollId+'">'+
+    '<div class="guilt-slider-wrap">'+
+    '<span style="font-size:10px;color:var(--matrix-green)">1</span>'+
+    '<input type="range" class="guilt-slider" min="1" max="10" value="5" id="slider_'+pollId+'" oninput="document.getElementById(\'val_'+pollId+'\').textContent=this.value">'+
+    '<span style="font-size:10px;color:var(--cod-red)">10</span>'+
+    '<span class="guilt-val" id="val_'+pollId+'">5</span>'+
+    '</div>'+
+    '<button class="guilt-vote-btn" onclick="submitVote(\''+subjectCode+'\')">CAST YOUR VOTE</button>'+
+    '</div>'+
+    '<div class="guilt-results" id="results_'+pollId+'">'+
+    '<div class="guilt-avg" id="avg_'+pollId+'">—</div>'+
+    '<div class="guilt-avg-label">COMMUNITY GUILT RATING</div>'+
+    '<div class="guilt-count" id="count_'+pollId+'"></div>'+
+    '</div></div>';
 }
 
 function openFile(idx){
@@ -790,9 +789,49 @@ function openFile(idx){
   const sc=s.codename.replace(/\s+/g,'_').toLowerCase();
   const nextIdx=(idx+1)%subjects.length;
   const ns=subjects[nextIdx];
-  ct.innerHTML=`<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-${String(idx+1).padStart(3,'0')}</div><div class="file-header"><div class="file-mugshot"><img src="${s.image}" alt="${s.codename}"></div><div class="file-meta"><div class="file-subject-name">${s.codename}</div><div class="file-subject-sub">RANK #${s.rank} // RISK: ${s.riskLevel}% // ${s.episodes.length} EP${s.episodes.length>1?'S':''} // ${tv} EVIDENCE</div></div><button class="file-close" onclick="closeFile()">✕</button></div><div class="file-body">${s.episodes.map((ep,i)=>`<div class="episode-block"><div class="episode-header ${i===0?'open':''}" onclick="toggleEp(this)"><span class="episode-tag">${ep.title}</span><span class="episode-toggle">▼</span></div><div class="episode-content ${i===0?'open':''}">${getMedia(ep,sc,i)}${ep.evidence.map(e=>`<div class="evidence-item"><span class="evidence-icon">${e.icon}</span><div class="evidence-text">${e.text}</div></div>`).join('')}</div></div>`).join('')}${s.connections.length?`<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>${s.connections.map(c=>{const ci=subjects.findIndex(x=>x.codename===c);return ci>=0?`<span class="connection-tag" onclick="closeFile();setTimeout(()=>openFile(${ci}),400)">${c}</span>`:`<span class="connection-tag" style="opacity:.5;cursor:default">${c}</span>`}).join('')}</div>':''}${getGuiltPoll(sc)}<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">${s.verdict}</div></div><div class="next-scammer" onclick="closeFile();setTimeout(()=>openFile(${nextIdx}),300)"><div class="next-scammer-img"><img src="${ns.image}" alt="${ns.codename}"></div><div class="next-scammer-info"><div class="next-scammer-label">NEXT DECLASSIFIED FILE ▸</div><div class="next-scammer-name">${ns.codename}</div><div class="next-scammer-risk">RISK: ${ns.riskLevel}% // ${ns.episodes.length} EPISODE${ns.episodes.length>1?'S':''}</div></div><div class="next-scammer-arrow">→</div></div></div>`;
+
+  var html='<div class="file-declassified-bar">DECLASSIFIED — DOC# NT-'+String(idx+1).padStart(3,'0')+'</div>';
+  html+='<div class="file-header"><div class="file-mugshot"><img src="'+s.image+'" alt="'+s.codename+'"></div>';
+  html+='<div class="file-meta"><div class="file-subject-name">'+s.codename+'</div>';
+  html+='<div class="file-subject-sub">RANK #'+s.rank+' // RISK: '+s.riskLevel+'% // '+s.episodes.length+' EP'+(s.episodes.length>1?'S':'')+' // '+tv+' EVIDENCE</div></div>';
+  html+='<button class="file-close" onclick="closeFile()">✕</button></div>';
+  html+='<div class="file-body">';
+
+  s.episodes.forEach(function(ep,i){
+    html+='<div class="episode-block">';
+    html+='<div class="episode-header '+(i===0?'open':'')+'" onclick="toggleEp(this)">';
+    html+='<span class="episode-tag">'+ep.title+'</span><span class="episode-toggle">▼</span></div>';
+    html+='<div class="episode-content '+(i===0?'open':'')+'">';
+    html+=getMedia(ep,sc,i);
+    ep.evidence.forEach(function(e){
+      html+='<div class="evidence-item"><span class="evidence-icon">'+e.icon+'</span><div class="evidence-text">'+e.text+'</div></div>';
+    });
+    html+='</div></div>';
+  });
+
+  if(s.connections.length){
+    html+='<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>';
+    s.connections.forEach(function(c){
+      var ci=subjects.findIndex(function(x){return x.codename===c});
+      if(ci>=0){html+='<span class="connection-tag" onclick="closeFile();setTimeout(function(){openFile('+ci+')},400)">'+c+'</span>'}
+      else{html+='<span class="connection-tag" style="opacity:.5;cursor:default">'+c+'</span>'}
+    });
+    html+='</div>';
+  }
+
+  html+=getGuiltPoll(sc);
+  html+='<div class="verdict-box"><div class="verdict-label">NOUR TRADES INTELLIGENCE VERDICT</div><div class="verdict-text">'+s.verdict+'</div></div>';
+  html+='<div class="next-scammer" onclick="closeFile();setTimeout(function(){openFile('+nextIdx+')},300)">';
+  html+='<div class="next-scammer-img"><img src="'+ns.image+'" alt="'+ns.codename+'"></div>';
+  html+='<div class="next-scammer-info"><div class="next-scammer-label">NEXT DECLASSIFIED FILE ▸</div>';
+  html+='<div class="next-scammer-name">'+ns.codename+'</div>';
+  html+='<div class="next-scammer-risk">RISK: '+ns.riskLevel+'% // '+ns.episodes.length+' EPISODE'+(ns.episodes.length>1?'S':'')+'</div></div>';
+  html+='<div class="next-scammer-arrow">→</div></div>';
+  html+='</div>';
+
+  ct.innerHTML=html;
   ov.classList.add('active');document.body.style.overflow='hidden';
-  loadComments(`${sc}_ep0`);
+  loadComments(sc+'_ep0');
   loadVotes(sc);
 }
 
