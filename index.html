@@ -795,15 +795,6 @@ function getMedia(ep, subjectCode, epIdx){
   let h='';
   if(ep.video)h+=`<div class="video-wrapper"><video controls preload="metadata" playsinline><source src="${ep.video}" type="video/mp4"></video></div>`;
   if(ep.reelUrl)h+=`<a href="${ep.reelUrl}" target="_blank" rel="noopener" class="reel-watch-link"><span class="icon">📹</span><span class="label">WATCH ON INSTAGRAM</span><span class="arrow">→</span></a>`;
-  const commentId = `${subjectCode}_ep${epIdx}`;
-  h+=`<div class="comments-section">
-    <div class="comments-title">💬 ANONYMOUS COMMENTS</div>
-    <div class="comment-form">
-      <input class="comment-input" type="text" placeholder="Drop an anonymous comment..." id="cinput_${commentId}" onkeydown="if(event.key==='Enter'){event.preventDefault();postComment('${commentId}')}">
-      <button class="comment-btn" onclick="postComment('${commentId}')">POST</button>
-    </div>
-    <div class="comments-list" id="clist_${commentId}"><div class="comments-loading">Loading comments...</div></div>
-  </div>`;
   return h;
 }
 
@@ -850,6 +841,16 @@ function openFile(idx){
     html+='</div></div>';
   });
 
+  // SINGLE COMMENT SECTION FOR THIS TRADER
+  html+=`<div class="comments-section" style="margin-top:20px;border-top:1px solid var(--matrix-dark);padding-top:20px">
+    <div class="comments-title">💬 COMMENTS ON ${s.codename}</div>
+    <div class="comment-form">
+      <input class="comment-input" type="text" placeholder="Drop an anonymous comment..." id="cinput_${sc}" onkeydown="if(event.key==='Enter'){event.preventDefault();postComment('${sc}')}">
+      <button class="comment-btn" onclick="postComment('${sc}')">POST</button>
+    </div>
+    <div class="comments-list" id="clist_${sc}"><div class="comments-loading">Loading comments...</div></div>
+  </div>`;
+
   if(s.connections.length){
     html+='<div class="connections-section"><div class="connections-title">◆ CONNECTED SUBJECTS</div>';
     s.connections.forEach(function(c){
@@ -872,14 +873,11 @@ function openFile(idx){
 
   ct.innerHTML=html;
   ov.classList.add('active');document.body.style.overflow='hidden';
-  loadComments(sc+'_ep0');
+  loadComments(sc);
   loadVotes(sc);
 }
 
-function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open');
-  // Load comments when opening an episode
-  if(c.classList.contains('open')){const cl=c.querySelector('.comments-list');if(cl&&cl.id){loadComments(cl.id.replace('clist_',''))}}
-}
+function toggleEp(h){const c=h.nextElementSibling;if(c.classList.contains('open'))c.querySelectorAll('video').forEach(v=>v.pause());h.classList.toggle('open');c.classList.toggle('open');}
 function closeFile(){document.querySelectorAll('.file-container video').forEach(v=>v.pause());document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''}
 document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('modalOverlay'))closeFile()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFile()});
@@ -891,7 +889,7 @@ async function loadComments(commentId){
   list.innerHTML='<div class="comments-loading">Loading...</div>';
   try{
     if(!supabaseClient){list.innerHTML='<div class="no-comments">Comments loading...</div>';return}
-    const{data,error}=await supabaseClient.from('comments').select('*').eq('episode_id',commentId).order('created_at',{ascending:false}).limit(50);
+    const{data,error}=await supabaseClient.from('comments').select('*').like('episode_id',commentId+'%').order('created_at',{ascending:false}).limit(50);
     if(error)throw error;
     if(!data||data.length===0){list.innerHTML='<div class="no-comments">No comments yet. Be the first.</div>';return}
     list.innerHTML=data.map(c=>{
