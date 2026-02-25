@@ -288,15 +288,22 @@ async function saveProfile(){
 // Avatar upload
 document.getElementById('avatarInput').addEventListener('change',async function(){
   var file=this.files[0];if(!file)return;
-  var ext=file.name.split('.').pop();
-  var path=currentUser.id+'/avatar.'+ext;
-  var r=await sb.storage.from('avatars').upload(path,file,{upsert:true});
-  if(r.error){alert('Upload failed');return}
+  var path=currentUser.id+'/avatar';
+  // Remove any existing files in user's folder
+  var existing=await sb.storage.from('avatars').list(currentUser.id);
+  if(existing.data&&existing.data.length>0){
+    var toRemove=existing.data.map(function(f){return currentUser.id+'/'+f.name});
+    await sb.storage.from('avatars').remove(toRemove);
+  }
+  var r=await sb.storage.from('avatars').upload(path,file,{upsert:true,contentType:file.type,cacheControl:'0'});
+  if(r.error){console.error(r.error);alert('Upload failed: '+r.error.message);this.value='';return}
   var url=sb.storage.from('avatars').getPublicUrl(path);
-  await sb.from('profiles').update({avatar_url:url.data.publicUrl}).eq('id',currentUser.id);
-  document.getElementById('avatarImg').src=url.data.publicUrl+'?t='+Date.now();
+  var publicUrl=url.data.publicUrl+'?t='+Date.now();
+  await sb.from('profiles').update({avatar_url:publicUrl}).eq('id',currentUser.id);
+  document.getElementById('avatarImg').src=publicUrl;
   document.getElementById('avatarImg').style.display='block';
   document.getElementById('avatarPlaceholder').style.display='none';
+  this.value='';
 });
 
 async function voteTrust(dir){
