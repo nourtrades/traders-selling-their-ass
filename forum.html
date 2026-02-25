@@ -14,7 +14,7 @@
 body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden}
 canvas{position:fixed;top:0;left:0;z-index:0;opacity:.08}
 .site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(10,10,10,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);height:48px}
-.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap}
+.site-nav-brand{text-decoration:none}
 .site-nav-logo{height:32px;width:auto;margin-right:6px}
 .site-nav-links{display:flex;gap:4px;align-items:center}
 .site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
@@ -62,7 +62,7 @@ canvas{position:fixed;top:0;left:0;z-index:0;opacity:.08}
 .post-actions{display:flex;gap:15px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.05)}
 .post-action{font-size:10px;color:var(--matrix-mid);cursor:pointer;transition:color .2s;background:none;border:none;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
 .post-action:hover{color:var(--matrix-green)}
-.join-btn{color:var(--cod-yellow)!important;font-weight:bold}
+.join-discuss{color:var(--cod-yellow) !important;font-weight:bold;font-size:10px}
 .replies{border-top:1px solid var(--matrix-dark);background:rgba(0,0,0,.2);padding:0 15px}
 .reply{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
 .reply:last-child{border-bottom:none}
@@ -79,10 +79,7 @@ canvas{position:fixed;top:0;left:0;z-index:0;opacity:.08}
 .reply-btn{background:var(--cod-yellow);color:#000;border:none;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:1px;padding:8px 14px;cursor:pointer;font-weight:700;border-radius:2px}
 .forum-empty{text-align:center;padding:40px;color:var(--matrix-mid);font-size:13px;letter-spacing:2px}
 .footer{text-align:center;padding:30px 20px;font-size:10px;color:var(--matrix-dark);letter-spacing:3px;position:relative;z-index:1}
-@media(max-width:600px){
-  .post-title{font-size:16px}
-  .compose-title{font-size:13px}
-}
+@media(max-width:600px){.post-title{font-size:16px}.compose-title{font-size:13px}}
 </style>
 </head>
 <body>
@@ -126,9 +123,7 @@ canvas{position:fixed;top:0;left:0;z-index:0;opacity:.08}
 </div>
 <div class="footer">TSA INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
 <script>
-var ch='0123456789ABCDEFabcdef$%&';var c=document.getElementById('c'),ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;var fs=14,dr=[];for(var i=0;i<Math.ceil(c.width/fs);i++)dr[i]=Math.random()*c.height/fs;
-function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>c.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
-setInterval(dm,50);window.addEventListener('resize',function(){c.width=window.innerWidth;c.height=window.innerHeight});
+var ch='0123456789ABCDEFabcdef';var c=document.getElementById('c'),ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;var fs=14,dr=[];for(var i=0;i<Math.ceil(c.width/fs);i++)dr[i]=Math.random()*c.height/fs;function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>c.height&&Math.random()>.975)dr[i]=0;dr[i]++}}setInterval(dm,50);window.addEventListener('resize',function(){c.width=window.innerWidth;c.height=window.innerHeight});
 </script>
 <script>
 var SUPABASE_URL='https://kjeqzwfxtshgerzkaiqg.supabase.co';
@@ -176,25 +171,31 @@ async function loadPosts(){
       var replies=replyMap[p.id]||[];
       var likes=likeCounts[p.id]||0;
       var isAnon=!p.user_id||p.is_anonymous;
-      var authorHtml=isAnon?
-        '<span class="post-author">'+escHtml(p.author_name)+'</span><span class="badge-anon">ANON</span>':
-        '<span class="post-author"><a href="/profile.html?id='+p.user_id+'">'+escHtml(p.author_name)+'</a></span><span class="badge-verified">✓ VERIFIED</span>';
+      var authorHtml;
+      if(isAnon){
+        authorHtml='<span class="post-author">'+escHtml(p.author_name)+'</span><span class="badge-anon">ANON</span>';
+      }else{
+        authorHtml='<span class="post-author"><a href="/profile.html?id='+p.user_id+'">'+escHtml(p.author_name)+'</a></span><span class="badge-verified">✓ VERIFIED</span>';
+      }
       html+='<div class="post"><div class="post-main">';
       html+='<div class="post-meta">'+authorHtml+'<span class="post-time">'+timeAgo(p.created_at)+'</span></div>';
       html+='<div class="post-title">'+escHtml(p.title||p.body||'')+'</div>';
-      if(p.body&&p.title)html+='<div class="post-body">'+escHtml(p.body)+'</div>';
+      if(p.body&&p.title){html+='<div class="post-body">'+escHtml(p.body)+'</div>';}
       html+='<div class="post-actions">';
       html+='<button class="post-action" onclick="likePost(\''+p.id+'\')">▲ '+likes+'</button>';
       html+='<button class="post-action" onclick="toggleReply(\''+p.id+'\')">💬 '+replies.length+' REPLIES</button>';
-      html+='<button class="post-action join-btn" onclick="toggleReply(\''+p.id+'\')">✦ JOIN THE DISCUSSION</button>';
-      if(currentUser&&p.user_id===currentUser.id)html+='<button class="post-action" style="color:var(--cod-red)" onclick="deletePost(\''+p.id+'\')">🗑 DELETE</button>';
+      html+='<button class="post-action join-discuss" onclick="toggleReply(\''+p.id+'\')">✦ JOIN THE DISCUSSION</button>';
+      if(currentUser&&p.user_id===currentUser.id){html+='<button class="post-action" style="color:var(--cod-red)" onclick="deletePost(\''+p.id+'\')">🗑 DELETE</button>';}
       html+='</div></div>';
       html+='<div class="replies" id="replies_'+p.id+'">';
       replies.forEach(function(r){
         var rAnon=!r.user_id||r.is_anonymous;
-        var rAuthor=rAnon?
-          '<span class="reply-author">'+escHtml(r.author_name)+'</span><span class="badge-anon">ANON</span>':
-          '<span class="reply-author"><a href="/profile.html?id='+r.user_id+'">'+escHtml(r.author_name)+'</a></span><span class="badge-verified">✓</span>';
+        var rAuthor;
+        if(rAnon){
+          rAuthor='<span class="reply-author">'+escHtml(r.author_name)+'</span><span class="badge-anon">ANON</span>';
+        }else{
+          rAuthor='<span class="reply-author"><a href="/profile.html?id='+r.user_id+'">'+escHtml(r.author_name)+'</a></span><span class="badge-verified">✓</span>';
+        }
         html+='<div class="reply"><div class="reply-meta">'+rAuthor+'<span class="reply-time">'+timeAgo(r.created_at)+'</span></div>';
         html+='<div class="reply-text">'+escHtml(r.body||r.title||'')+'</div></div>';
       });
@@ -240,33 +241,10 @@ async function postReply(parentId){
 
 function toggleReply(id){var f=document.getElementById('freply_'+id);f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus()}
 async function likePost(id){try{await sb.from('forum_likes').insert({post_id:id});loadPosts()}catch(e){}}
-
-async function deletePost(id){
-  if(!confirm('Delete this post?'))return;
-  try{
-    await sb.from('forum_posts').delete().eq('parent_id',id);
-    await sb.from('forum_likes').delete().eq('post_id',id);
-    await sb.from('forum_posts').delete().eq('id',id);
-    loadPosts();
-  }catch(e){alert('Could not delete: '+e.message)}
-}
+async function deletePost(id){if(!confirm('Delete this post?'))return;try{await sb.from('forum_posts').delete().eq('parent_id',id);await sb.from('forum_likes').delete().eq('post_id',id);await sb.from('forum_posts').delete().eq('id',id);loadPosts()}catch(e){alert('Could not delete: '+e.message)}}
 </script>
 <script>
-(function checkAuth(){
-  var iv=setInterval(function(){
-    if(!window.supabase)return;
-    clearInterval(iv);
-    var url="https://kjeqzwfxtshgerzkaiqg.supabase.co";
-    var key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc3NjQ2NjMsImV4cCI6MjA1MzM0MDY2M30.wmQ7AJyGFRhMIhCb3lHGBqMPNzDkEGOr_NKAJ6v1bSQ";
-    var s=window.supabase.createClient(url,key);
-    s.auth.getSession().then(function(r){
-      if(r.data.session){
-        var el=document.getElementById("navAuth");
-        if(el){el.href="/profile.html";el.textContent="\u{1f464} PROFILE"}
-      }
-    });
-  },100);
-})();
+(function checkAuth(){var iv=setInterval(function(){if(!window.supabase)return;clearInterval(iv);var url="https://kjeqzwfxtshgerzkaiqg.supabase.co";var key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc3NjQ2NjMsImV4cCI6MjA1MzM0MDY2M30.wmQ7AJyGFRhMIhCb3lHGBqMPNzDkEGOr_NKAJ6v1bSQ";var s=window.supabase.createClient(url,key);s.auth.getSession().then(function(r){if(r.data.session){var el=document.getElementById("navAuth");if(el){el.href="/profile.html";el.textContent="\u{1f464} PROFILE"}}});},100)})();
 </script>
 </body>
 </html>
