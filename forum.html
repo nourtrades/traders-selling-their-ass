@@ -185,6 +185,7 @@ async function loadPosts(){
       html+='<div class="post-actions">';
       html+='<button class="post-action" onclick="likePost(\''+p.id+'\')">▲ '+likes+'</button>';
       html+='<button class="post-action" onclick="toggleReply(\''+p.id+'\')">💬 '+replies.length+' REPLIES</button>';
+      if(currentUser&&p.user_id===currentUser.id)html+='<button class="post-action" style="color:var(--cod-red)" onclick="deletePost(\''+p.id+'\')">🗑 DELETE</button>';
       html+='</div></div>';
       html+='<div class="replies" id="replies_'+p.id+'">';
       replies.forEach(function(r){
@@ -237,6 +238,16 @@ async function postReply(parentId){
 
 function toggleReply(id){var f=document.getElementById('freply_'+id);f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus()}
 async function likePost(id){try{await sb.from('forum_likes').insert({post_id:id});loadPosts()}catch(e){}}
+
+async function deletePost(id){
+  if(!confirm('Delete this post?'))return;
+  try{
+    await sb.from('forum_posts').delete().eq('parent_id',id);
+    await sb.from('forum_likes').delete().eq('post_id',id);
+    await sb.from('forum_posts').delete().eq('id',id);
+    loadPosts();
+  }catch(e){alert('Could not delete: '+e.message)}
+}
 </script>
 <script>
 (function checkAuth(){
