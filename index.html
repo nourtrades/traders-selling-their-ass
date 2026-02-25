@@ -22,6 +22,21 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .declassified-bar{background:var(--declassified-red);padding:6px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:6px;color:#fff;text-transform:uppercase;animation:threat-blink 2s step-end infinite}
 @keyframes threat-blink{0%,100%{opacity:1}50%{opacity:.6}}
 
+/* SITE NAV */
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(0,10,0,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.site-nav-links{display:flex;gap:4px;align-items:center}
+.site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+.site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(0,255,65,.03)}
+.site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
+.site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
+@media(max-width:600px){
+  .site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(0,10,0,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}
+  .site-nav-links.open{display:flex}
+  .site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(0,255,65,.05)}
+  .site-nav-toggle{display:block}
+}
+
 /* CTA BANNER */
 .cta-banner{background:linear-gradient(135deg,rgba(0,255,65,.08),rgba(255,106,0,.08));border-bottom:1px solid var(--matrix-dark);padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
 .cta-banner-text{font-size:13px;color:var(--matrix-green);letter-spacing:1px}
@@ -310,6 +325,46 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
   .wb-container{padding:20px 15px}
   .popup-box{padding:24px 20px;margin:10px}
 }
+
+/* FORUM */
+.forum-section{max-width:900px;margin:0 auto;padding:0 20px 40px}
+.forum-tabs{display:flex;gap:0;margin-bottom:0;border-bottom:1px solid var(--matrix-dark)}
+.forum-tab{flex:1;padding:14px 8px;background:rgba(0,20,0,.2);border:1px solid var(--matrix-dark);border-bottom:none;color:var(--matrix-mid);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;text-align:center;cursor:pointer;transition:all .2s}
+.forum-tab:hover{background:rgba(0,255,65,.03);color:var(--matrix-green)}
+.forum-tab.active{background:rgba(0,255,65,.05);color:var(--matrix-green);border-color:var(--matrix-green);border-bottom:2px solid var(--matrix-green)}
+.forum-tab .tab-count{display:block;font-size:18px;margin-bottom:4px}
+.forum-body{border:1px solid var(--matrix-dark);border-top:none;background:rgba(0,20,0,.2);min-height:300px}
+.forum-compose{padding:16px;border-bottom:1px solid rgba(0,255,65,.08)}
+.forum-compose-row{display:flex;gap:8px}
+.forum-name-input{width:120px;background:rgba(0,0,0,.4);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:10px;outline:none}
+.forum-msg-input{flex:1;background:rgba(0,0,0,.4);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:12px;padding:10px;outline:none;resize:none;min-height:40px}
+.forum-msg-input:focus,.forum-name-input:focus{border-color:var(--matrix-green)}
+.forum-post-btn{padding:10px 18px;background:transparent;border:1px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.forum-post-btn:hover{background:var(--matrix-green);color:#000}
+.forum-posts{max-height:500px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--matrix-dark) transparent}
+.forum-post{padding:14px 16px;border-bottom:1px solid rgba(0,255,65,.05);transition:background .2s}
+.forum-post:hover{background:rgba(0,255,65,.02)}
+.forum-post-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.forum-post-author{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-yellow)}
+.forum-post-time{font-size:10px;color:var(--matrix-dark)}
+.forum-post-body{font-size:13px;color:var(--matrix-green);line-height:1.6;opacity:.85}
+.forum-post-actions{display:flex;gap:12px;margin-top:8px}
+.forum-post-action{font-size:10px;color:var(--matrix-dark);cursor:pointer;transition:color .2s;background:none;border:none;font-family:'Share Tech Mono',monospace;padding:0}
+.forum-post-action:hover{color:var(--matrix-green)}
+.forum-replies{margin-left:20px;border-left:2px solid rgba(0,255,65,.08);padding-left:12px}
+.forum-reply-form{display:none;padding:8px 0;margin-top:6px}
+.forum-reply-form.show{display:flex;gap:6px}
+.forum-reply-input{flex:1;background:rgba(0,0,0,.3);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:11px;padding:8px;outline:none}
+.forum-reply-btn{padding:8px 12px;background:transparent;border:1px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:1px;cursor:pointer}
+.forum-reply-btn:hover{background:var(--matrix-green);color:#000}
+.forum-empty{text-align:center;padding:40px;color:var(--matrix-dark);font-size:12px;letter-spacing:2px}
+.forum-like-count{color:var(--cod-yellow)}
+@media(max-width:768px){
+  .forum-compose-row{flex-direction:column}
+  .forum-name-input{width:100%}
+  .forum-tab{font-size:8px;letter-spacing:1px;padding:10px 4px}
+  .forum-tab .tab-count{font-size:14px}
+}
 </style>
 </head>
 <body>
@@ -356,10 +411,22 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 <div class="main-container" id="mainContent" style="opacity:0;">
   <div class="declassified-bar">⚠ DECLASSIFIED — NOUR TRADES INTELLIGENCE DIVISION — AUTHORIZED PERSONNEL ONLY ⚠</div>
 
+  <!-- SITE NAV -->
+  <nav class="site-nav">
+    <a href="/" class="site-nav-brand">🍑 NOUR TRADES</a>
+    <div class="site-nav-links">
+      <a href="/" class="site-nav-link active">📁 DOSSIERS</a>
+      <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
+      <a href="/forum.html" class="site-nav-link">💬 FORUM</a>
+      <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
+    </div>
+    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+  </nav>
+
   <!-- CTA BANNER -->
   <div class="cta-banner">
     <span class="cta-banner-text">🚨 <strong>Have you been scammed by a trader?</strong> Submit your story anonymously & get paid in crypto.</span>
-    <a href="#whistleblower" class="cta-banner-btn">SUBMIT YOUR STORY →</a>
+    <a href="/report.html" class="cta-banner-btn">SUBMIT YOUR STORY →</a>
   </div>
   <div style="display:flex;justify-content:center;gap:10px;padding:10px 20px;background:rgba(0,20,0,.3);border-bottom:1px solid var(--matrix-dark);flex-wrap:wrap;">
     <a href="https://whop.com/stock-hours/stock-hours/?utm_source=store_page&funnelId=store_1a22da23-8ba1-44d6-a2c3-dea287a26d22" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--matrix-green);text-decoration:none;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-green);text-align:center;justify-content:center;">💬 JOIN DISCORD</a>
@@ -405,75 +472,24 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
     </div>
   </div>
 
-  <div class="section-header"><span class="section-title">◆ SCAM SPOTTER QUIZ — TEST YOUR KNOWLEDGE ◆</span></div>
-  <div id="quizSection" class="quiz-section">
-    <div class="quiz-progress"><span id="quizProg">1/8</span><div class="quiz-prog-bar"><div class="quiz-prog-fill" id="quizProgFill" style="width:12.5%"></div></div><span class="quiz-score" id="quizScoreDisplay">SCORE: 0</span></div>
-    <div id="quizCard" class="quiz-card">
-      <div class="quiz-scenario" id="quizScenario"></div>
-      <div class="quiz-options" id="quizOptions"></div>
-      <div class="quiz-feedback" id="quizFeedback"></div>
-      <div class="quiz-guilty" id="quizGuilty"></div>
-    </div>
-    <div id="quizResults" class="quiz-results" style="display:none">
-      <div class="quiz-results-icon">🔍</div>
-      <div class="quiz-results-title" id="quizResultTitle"></div>
-      <div class="quiz-results-score" id="quizResultScore"></div>
-      <div class="quiz-results-breakdown" id="quizResultBreakdown"></div>
-      <button class="quiz-restart-btn" onclick="startQuiz()">🔁 RETAKE QUIZ</button>
-      <div class="quiz-share" id="quizShare"></div>
-    </div>
-  </div>
-
-  <div class="section-header" id="whistleblower"><span class="section-title">◆ WHISTLEBLOWER SUBMISSION — SECURE CHANNEL ◆</span></div>
-  <div class="whistleblower-section">
-    <div class="wb-container">
-      <div class="wb-header">
-        <div class="wb-title">🛡️ REPORT A SCAM TRADER</div>
-        <div class="wb-subtitle">Have you been scammed by a trader or influencer? Submit your story anonymously.<br>If we use your intel in our videos, we'll send crypto to your wallet as a reward.</div>
-        <div class="wb-reward">💰 BOUNTY PAID IN CRYPTO FOR VERIFIED INTEL</div>
-      </div>
-      <form class="wb-form" id="wbForm">
-        <div class="wb-row">
-          <div class="wb-field">
-            <label class="wb-label">Name of Influencer / Trader</label>
-            <input class="wb-input" type="text" id="wbName" placeholder="Who scammed you?" required>
-          </div>
-          <div class="wb-field">
-            <label class="wb-label">What is their Social Media?</label>
-            <input class="wb-input" type="text" id="wbSocial" placeholder="@handle or link to their profile" required>
-          </div>
-        </div>
-        <div class="wb-field">
-          <label class="wb-label">How Much Did They Scam? (Estimated $)</label>
-          <input class="wb-input" type="text" id="wbAmount" placeholder="$0.00" required>
-        </div>
-        <div class="wb-field">
-          <label class="wb-label">What Did They Do? (Be specific — dates, details, receipts)</label>
-          <textarea class="wb-textarea" id="wbDescription" placeholder="Describe exactly how you were scammed. The more details, the better our investigation..." required></textarea>
-        </div>
-        <div class="wb-field">
-          <label class="wb-label">Upload Proof (Screenshots, Videos, Receipts)</label>
-          <div class="wb-file-drop" id="fileDrop">
-            <input type="file" multiple accept="image/*,video/*,.pdf" id="fileInput">
-            <div class="wb-file-icon">📁</div>
-            <div class="wb-file-text">Drag files here or <strong>click to browse</strong><br>Images, videos, PDFs accepted (max 50MB each)</div>
-            <div class="wb-file-list" id="fileList"></div>
-          </div>
-        </div>
-        <div class="wb-field">
-          <label class="wb-label">Your Crypto Wallet Address (For Bounty Payment)</label>
-          <input class="wb-input" type="text" id="wbWallet" placeholder="BTC, ETH, SOL, or USDT wallet address" required>
-        </div>
-        <div class="wb-disclaimer">🔒 YOUR IDENTITY STAYS ANONYMOUS. We never reveal sources. Only your wallet address is stored for payment. All submissions are reviewed by the Nour Trades intelligence team. If your intel is featured in an episode, payment is sent within 48 hours.</div>
-        <div class="wb-error" id="wbError"></div>
-        <button type="submit" class="wb-submit" id="wbSubmitBtn">◈ SUBMIT INTEL — STAY ANONYMOUS</button>
-      </form>
-      <div class="wb-success" id="wbSuccess">
-        <div class="wb-success-icon">🛡️</div>
-        <div class="wb-success-text">INTEL RECEIVED</div>
-        <div class="wb-success-sub">Your submission is being reviewed by the Nour Trades intelligence team.<br>If used, bounty will be sent to your wallet within 48 hours.</div>
-      </div>
-    </div>
+  <!-- SECONDARY PAGE LINKS -->
+  <div class="section-header"><span class="section-title">◆ EXPLORE MORE ◆</span></div>
+  <div style="max-width:900px;margin:0 auto;padding:0 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+    <a href="/quiz.html" style="display:block;border:1px solid var(--cod-yellow);background:rgba(255,214,0,.03);padding:24px 20px;text-align:center;text-decoration:none;transition:all .3s;">
+      <div style="font-size:32px;margin-bottom:10px;">🔍</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:3px;color:var(--cod-yellow);margin-bottom:6px;">SCAM SPOTTER QUIZ</div>
+      <div style="font-size:11px;color:var(--matrix-mid);line-height:1.5;">8 scenarios. Test if you can spot the red flags before it's too late.</div>
+    </a>
+    <a href="/forum.html" style="display:block;border:1px solid var(--matrix-green);background:rgba(0,255,65,.03);padding:24px 20px;text-align:center;text-decoration:none;transition:all .3s;">
+      <div style="font-size:32px;margin-bottom:10px;">💬</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:3px;color:var(--matrix-green);margin-bottom:6px;">TRADERS FORUM</div>
+      <div style="font-size:11px;color:var(--matrix-mid);line-height:1.5;">Stocks, Forex, Crypto — discuss freely with the community.</div>
+    </a>
+    <a href="/report.html" style="display:block;border:1px solid var(--cod-red);background:rgba(255,23,68,.03);padding:24px 20px;text-align:center;text-decoration:none;transition:all .3s;">
+      <div style="font-size:32px;margin-bottom:10px;">🛡️</div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:3px;color:var(--cod-red);margin-bottom:6px;">REPORT A SCAMMER</div>
+      <div style="font-size:11px;color:var(--matrix-mid);line-height:1.5;">Submit intel anonymously. Crypto bounty for verified tips.</div>
+    </a>
   </div>
 
   <!-- EMAIL SIGNUP -->
@@ -925,244 +941,6 @@ function timeAgo(date){
   if(s<3600)return Math.floor(s/60)+'m ago';
   if(s<86400)return Math.floor(s/3600)+'h ago';
   return Math.floor(s/86400)+'d ago';
-}
-
-// ========== WHISTLEBLOWER — SUPABASE ==========
-const fd=document.getElementById('fileDrop'),fi=document.getElementById('fileInput'),fl=document.getElementById('fileList');
-fd.addEventListener('dragover',e=>{e.preventDefault();fd.classList.add('dragover')});
-fd.addEventListener('dragleave',()=>fd.classList.remove('dragover'));
-fd.addEventListener('drop',e=>{e.preventDefault();fd.classList.remove('dragover');fi.files=e.dataTransfer.files;updateFL()});
-fi.addEventListener('change',updateFL);
-function updateFL(){const f=fi.files;fl.textContent=f.length?`${f.length} file${f.length>1?'s':''} selected`:'';}
-
-document.getElementById('wbForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const btn = document.getElementById('wbSubmitBtn');
-  const errEl = document.getElementById('wbError');
-  errEl.classList.remove('show');
-  btn.disabled = true;
-  btn.classList.add('loading');
-
-  try {
-    if (!supabaseClient) throw new Error('Connection not ready. Please wait a moment and try again.');
-
-    // 1. Upload proof files to Supabase Storage
-    const proofUrls = [];
-    const files = document.getElementById('fileInput').files;
-    
-    if (files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const timestamp = Date.now();
-        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-        const filePath = `submissions/${timestamp}_${safeName}`;
-        
-        const { data, error } = await supabaseClient.storage
-          .from('whistleblower-proof')
-          .upload(filePath, file);
-        
-        if (error) {
-          console.error('Upload error:', error);
-          continue;
-        }
-        
-        const { data: urlData } = supabaseClient.storage
-          .from('whistleblower-proof')
-          .getPublicUrl(filePath);
-        
-        if (urlData?.publicUrl) {
-          proofUrls.push(urlData.publicUrl);
-        }
-      }
-    }
-
-    // 2. Insert submission into database
-    const { error: insertError } = await supabaseClient
-      .from('whistleblower_submissions')
-      .insert({
-        influencer_name: document.getElementById('wbName').value.trim(),
-        social_media: document.getElementById('wbSocial').value.trim(),
-        scam_amount: document.getElementById('wbAmount').value.trim(),
-        scam_description: document.getElementById('wbDescription').value.trim(),
-        proof_urls: proofUrls,
-        crypto_wallet: document.getElementById('wbWallet').value.trim()
-      });
-
-    if (insertError) throw insertError;
-
-    // 3. Show success
-    document.getElementById('wbForm').style.display = 'none';
-    document.getElementById('wbSuccess').classList.add('show');
-
-  } catch (err) {
-    console.error('Submission error:', err);
-    errEl.textContent = '⚠ TRANSMISSION FAILED — Please try again. Error: ' + (err.message || 'Unknown error');
-    errEl.classList.add('show');
-    btn.disabled = false;
-    btn.classList.remove('loading');
-  }
-});
-// ========== SCAM SPOTTER QUIZ ==========
-var quizQuestions=[
-  {scenario:"A forex trader posts a Lamborghini, a Dubai penthouse, and a $50K profit screenshot — all in 24 hours. But they've never shown a single live trade on a verified brokerage. What should you do?",
-   options:["Sign up for their course — those results speak for themselves","Ask to see a verified brokerage statement before trusting anything","Follow them and copy their trades from screenshots","Report them — the lifestyle is the marketing"],
-   correct:1,explanation:"<strong>Lifestyle IS the product.</strong> Lambos and Dubai shots are designed to make you ask 'how?' — so they can sell you a $2,000 course. Real traders show brokerage statements, not car keys.",guilty:["TJR","LAMBO RAUL","FXALEXG"]},
-  {scenario:"Someone DMs you offering an algorithm that 'trades for you' with a guaranteed 10% monthly return. All you need to do is deposit $5,000 into their recommended broker. What's really happening?",
-   options:["It's a great passive income opportunity","The algo is the bait — the broker deposit is where they make money","10% monthly is conservative for a good algo","You should negotiate for a better algo first"],
-   correct:1,explanation:"<strong>You're the product.</strong> No algo consistently beats the market hands-free. They earn commissions when you deposit into their partner broker. When you lose, they still get paid.",guilty:["TJR","ETHAN DURAN"]},
-  {scenario:"A stock influencer posts 25 different discount codes for prop firms in a single week — including on Thanksgiving. They're constantly pushing new codes in Instagram stories. Why?",
-   options:["They genuinely want to help their followers save money","They earn affiliate commissions every time someone signs up and fails","The firms must be really good if they keep promoting them","It's normal marketing — everyone does it"],
-   correct:1,explanation:"<strong>Affiliate revenue is the business model.</strong> Every signup = commission for them. They don't care if you pass the challenge. The more codes they push, the more desperate they are for that affiliate check.",guilty:["USMAN ASHRAF","FXALEXG"]},
-  {scenario:"Your 'mentor' recommends a broker that operates offshore with no regulation and uses CFDs. They say the spreads are better and there's more leverage. Should you trust this?",
-   options:["Better spreads and leverage sounds great — sign up","Never. Unregulated offshore brokers can manipulate your trades on the backend","It's fine if your mentor uses it too","Offshore just means lower taxes — it's actually smart"],
-   correct:1,explanation:"<strong>Offshore = no protection.</strong> Unregulated CFD brokers can edit your trades, widen spreads, and take your money with zero accountability. They're unregulated for a reason.",guilty:["TJR","FXALEXG","ETHAN DURAN"]},
-  {scenario:"An influencer shows you an incredible trade — a $20,000 profit in one day. But it's a screenshot posted to their Instagram story, not a live recording. How confident should you be?",
-   options:["Screenshots don't lie — that's solid proof","Zero confidence. Screenshots can be faked with Inspect Element in 30 seconds","If they have multiple screenshots it must be real","Trust them — why would they lie?"],
-   correct:1,explanation:"<strong>Inspect Element exists.</strong> Anyone can fake a trading screenshot in seconds. If they won't live-trade on a verified, regulated brokerage in real time — assume it's fake until proven otherwise.",guilty:["MASITRADES","SCARFACE","SCI"]},
-  {scenario:"You discover that your trading mentor gets a 40-50% revenue share from the broker they recommended to you — meaning they earn money every time you trade and lose. What does this mean?",
-   options:["At least they're making money — must be a good broker","They literally profit from your losses. You ARE the business model.","Revenue share is normal in every industry","The percentage seems high but the broker is still legit"],
-   correct:1,explanation:"<strong>You ARE the business model.</strong> When your mentor earns 40-50% of your losses, they don't need you to win. They need you to deposit, trade, and lose. That's their real income stream.",guilty:["TJR","FXALEXG","LAMBO RAUL"]},
-  {scenario:"A trader with 500K followers launched a $2,000 Discord course before they had any verified profitable trading history. They say 'I learned so you don't have to.' Red flag?",
-   options:["Biggest red flag possible — they're selling what they can't do","If they have followers, they must know something","$2,000 is reasonable for good education","At least they're transparent about their journey"],
-   correct:0,explanation:"<strong>Course before profits = scam.</strong> If their trading actually made money, they wouldn't need thousands of people paying $2,000 for Discord access. The course IS the business — not trading.",guilty:["UMAR ASHRAF","SCI","JDUN"]},
-  {scenario:"You notice that 5 different 'competing' trading influencers all live in the same city, promote the same brokers, appear in each other's content, and use the exact same marketing playbook. Coincidence?",
-   options:["Coincidence — lots of traders live in the same cities","It's a coordinated network. They share playbooks, referrals, and cover for each other.","Competition is healthy — they push each other to be better","They probably just went to the same trading school"],
-   correct:1,explanation:"<strong>It's a network, not a coincidence.</strong> Same friend groups, same brokers, same offshore platforms, same playbook. When scammers are all connected, they're protecting each other's revenue streams.",guilty:["LAMBO RAUL","FXALEXG","ETHAN DURAN","UMAR ASHRAF","SCARFACE"]}
-];
-var quizCurrent=0,quizScore=0,quizAnswered=[];
-
-function startQuiz(){
-  quizCurrent=0;quizScore=0;quizAnswered=[];
-  document.getElementById('quizResults').style.display='none';
-  document.getElementById('quizCard').style.display='block';
-  renderQuestion();
-}
-
-function renderQuestion(){
-  var q=quizQuestions[quizCurrent];
-  document.getElementById('quizProg').textContent=(quizCurrent+1)+'/'+quizQuestions.length;
-  document.getElementById('quizProgFill').style.width=((quizCurrent+1)/quizQuestions.length*100)+'%';
-  document.getElementById('quizScoreDisplay').textContent='SCORE: '+quizScore;
-  document.getElementById('quizScenario').innerHTML='<span class="quiz-q-label">SCENARIO '+(quizCurrent+1)+'</span>'+q.scenario;
-  var letters=['A','B','C','D'];
-  var optsHtml='';
-  q.options.forEach(function(opt,i){
-    optsHtml+='<div class="quiz-opt" onclick="answerQuiz('+i+')" id="qopt_'+i+'"><span class="opt-letter">'+letters[i]+'</span><span>'+opt+'</span></div>';
-  });
-  document.getElementById('quizOptions').innerHTML=optsHtml;
-  document.getElementById('quizFeedback').className='quiz-feedback';
-  document.getElementById('quizFeedback').innerHTML='';
-  document.getElementById('quizGuilty').className='quiz-guilty';
-  document.getElementById('quizGuilty').innerHTML='';
-  // Remove old next btn if any
-  var oldBtn=document.querySelector('.quiz-next-btn');
-  if(oldBtn)oldBtn.remove();
-}
-
-function answerQuiz(chosen){
-  var q=quizQuestions[quizCurrent];
-  var isCorrect=chosen===q.correct;
-  if(isCorrect)quizScore++;
-  quizAnswered.push({q:quizCurrent,correct:isCorrect});
-
-  // Highlight options
-  for(var i=0;i<q.options.length;i++){
-    var el=document.getElementById('qopt_'+i);
-    el.classList.add('disabled');
-    if(i===q.correct)el.classList.add('correct');
-    else if(i===chosen&&!isCorrect)el.classList.add('wrong');
-  }
-
-  document.getElementById('quizScoreDisplay').textContent='SCORE: '+quizScore;
-
-  // Show feedback
-  var fb=document.getElementById('quizFeedback');
-  fb.innerHTML=(isCorrect?'✅ CORRECT. ':'❌ WRONG. ')+q.explanation;
-  fb.className='quiz-feedback show';
-
-  // Show guilty scammers
-  if(q.guilty&&q.guilty.length){
-    var gh=document.getElementById('quizGuilty');
-    var ghHtml='<span class="quiz-guilty-label">🚨 GUILTY:</span>';
-    q.guilty.forEach(function(name){
-      var si=subjects.findIndex(function(s){return s.codename===name});
-      if(si>=0){ghHtml+='<span class="quiz-guilty-name" onclick="closeQuizAndOpen('+si+')">'+name+'</span>'}
-      else{ghHtml+='<span class="quiz-guilty-name">'+name+'</span>'}
-    });
-    gh.innerHTML=ghHtml;
-    gh.className='quiz-guilty show';
-  }
-
-  // Add next button
-  var nextBtn=document.createElement('button');
-  nextBtn.className='quiz-next-btn show';
-  nextBtn.textContent=quizCurrent<quizQuestions.length-1?'NEXT SCENARIO →':'SEE RESULTS →';
-  nextBtn.onclick=function(){
-    quizCurrent++;
-    if(quizCurrent<quizQuestions.length){renderQuestion()}
-    else{showQuizResults()}
-  };
-  document.getElementById('quizCard').appendChild(nextBtn);
-}
-
-function closeQuizAndOpen(idx){
-  openFile(idx);
-}
-
-function showQuizResults(){
-  document.getElementById('quizCard').style.display='none';
-  var pct=Math.round(quizScore/quizQuestions.length*100);
-  var title,icon;
-  if(pct>=88){title='SCAM DETECTOR ELITE';icon='🛡️'}
-  else if(pct>=63){title='STREET SMART';icon='🔍'}
-  else if(pct>=38){title='NEEDS TRAINING';icon='⚠️'}
-  else{title='EASY TARGET';icon='🎯'}
-
-  document.getElementById('quizResultTitle').textContent=title;
-  document.getElementById('quizResultScore').textContent=quizScore+'/'+quizQuestions.length;
-  document.getElementById('quizResultBreakdown').innerHTML='You scored '+pct+'% — '+
-    (pct>=88?'You can spot scams from a mile away. You\'re built for this.':
-     pct>=63?'Solid awareness, but some scams could still slip through. Study the dossiers above.':
-     pct>=38?'You\'d fall for some of these. Read every dossier on this page — it could save you thousands.':
-     'You need to study up ASAP. These scammers would eat you alive. Read every file above.');
-  document.getElementById('quizShare').innerHTML='Share: "I scored '+quizScore+'/'+quizQuestions.length+' on the Scam Spotter Quiz at traderssellingass.com 🍑"';
-  document.getElementById('quizResults').style.display='block';
-}
-
-startQuiz();
-
-// ========== GUILT POLL ==========
-async function submitVote(subjectCode){
-  const pollId=`poll_${subjectCode}`;
-  const slider=document.getElementById(`slider_${pollId}`);
-  const val=parseInt(slider.value);
-  const form=document.getElementById(`form_${pollId}`);
-  const btn=form.querySelector('.guilt-vote-btn');
-  btn.disabled=true;btn.textContent='VOTING...';
-  try{
-    if(!supabaseClient)throw new Error('Not connected');
-    await supabaseClient.from('guilt_votes').insert({subject_code:subjectCode,vote:val});
-    form.style.display='none';
-    await loadVotes(subjectCode);
-  }catch(e){
-    btn.disabled=false;btn.textContent='CAST YOUR VOTE';
-  }
-}
-
-async function loadVotes(subjectCode){
-  const pollId=`poll_${subjectCode}`;
-  const results=document.getElementById(`results_${pollId}`);
-  if(!results)return;
-  try{
-    if(!supabaseClient)return;
-    const{data,error}=await supabaseClient.from('guilt_votes').select('vote').eq('subject_code',subjectCode);
-    if(error||!data||data.length===0)return;
-    const avg=(data.reduce((a,v)=>a+v.vote,0)/data.length).toFixed(1);
-    document.getElementById(`avg_${pollId}`).textContent=avg+'/10';
-    document.getElementById(`count_${pollId}`).textContent=data.length+' vote'+(data.length!==1?'s':'');
-    results.classList.add('show');
-  }catch(e){}
 }
 
 // ========== EMAIL SIGNUP ==========
