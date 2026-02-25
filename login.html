@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+<title>LOGIN // NOUR TRADES INTELLIGENCE</title>
+<script defer src="/_vercel/insights/script.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XLYG9PBFK7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XLYG9PBFK7');</script>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair;min-height:100vh}
+#matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
+.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px)}
+.page-wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(0,10,0,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.site-nav-links{display:flex;gap:4px;align-items:center}
+.site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+.site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(0,255,65,.03)}
+.site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
+.site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
+@media(max-width:600px){.site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(0,10,0,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}.site-nav-links.open{display:flex}.site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(0,255,65,.05)}.site-nav-toggle{display:block}}
+
+.auth-container{max-width:420px;margin:60px auto;padding:0 20px;width:100%}
+.auth-box{border:1px solid var(--matrix-dark);background:rgba(0,20,0,.4);padding:32px}
+.auth-title{font-family:'Orbitron',sans-serif;font-size:20px;letter-spacing:4px;color:var(--matrix-green);text-align:center;margin-bottom:6px;text-shadow:0 0 15px rgba(0,255,65,.3)}
+.auth-sub{text-align:center;font-size:12px;color:var(--matrix-mid);margin-bottom:28px;line-height:1.6}
+.auth-tabs{display:flex;margin-bottom:24px;border-bottom:1px solid var(--matrix-dark)}
+.auth-tab{flex:1;padding:10px;text-align:center;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--matrix-mid);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+.auth-tab.active{color:var(--matrix-green);border-bottom-color:var(--matrix-green)}
+.auth-tab:hover{color:var(--matrix-green)}
+.auth-form{display:flex;flex-direction:column;gap:16px}
+.auth-field{display:flex;flex-direction:column;gap:4px}
+.auth-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;color:var(--matrix-mid);text-transform:uppercase}
+.auth-input{background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:14px;padding:12px;outline:none;transition:border-color .2s}
+.auth-input:focus{border-color:var(--matrix-green);box-shadow:0 0 8px rgba(0,255,65,.1)}
+.auth-input::placeholder{color:rgba(0,255,65,.2)}
+.auth-btn{background:transparent;border:2px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;padding:14px;cursor:pointer;transition:all .3s;margin-top:4px}
+.auth-btn:hover{background:var(--matrix-green);color:#000;box-shadow:0 0 20px rgba(0,255,65,.4)}
+.auth-btn:disabled{opacity:.5;cursor:not-allowed}
+.auth-error{color:var(--cod-red);font-size:11px;text-align:center;padding:10px;border:1px solid var(--cod-red);background:rgba(255,23,68,.05);display:none}
+.auth-error.show{display:block}
+.auth-success{color:var(--matrix-green);font-size:11px;text-align:center;padding:10px;border:1px solid var(--matrix-green);background:rgba(0,255,65,.03);display:none}
+.auth-success.show{display:block}
+.auth-divider{text-align:center;font-size:10px;color:var(--matrix-dark);letter-spacing:2px;margin:8px 0}
+.auth-anon-btn{background:transparent;border:1px solid var(--matrix-dark);color:var(--matrix-mid);font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;padding:12px;cursor:pointer;transition:all .2s;width:100%}
+.auth-anon-btn:hover{border-color:var(--matrix-mid);color:var(--matrix-green)}
+.footer{text-align:center;padding:30px 20px;border-top:1px solid var(--matrix-dark);font-size:10px;color:var(--matrix-dark);letter-spacing:2px;margin-top:auto}
+#signupForm{display:none}
+</style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<div class="scanlines"></div>
+<div class="page-wrap">
+  <nav class="site-nav">
+    <a href="/" class="site-nav-brand">🍑 NOUR TRADES</a>
+    <div class="site-nav-links">
+      <a href="/" class="site-nav-link">📁 DOSSIERS</a>
+      <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
+      <a href="/forum.html" class="site-nav-link">💬 FORUM</a>
+      <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
+      <a href="/login.html" class="site-nav-link active">👤 LOGIN</a>
+    </div>
+    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="auth-title">🔐 ACCESS PORTAL</div>
+      <div class="auth-sub">Create an account to claim your identity in the forum.<br>Choose a display name, build credibility, earn trust.</div>
+
+      <div class="auth-tabs">
+        <div class="auth-tab active" onclick="showTab('login')">LOGIN</div>
+        <div class="auth-tab" onclick="showTab('signup')">SIGN UP</div>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form class="auth-form" id="loginForm">
+        <div class="auth-field">
+          <label class="auth-label">Email</label>
+          <input class="auth-input" type="email" id="loginEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Password</label>
+          <input class="auth-input" type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <div class="auth-error" id="loginError"></div>
+        <button type="submit" class="auth-btn" id="loginBtn">◈ LOGIN</button>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form class="auth-form" id="signupForm">
+        <div class="auth-field">
+          <label class="auth-label">Display Name</label>
+          <input class="auth-input" type="text" id="signupName" placeholder="Your public name" maxlength="24" required>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Email</label>
+          <input class="auth-input" type="email" id="signupEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Password (min 6 chars)</label>
+          <input class="auth-input" type="password" id="signupPassword" placeholder="••••••••" minlength="6" required>
+        </div>
+        <div class="auth-error" id="signupError"></div>
+        <div class="auth-success" id="signupSuccess"></div>
+        <button type="submit" class="auth-btn" id="signupBtn">◈ CREATE ACCOUNT</button>
+      </form>
+
+      <div class="auth-divider">— OR —</div>
+      <button class="auth-anon-btn" onclick="window.location.href='/forum.html'">CONTINUE AS ANONYMOUS →</button>
+    </div>
+  </div>
+
+  <div class="footer">NOUR TRADES INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
+</div>
+<script>
+var canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
+function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
+var ch='アイウエオカキクケコ0123456789',fs=14,col=~~(canvas.width/fs),dr=Array(col).fill(1);
+function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
+setInterval(dm,35);
+
+var SUPABASE_URL='https://kjeqzwfxtshgerzkaiqg.supabase.co';
+var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
+var sb=null;
+
+(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=function(){
+  sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  // Check if already logged in
+  sb.auth.getSession().then(function(r){
+    if(r.data.session){window.location.href='/profile.html'}
+  });
+};document.head.appendChild(s)})();
+
+function showTab(tab){
+  document.querySelectorAll('.auth-tab').forEach(function(t){t.classList.remove('active')});
+  if(tab==='login'){
+    document.querySelectorAll('.auth-tab')[0].classList.add('active');
+    document.getElementById('loginForm').style.display='flex';
+    document.getElementById('signupForm').style.display='none';
+  }else{
+    document.querySelectorAll('.auth-tab')[1].classList.add('active');
+    document.getElementById('loginForm').style.display='none';
+    document.getElementById('signupForm').style.display='flex';
+  }
+}
+
+// LOGIN
+document.getElementById('loginForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var btn=document.getElementById('loginBtn'),err=document.getElementById('loginError');
+  err.classList.remove('show');btn.disabled=true;btn.textContent='AUTHENTICATING...';
+  try{
+    if(!sb)throw new Error('Loading...');
+    var r=await sb.auth.signInWithPassword({
+      email:document.getElementById('loginEmail').value.trim(),
+      password:document.getElementById('loginPassword').value
+    });
+    if(r.error)throw r.error;
+    window.location.href='/forum.html';
+  }catch(ex){
+    err.textContent='⚠ '+( ex.message||'Login failed');
+    err.classList.add('show');btn.disabled=false;btn.textContent='◈ LOGIN';
+  }
+});
+
+// SIGNUP
+document.getElementById('signupForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var btn=document.getElementById('signupBtn'),err=document.getElementById('signupError'),suc=document.getElementById('signupSuccess');
+  err.classList.remove('show');suc.classList.remove('show');btn.disabled=true;btn.textContent='CREATING...';
+  var displayName=document.getElementById('signupName').value.trim();
+  var email=document.getElementById('signupEmail').value.trim();
+  var password=document.getElementById('signupPassword').value;
+  try{
+    if(!sb)throw new Error('Loading...');
+    if(displayName.length<2)throw new Error('Display name must be at least 2 characters');
+    var r=await sb.auth.signUp({
+      email:email,
+      password:password,
+      options:{data:{display_name:displayName}}
+    });
+    if(r.error)throw r.error;
+    // Create profile row
+    if(r.data.user){
+      await sb.from('profiles').upsert({
+        id:r.data.user.id,
+        display_name:displayName,
+        avatar_url:null,
+        bio:'',
+        trust_score:50
+      });
+    }
+    // If email confirmation is off, redirect immediately
+    if(r.data.session){
+      window.location.href='/profile.html';
+    }else{
+      suc.textContent='✅ Account created! Check your email to confirm, then login.';
+      suc.classList.add('show');btn.disabled=false;btn.textContent='◈ CREATE ACCOUNT';
+    }
+  }catch(ex){
+    err.textContent='⚠ '+(ex.message||'Signup failed');
+    err.classList.add('show');btn.disabled=false;btn.textContent='◈ CREATE ACCOUNT';
+  }
+});
+</script>
+</body>
+</html>

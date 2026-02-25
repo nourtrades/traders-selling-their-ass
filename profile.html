@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+<title>PROFILE // NOUR TRADES INTELLIGENCE</title>
+<script defer src="/_vercel/insights/script.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XLYG9PBFK7"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XLYG9PBFK7');</script>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--matrix-green:#00ff41;--matrix-dark:#003b00;--matrix-mid:#008f11;--cod-orange:#ff6a00;--cod-red:#ff1744;--cod-yellow:#ffd600;--bg-black:#0a0a0a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;overflow-x:hidden;cursor:crosshair;min-height:100vh}
+#matrix-rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.12}
+.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,65,.03) 2px,rgba(0,255,65,.03) 4px)}
+.page-wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
+.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(0,10,0,.9);border-bottom:1px solid var(--matrix-dark);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);height:48px}
+.site-nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:3px;color:var(--matrix-green);text-decoration:none;white-space:nowrap;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.site-nav-links{display:flex;gap:4px;align-items:center}
+.site-nav-link{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--matrix-mid);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:all .2s;white-space:nowrap}
+.site-nav-link:hover{color:var(--matrix-green);border-color:var(--matrix-dark);background:rgba(0,255,65,.03)}
+.site-nav-link.active{color:var(--matrix-green);border-color:var(--matrix-green);background:rgba(0,255,65,.05)}
+.site-nav-toggle{display:none;background:none;border:1px solid var(--matrix-dark);color:var(--matrix-green);font-size:18px;padding:4px 8px;cursor:pointer}
+@media(max-width:600px){.site-nav-links{display:none;position:absolute;top:48px;left:0;right:0;background:rgba(0,10,0,.95);border-bottom:1px solid var(--matrix-green);flex-direction:column;padding:8px 0;backdrop-filter:blur(10px)}.site-nav-links.open{display:flex}.site-nav-link{padding:12px 20px;width:100%;text-align:left;border:none;border-bottom:1px solid rgba(0,255,65,.05)}.site-nav-toggle{display:block}}
+
+.profile-container{max-width:700px;margin:0 auto;padding:30px 20px 60px;width:100%}
+.profile-card{border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3);padding:28px;margin-bottom:20px}
+.profile-header{display:flex;gap:20px;align-items:flex-start;margin-bottom:20px}
+.profile-avatar{width:80px;height:80px;border-radius:50%;border:2px solid var(--matrix-green);overflow:hidden;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;position:relative;cursor:pointer}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-avatar-upload{position:absolute;inset:0;opacity:0;cursor:pointer}
+.profile-info{flex:1}
+.profile-name{font-family:'Orbitron',sans-serif;font-size:20px;letter-spacing:3px;color:var(--matrix-green);text-shadow:0 0 10px rgba(0,255,65,.3)}
+.profile-email{font-size:11px;color:var(--matrix-dark);margin-top:4px}
+.profile-joined{font-size:10px;color:var(--matrix-mid);margin-top:4px;letter-spacing:1px}
+.profile-edit-section{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.profile-field{display:flex;flex-direction:column;gap:4px}
+.profile-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;color:var(--matrix-mid)}
+.profile-input,.profile-textarea{background:rgba(0,0,0,.4);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:13px;padding:10px;outline:none;transition:border-color .2s}
+.profile-input:focus,.profile-textarea:focus{border-color:var(--matrix-green)}
+.profile-textarea{min-height:60px;resize:vertical}
+.profile-save-btn{padding:10px 20px;background:transparent;border:1px solid var(--matrix-green);color:var(--matrix-green);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;cursor:pointer;transition:all .2s;align-self:flex-start}
+.profile-save-btn:hover{background:var(--matrix-green);color:#000}
+.profile-msg{font-size:11px;color:var(--matrix-green);display:none;padding:6px 0}
+.profile-msg.show{display:block}
+
+/* TRUST METER */
+.trust-section{border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3);padding:20px;margin-bottom:20px}
+.trust-title{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--cod-yellow);margin-bottom:12px}
+.trust-score-display{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.trust-number{font-family:'Orbitron',sans-serif;font-size:36px;font-weight:700;color:var(--cod-yellow);text-shadow:0 0 15px rgba(255,214,0,.3)}
+.trust-bar{flex:1;height:8px;background:rgba(0,255,65,.1);border-radius:4px;overflow:hidden}
+.trust-bar-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.trust-label{font-size:10px;color:var(--matrix-mid);letter-spacing:1px}
+.trust-votes{font-size:10px;color:var(--matrix-dark);margin-top:4px}
+.trust-vote-section{display:flex;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(0,255,65,.08)}
+.trust-vote-label{font-size:10px;color:var(--matrix-mid);letter-spacing:1px}
+.trust-vote-btn{padding:6px 14px;background:transparent;border:1px solid var(--matrix-dark);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:1px;cursor:pointer;transition:all .2s}
+.trust-vote-btn.up{color:var(--matrix-green);border-color:var(--matrix-green)}
+.trust-vote-btn.up:hover{background:var(--matrix-green);color:#000}
+.trust-vote-btn.down{color:var(--cod-red);border-color:var(--cod-red)}
+.trust-vote-btn.down:hover{background:var(--cod-red);color:#fff}
+
+/* POSTS HISTORY */
+.posts-section{border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3);padding:20px;margin-bottom:20px}
+.posts-title{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--matrix-green);margin-bottom:12px}
+.post-item{padding:10px 0;border-bottom:1px solid rgba(0,255,65,.05)}
+.post-item:last-child{border-bottom:none}
+.post-item-channel{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:2px;color:var(--cod-orange);text-transform:uppercase}
+.post-item-body{font-size:12px;color:var(--matrix-green);opacity:.8;margin-top:4px;line-height:1.5}
+.post-item-time{font-size:10px;color:var(--matrix-dark);margin-top:4px}
+.post-empty{font-size:11px;color:var(--matrix-dark);text-align:center;padding:16px}
+
+.logout-btn{padding:10px 20px;background:transparent;border:1px solid var(--cod-red);color:var(--cod-red);font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;cursor:pointer;transition:all .2s;display:block;margin:0 auto}
+.logout-btn:hover{background:var(--cod-red);color:#fff}
+.footer{text-align:center;padding:30px 20px;border-top:1px solid var(--matrix-dark);font-size:10px;color:var(--matrix-dark);letter-spacing:2px;margin-top:auto}
+@media(max-width:600px){.profile-header{flex-direction:column;align-items:center;text-align:center}}
+</style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<div class="scanlines"></div>
+<div class="page-wrap">
+  <nav class="site-nav">
+    <a href="/" class="site-nav-brand">🍑 NOUR TRADES</a>
+    <div class="site-nav-links">
+      <a href="/" class="site-nav-link">📁 DOSSIERS</a>
+      <a href="/quiz.html" class="site-nav-link">🔍 QUIZ</a>
+      <a href="/forum.html" class="site-nav-link">💬 FORUM</a>
+      <a href="/report.html" class="site-nav-link">🛡️ REPORT</a>
+      <a href="/profile.html" class="site-nav-link active" id="navProfile">👤 PROFILE</a>
+    </div>
+    <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+  </nav>
+
+  <div class="profile-container" id="profileContent" style="display:none">
+    <!-- OWN PROFILE / EDIT MODE -->
+    <div class="profile-card" id="profileCard">
+      <div class="profile-header">
+        <div class="profile-avatar" id="avatarWrap" onclick="document.getElementById('avatarInput').click()">
+          <span id="avatarPlaceholder">👤</span>
+          <img id="avatarImg" style="display:none">
+          <input type="file" accept="image/*" id="avatarInput" class="profile-avatar-upload">
+        </div>
+        <div class="profile-info">
+          <div class="profile-name" id="profileName">—</div>
+          <div class="profile-email" id="profileEmail"></div>
+          <div class="profile-joined" id="profileJoined"></div>
+        </div>
+      </div>
+      <div class="profile-edit-section" id="editSection">
+        <div class="profile-field">
+          <label class="profile-label">Display Name</label>
+          <input class="profile-input" type="text" id="editName" maxlength="24">
+        </div>
+        <div class="profile-field">
+          <label class="profile-label">Bio</label>
+          <textarea class="profile-textarea" id="editBio" maxlength="200" placeholder="Tell the community about yourself..."></textarea>
+        </div>
+        <div class="profile-msg" id="saveMsg">✅ Profile updated</div>
+        <button class="profile-save-btn" onclick="saveProfile()">SAVE CHANGES</button>
+      </div>
+    </div>
+
+    <!-- TRUST METER (own profile) -->
+    <div class="trust-section" id="trustSection">
+      <div class="trust-title">⚖️ COMMUNITY TRUST SCORE</div>
+      <div class="trust-score-display">
+        <div class="trust-number" id="trustScore">50</div>
+        <div style="flex:1">
+          <div class="trust-bar"><div class="trust-bar-fill" id="trustBar" style="width:50%;background:var(--cod-yellow)"></div></div>
+          <div class="trust-label" id="trustLabel">NEUTRAL</div>
+          <div class="trust-votes" id="trustVotes">0 votes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCUSSION HISTORY -->
+    <div class="posts-section">
+      <div class="posts-title">💬 YOUR DISCUSSIONS</div>
+      <div id="postsList"><div class="post-empty">Loading...</div></div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">◈ LOGOUT</button>
+  </div>
+
+  <!-- VIEWING OTHER USER'S PROFILE -->
+  <div class="profile-container" id="otherProfileContent" style="display:none">
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar" id="otherAvatar"><span>👤</span></div>
+        <div class="profile-info">
+          <div class="profile-name" id="otherName">—</div>
+          <div class="profile-joined" id="otherJoined"></div>
+          <div id="otherBio" style="font-size:12px;color:var(--matrix-mid);margin-top:6px;line-height:1.5"></div>
+        </div>
+      </div>
+    </div>
+    <div class="trust-section">
+      <div class="trust-title">⚖️ COMMUNITY TRUST SCORE</div>
+      <div class="trust-score-display">
+        <div class="trust-number" id="otherTrustScore">50</div>
+        <div style="flex:1">
+          <div class="trust-bar"><div class="trust-bar-fill" id="otherTrustBar" style="width:50%;background:var(--cod-yellow)"></div></div>
+          <div class="trust-label" id="otherTrustLabel">NEUTRAL</div>
+          <div class="trust-votes" id="otherTrustVotes">0 votes</div>
+        </div>
+      </div>
+      <div class="trust-vote-section" id="voteSection">
+        <span class="trust-vote-label">RATE THIS USER:</span>
+        <button class="trust-vote-btn up" onclick="voteTrust(1)">▲ CREDIBLE</button>
+        <button class="trust-vote-btn down" onclick="voteTrust(-1)">▼ NOT CREDIBLE</button>
+      </div>
+    </div>
+    <div class="posts-section">
+      <div class="posts-title">💬 THEIR DISCUSSIONS</div>
+      <div id="otherPostsList"><div class="post-empty">Loading...</div></div>
+    </div>
+  </div>
+
+  <div class="footer">NOUR TRADES INTELLIGENCE DIVISION // TRADERSSELLINGASS.COM</div>
+</div>
+<script>
+var canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
+function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
+var ch='アイウエオカキクケコ0123456789',fs=14,col=~~(canvas.width/fs),dr=Array(col).fill(1);
+function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';for(var i=0;i<dr.length;i++){ctx.fillText(ch[~~(Math.random()*ch.length)],i*fs,dr[i]*fs);if(dr[i]*fs>canvas.height&&Math.random()>.975)dr[i]=0;dr[i]++}}
+setInterval(dm,35);
+
+var SUPABASE_URL='https://kjeqzwfxtshgerzkaiqg.supabase.co';
+var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZXF6d2Z4dHNoZ2VyemthaXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4OTcyNTEsImV4cCI6MjA4NzQ3MzI1MX0.nypjzpnw2hvRWpQ-KxJQvpecDZSiruG5Bm5ixWbSD0I';
+var sb=null,currentUser=null,viewingUserId=null;
+
+(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=async function(){
+  sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  // Check URL params for viewing other user
+  var params=new URLSearchParams(window.location.search);
+  viewingUserId=params.get('id');
+  var sess=await sb.auth.getSession();
+  if(sess.data.session){
+    currentUser=sess.data.session.user;
+    if(viewingUserId&&viewingUserId!==currentUser.id){
+      loadOtherProfile(viewingUserId);
+    }else{
+      loadOwnProfile();
+    }
+  }else if(viewingUserId){
+    loadOtherProfile(viewingUserId);
+  }else{
+    window.location.href='/login.html';
+  }
+};document.head.appendChild(s)})();
+
+async function loadOwnProfile(){
+  document.getElementById('profileContent').style.display='block';
+  var r=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
+  var p=r.data;
+  if(p){
+    document.getElementById('profileName').textContent=p.display_name||'Agent';
+    document.getElementById('editName').value=p.display_name||'';
+    document.getElementById('editBio').value=p.bio||'';
+    if(p.avatar_url){
+      document.getElementById('avatarImg').src=p.avatar_url;
+      document.getElementById('avatarImg').style.display='block';
+      document.getElementById('avatarPlaceholder').style.display='none';
+    }
+    updateTrustDisplay(p.trust_score||50,'trustScore','trustBar','trustLabel','trustVotes',p.trust_votes||0);
+  }
+  document.getElementById('profileEmail').textContent=currentUser.email;
+  document.getElementById('profileJoined').textContent='JOINED '+new Date(currentUser.created_at).toLocaleDateString('en-US',{year:'numeric',month:'short'});
+  loadUserPosts(currentUser.id,'postsList');
+}
+
+async function loadOtherProfile(uid){
+  document.getElementById('otherProfileContent').style.display='block';
+  var r=await sb.from('profiles').select('*').eq('id',uid).single();
+  var p=r.data;
+  if(!p){document.getElementById('otherName').textContent='USER NOT FOUND';return}
+  document.getElementById('otherName').textContent=p.display_name||'Agent';
+  document.getElementById('otherBio').textContent=p.bio||'';
+  document.getElementById('otherJoined').textContent='MEMBER';
+  if(p.avatar_url){
+    document.getElementById('otherAvatar').innerHTML='<img src="'+p.avatar_url+'" style="width:100%;height:100%;object-fit:cover">';
+  }
+  updateTrustDisplay(p.trust_score||50,'otherTrustScore','otherTrustBar','otherTrustLabel','otherTrustVotes',p.trust_votes||0);
+  if(!currentUser){document.getElementById('voteSection').style.display='none'}
+  loadUserPosts(uid,'otherPostsList');
+}
+
+function updateTrustDisplay(score,scoreId,barId,labelId,votesId,votes){
+  document.getElementById(scoreId).textContent=score;
+  document.getElementById(barId).style.width=score+'%';
+  var color=score>=70?'var(--matrix-green)':score>=40?'var(--cod-yellow)':'var(--cod-red)';
+  document.getElementById(barId).style.background=color;
+  var label=score>=80?'HIGHLY TRUSTED':score>=60?'TRUSTED':score>=40?'NEUTRAL':score>=20?'SUSPICIOUS':'NOT TRUSTED';
+  document.getElementById(labelId).textContent=label;
+  document.getElementById(votesId).textContent=votes+' vote'+(votes!==1?'s':'');
+}
+
+async function loadUserPosts(uid,containerId){
+  var c=document.getElementById(containerId);
+  try{
+    var r=await sb.from('forum_posts').select('*').eq('user_id',uid).order('created_at',{ascending:false}).limit(20);
+    var posts=r.data||[];
+    if(!posts.length){c.innerHTML='<div class="post-empty">No discussions yet.</div>';return}
+    var html='';
+    posts.forEach(function(p){
+      html+='<div class="post-item"><div class="post-item-channel">'+p.channel+'</div><div class="post-item-body">'+escHtml(p.body)+'</div><div class="post-item-time">'+getTimeAgo(p.created_at)+'</div></div>';
+    });
+    c.innerHTML=html;
+  }catch(e){c.innerHTML='<div class="post-empty">Could not load posts.</div>'}
+}
+
+function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function getTimeAgo(ts){var d=Math.floor((Date.now()-new Date(ts).getTime())/1000);if(d<60)return'just now';if(d<3600)return Math.floor(d/60)+'m ago';if(d<86400)return Math.floor(d/3600)+'h ago';return Math.floor(d/86400)+'d ago'}
+
+async function saveProfile(){
+  var name=document.getElementById('editName').value.trim();
+  var bio=document.getElementById('editBio').value.trim();
+  if(!name)return;
+  await sb.from('profiles').update({display_name:name,bio:bio}).eq('id',currentUser.id);
+  document.getElementById('profileName').textContent=name;
+  var msg=document.getElementById('saveMsg');msg.classList.add('show');setTimeout(function(){msg.classList.remove('show')},2000);
+}
+
+// Avatar upload
+document.getElementById('avatarInput').addEventListener('change',async function(){
+  var file=this.files[0];if(!file)return;
+  var ext=file.name.split('.').pop();
+  var path=currentUser.id+'/avatar.'+ext;
+  var r=await sb.storage.from('avatars').upload(path,file,{upsert:true});
+  if(r.error){alert('Upload failed');return}
+  var url=sb.storage.from('avatars').getPublicUrl(path);
+  await sb.from('profiles').update({avatar_url:url.data.publicUrl}).eq('id',currentUser.id);
+  document.getElementById('avatarImg').src=url.data.publicUrl+'?t='+Date.now();
+  document.getElementById('avatarImg').style.display='block';
+  document.getElementById('avatarPlaceholder').style.display='none';
+});
+
+async function voteTrust(dir){
+  if(!currentUser||!viewingUserId)return;
+  try{
+    // Upsert vote
+    await sb.from('trust_votes').upsert({voter_id:currentUser.id,target_id:viewingUserId,vote:dir},{onConflict:'voter_id,target_id'});
+    // Recalculate
+    var r=await sb.from('trust_votes').select('vote').eq('target_id',viewingUserId);
+    var votes=r.data||[];
+    var total=votes.length;
+    var ups=votes.filter(function(v){return v.vote>0}).length;
+    var score=total>0?Math.round((ups/total)*100):50;
+    await sb.from('profiles').update({trust_score:score,trust_votes:total}).eq('id',viewingUserId);
+    updateTrustDisplay(score,'otherTrustScore','otherTrustBar','otherTrustLabel','otherTrustVotes',total);
+    document.getElementById('voteSection').innerHTML='<span class="trust-vote-label">✅ VOTE RECORDED</span>';
+  }catch(e){}
+}
+
+async function logout(){
+  await sb.auth.signOut();
+  window.location.href='/login.html';
+}
+</script>
+</body>
+</html>
