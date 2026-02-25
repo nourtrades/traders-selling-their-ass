@@ -314,13 +314,29 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
   </div>
 
   <div class="section-header"><span class="section-title">◆ WANTED — RANKED BY RISK FACTOR ◆</span></div>
-  <div style="display:flex;justify-content:center;gap:10px;padding:0 20px 20px;flex-wrap:wrap;">
+  <div style="display:flex;justify-content:center;gap:10px;padding:0 20px 12px;flex-wrap:wrap;">
     <button class="filter-btn active" onclick="filterMarket('ALL')">ALL</button>
     <button class="filter-btn" onclick="filterMarket('STOCKS')">📊 STOCKS</button>
     <button class="filter-btn" onclick="filterMarket('FOREX')">💱 FOREX</button>
     <button class="filter-btn" onclick="filterMarket('CRYPTO')">🪙 CRYPTO</button>
   </div>
+  <div style="display:flex;justify-content:center;padding:0 20px 20px;">
+    <div style="position:relative;width:100%;max-width:400px;">
+      <input type="text" id="searchInput" placeholder="🔍 Search scammer by name..." oninput="searchScammer()" style="width:100%;background:rgba(0,0,0,.5);border:1px solid var(--matrix-dark);color:var(--matrix-green);font-family:'Share Tech Mono',monospace;font-size:13px;padding:10px 14px;outline:none;transition:border-color .2s;">
+    </div>
+  </div>
   <div class="mugshot-grid" id="mugGrid"></div>
+
+  <div class="section-header"><span class="section-title">◆ FRAUD NETWORK — CONNECTION WEB ◆</span></div>
+  <div style="max-width:900px;margin:0 auto;padding:0 20px 40px;">
+    <div style="border:1px solid var(--matrix-dark);background:rgba(0,20,0,.3);position:relative;overflow:hidden;">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--matrix-dark);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--matrix-green);">INTERACTIVE NETWORK MAP</span>
+        <span style="font-size:9px;color:var(--matrix-dark);letter-spacing:2px;">CLICK A NODE TO OPEN FILE</span>
+      </div>
+      <canvas id="networkCanvas" style="width:100%;height:500px;display:block;cursor:pointer;"></canvas>
+    </div>
+  </div>
 
   <div class="section-header" id="whistleblower"><span class="section-title">◆ WHISTLEBLOWER SUBMISSION — SECURE CHANNEL ◆</span></div>
   <div class="whistleblower-section">
@@ -504,6 +520,169 @@ subjects.forEach((s,idx)=>{
   grid.appendChild(card)});
 
 // ========== FILE MODAL ==========
+// ========== SEARCH ==========
+function searchScammer(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  // Reset filter buttons
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+  const cards=document.querySelectorAll('.mugshot-card');
+  cards.forEach((card,idx)=>{
+    const s=subjects[idx];
+    if(!q){card.style.display='';return}
+    const match=s.codename.toLowerCase().includes(q)||s.tags.some(t=>t.toLowerCase().includes(q))||s.summary.toLowerCase().includes(q);
+    card.style.display=match?'':'none';
+  });
+}
+
+// ========== CONNECTION WEB ==========
+(function drawNetwork(){
+  const cv=document.getElementById('networkCanvas');
+  if(!cv)return;
+  const dpr=window.devicePixelRatio||1;
+  function resize(){
+    const rect=cv.parentElement.getBoundingClientRect();
+    cv.width=rect.width*dpr;
+    cv.height=500*dpr;
+    cv.style.height='500px';
+  }
+  resize();
+  const ctx=cv.getContext('2d');
+
+  // Node positions - organized by groups
+  const nodes=[
+    // LAMBO RAUL GROUP (left side)
+    {idx:2,name:"LAMBO\nRAUL",x:.2,y:.2,r:28,color:'#ff1744'},
+    {idx:1,name:"FXALEXG",x:.2,y:.45,r:24,color:'#ff1744'},
+    {idx:3,name:"ETHAN\nDURAN",x:.2,y:.7,r:22,color:'#ff6a00'},
+
+    // TJR (center, alone)
+    {idx:0,name:"TJR",x:.5,y:.4,r:28,color:'#ff1744'},
+
+    // UMAR GROUP (right side)
+    {idx:6,name:"UMAR\nASHRAF",x:.8,y:.2,r:24,color:'#ff6a00'},
+    {idx:4,name:"SCARFACE",x:.68,y:.5,r:20,color:'#ff6a00'},
+    {idx:9,name:"MASI",x:.8,y:.55,r:18,color:'#ffd600'},
+    {idx:8,name:"USMAN",x:.92,y:.5,r:18,color:'#ffd600'},
+
+    // STANDALONE (bottom)
+    {idx:5,name:"SCI",x:.5,y:.75,r:20,color:'#ff6a00'},
+    {idx:7,name:"JDUN",x:.5,y:.92,r:18,color:'#ffd600'}
+  ];
+
+  // Connections - correct hierarchy
+  const edges=[
+    [0,1],  // LAMBO RAUL -> FXALEXG (hired him)
+    [1,2],  // FXALEXG -> ETHAN DURAN (under Alex)
+    [4,5],  // UMAR -> SCARFACE (under Umar)
+    [4,6],  // UMAR -> MASI (under Umar)
+    [4,7],  // UMAR -> USMAN (under Umar)
+  ];
+
+  let hoveredNode=null;
+  let animT=0;
+
+  function draw(){
+    animT+=0.02;
+    const w=cv.width,h=cv.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.scale(dpr,dpr);
+    const rw=w/dpr,rh=h/dpr;
+
+    // Draw edges
+    edges.forEach(([a,b])=>{
+      const na=nodes[a],nb=nodes[b];
+      const ax=na.x*rw,ay=na.y*rh,bx=nb.x*rw,by=nb.y*rh;
+      ctx.beginPath();
+      ctx.moveTo(ax,ay);ctx.lineTo(bx,by);
+      const isHovered=(hoveredNode===a||hoveredNode===b);
+      ctx.strokeStyle=isHovered?'rgba(255,106,0,0.6)':'rgba(0,255,65,0.15)';
+      ctx.lineWidth=isHovered?2:1;
+      ctx.stroke();
+
+      // Animated pulse along edge
+      const pulse=(animT*0.5)%1;
+      const px=ax+(bx-ax)*pulse,py=ay+(by-ay)*pulse;
+      ctx.beginPath();
+      ctx.arc(px,py,2,0,Math.PI*2);
+      ctx.fillStyle=isHovered?'rgba(255,106,0,0.8)':'rgba(0,255,65,0.3)';
+      ctx.fill();
+    });
+
+    // Draw nodes
+    nodes.forEach((n,i)=>{
+      const nx=n.x*rw,ny=n.y*rh;
+      const isHovered=(hoveredNode===i);
+      const pulse=isHovered?1:0.6+Math.sin(animT+i)*0.1;
+
+      // Glow
+      ctx.beginPath();
+      ctx.arc(nx,ny,n.r+8,0,Math.PI*2);
+      ctx.fillStyle=isHovered?`rgba(255,106,0,0.15)`:`rgba(0,255,65,0.03)`;
+      ctx.fill();
+
+      // Circle
+      ctx.beginPath();
+      ctx.arc(nx,ny,n.r,0,Math.PI*2);
+      ctx.fillStyle=isHovered?'rgba(255,106,0,0.2)':'rgba(0,20,0,0.8)';
+      ctx.strokeStyle=isHovered?n.color:`rgba(0,255,65,${pulse*0.5})`;
+      ctx.lineWidth=isHovered?2.5:1.5;
+      ctx.fill();ctx.stroke();
+
+      // Label
+      ctx.fillStyle=isHovered?'#fff':n.color;
+      ctx.font=`bold ${isHovered?11:9}px Orbitron,sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      const lines=n.name.split('\n');
+      lines.forEach((line,li)=>{
+        ctx.fillText(line,nx,ny+(li-(lines.length-1)/2)*13);
+      });
+
+      // Risk % below
+      ctx.fillStyle=isHovered?'rgba(255,255,255,0.6)':'rgba(0,255,65,0.3)';
+      ctx.font='8px "Share Tech Mono",monospace';
+      ctx.fillText(subjects[n.idx].riskLevel+'%',nx,ny+n.r+12);
+    });
+
+    ctx.setTransform(1,0,0,1,0,0);
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Hit detection
+  function getNode(e){
+    const rect=cv.getBoundingClientRect();
+    const mx=(e.clientX-rect.left),my=(e.clientY-rect.top);
+    const rw=rect.width,rh=rect.height;
+    for(let i=nodes.length-1;i>=0;i--){
+      const n=nodes[i];
+      const dx=n.x*rw-mx,dy=n.y*rh-my;
+      if(Math.sqrt(dx*dx+dy*dy)<n.r+5)return i;
+    }
+    return null;
+  }
+
+  cv.addEventListener('mousemove',e=>{
+    hoveredNode=getNode(e);
+    cv.style.cursor=hoveredNode!==null?'pointer':'default';
+  });
+  cv.addEventListener('mouseleave',()=>{hoveredNode=null});
+  cv.addEventListener('click',e=>{
+    const ni=getNode(e);
+    if(ni!==null)openFile(nodes[ni].idx);
+  });
+
+  // Touch support
+  cv.addEventListener('touchstart',e=>{
+    e.preventDefault();
+    const touch=e.touches[0];
+    const ni=getNode(touch);
+    if(ni!==null)openFile(nodes[ni].idx);
+  },{passive:false});
+
+  window.addEventListener('resize',()=>{resize();});
+})();
+
 // ========== MARKET FILTER ==========
 function filterMarket(market){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
