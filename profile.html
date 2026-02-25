@@ -106,7 +106,6 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
         </div>
         <div class="profile-info">
           <div class="profile-name" id="profileName">—</div>
-          <div class="profile-email" id="profileEmail"></div>
           <div class="profile-joined" id="profileJoined"></div>
         </div>
       </div>
@@ -228,7 +227,6 @@ async function loadOwnProfile(){
     }
     updateTrustDisplay(p.trust_score||50,'trustScore','trustBar','trustLabel','trustVotes',p.trust_votes||0);
   }
-  document.getElementById('profileEmail').textContent=currentUser.email;
   document.getElementById('profileJoined').textContent='JOINED '+new Date(currentUser.created_at).toLocaleDateString('en-US',{year:'numeric',month:'short'});
   loadUserPosts(currentUser.id,'postsList');
 }
