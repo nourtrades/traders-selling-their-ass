@@ -863,7 +863,6 @@ function openFile(idx){
   }
 
   html+=getGuiltPoll(sc);
-  html+='<div class="verdict-box"><div class="verdict-label">TSA INTELLIGENCE VERDICT</div><div class="verdict-text">'+s.verdict+'</div></div>';
   html+='<div class="next-scammer" onclick="closeFile();setTimeout(function(){openFile('+nextIdx+')},300)">';
   html+='<div class="next-scammer-img"><img src="'+ns.image+'" alt="'+ns.codename+'"></div>';
   html+='<div class="next-scammer-info"><div class="next-scammer-label">NEXT DECLASSIFIED FILE ▸</div>';
@@ -926,6 +925,43 @@ function timeAgo(date){
   if(s<3600)return Math.floor(s/60)+'m ago';
   if(s<86400)return Math.floor(s/3600)+'h ago';
   return Math.floor(s/86400)+'d ago';
+}
+
+// ========== GUILT VOTE SYSTEM ==========
+async function submitVote(subjectCode){
+  var pollId='poll_'+subjectCode;
+  var slider=document.getElementById('slider_'+pollId);
+  var btn=document.querySelector('#form_'+pollId+' .guilt-vote-btn');
+  if(!slider||!btn)return;
+  var rating=parseInt(slider.value);
+  btn.disabled=true;btn.textContent='SUBMITTING...';
+  try{
+    if(!supabaseClient)throw new Error('Not connected');
+    var{error}=await supabaseClient.from('guilt_votes').insert({subject_code:subjectCode,rating:rating});
+    if(error)throw error;
+    document.getElementById('form_'+pollId).style.display='none';
+    await loadVotes(subjectCode);
+  }catch(e){
+    console.error(e);
+    btn.disabled=false;btn.textContent='CAST YOUR VOTE';
+  }
+}
+
+async function loadVotes(subjectCode){
+  var pollId='poll_'+subjectCode;
+  var resultsEl=document.getElementById('results_'+pollId);
+  if(!resultsEl)return;
+  try{
+    if(!supabaseClient)return;
+    var{data,error}=await supabaseClient.from('guilt_votes').select('rating').eq('subject_code',subjectCode);
+    if(error)throw error;
+    if(!data||data.length===0)return;
+    var total=data.reduce(function(sum,v){return sum+v.rating},0);
+    var avg=(total/data.length).toFixed(1);
+    document.getElementById('avg_'+pollId).textContent=avg+'/10';
+    document.getElementById('count_'+pollId).textContent=data.length+' vote'+(data.length>1?'s':'')+' cast';
+    resultsEl.style.display='block';
+  }catch(e){console.error(e)}
 }
 
 // ========== EMAIL SIGNUP ==========
