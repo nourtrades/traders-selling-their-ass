@@ -581,18 +581,18 @@ const subjects=[
 {title:"EP 3.5 — COMMENT AND DELETE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep3half.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR8i-c7CUkT/",evidence:[]},
 {title:"EP 4 — THE WHITE FLAG",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep4.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR-GrmZgbaT/",evidence:[]}
 ],verdict:"EXPOSED — WHITE FLAG THROWN"},
-{codename:"JDUN TRADES",rank:8,riskLevel:79,riskClass:"medium",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/jdun.png",tags:["PAPER TRADING PARTNER","TRADIFY","PROP FIRM"],summary:"Partner exposed for paper trading. Now selling Tradify funded accounts.",connections:["BRETT SIMBA"],episodes:[
+{codename:"BRETT SIMBA",rank:8,riskLevel:80,riskClass:"high",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/brett.jpg",tags:["FAKE REVIEWS","TRADEIFY"],summary:"Caught adding fake customer reviews to Tradeify.",connections:["JDUN TRADES"],episodes:[
+{title:"EP 18 — FAKE TRADEIFY REVIEWS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep18.mp4",reelUrl:"https://www.instagram.com/p/DVZaxizDh0-/",evidence:[]}
+],verdict:"GUILTY — FAKE REVIEWS"},
+{codename:"JDUN TRADES",rank:9,riskLevel:79,riskClass:"medium",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/jdun.png",tags:["PAPER TRADING PARTNER","TRADIFY","PROP FIRM"],summary:"Partner exposed for paper trading. Now selling Tradify funded accounts.",connections:["BRETT SIMBA"],episodes:[
 {title:"EP 2 — PAPER TRADING PARTNER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep2.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR5aCiuE8Ku/",evidence:[]}
 ],verdict:"UNVERIFIED — PAPER TRAIL"},
-{codename:"USMAN ASHRAF",rank:9,riskLevel:78,riskClass:"medium",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/usman.jpg",tags:["SIGNAL SPAMMER","DISCOUNT CODES","CHEAP AD SPEND"],summary:"25 discount codes in one Thanksgiving week. Tantrums over ad spend.",connections:["UMAR ASHRAF"],episodes:[
+{codename:"USMAN ASHRAF",rank:10,riskLevel:78,riskClass:"medium",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/usman.jpg",tags:["SIGNAL SPAMMER","DISCOUNT CODES","CHEAP AD SPEND"],summary:"25 discount codes in one Thanksgiving week. Tantrums over ad spend.",connections:["UMAR ASHRAF"],episodes:[
 {title:"EP 3 — 25 DISCOUNT CODES",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep3.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR8Rr6Uk9U1/",evidence:[]}
 ],verdict:"SIGNAL SPAMMER"},
-{codename:"MASITRADES",rank:10,riskLevel:72,riskClass:"medium",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/masi.jpg",tags:["PHOTOSHOPPED TRADES","KICKED FROM SML"],summary:"Kicked from Stock Market Lab for photoshopping trades.",connections:["UMAR ASHRAF","USMAN ASHRAF"],episodes:[
+{codename:"MASITRADES",rank:11,riskLevel:72,riskClass:"medium",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/masi.jpg",tags:["PHOTOSHOPPED TRADES","KICKED FROM SML"],summary:"Kicked from Stock Market Lab for photoshopping trades.",connections:["UMAR ASHRAF","USMAN ASHRAF"],episodes:[
 {title:"EP 8 — KICKED FROM STOCK MARKET LAB",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep8.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSLfXPVEyzg/",evidence:[]}
-],verdict:"PHOTOSHOP FRAUD"},
-{codename:"BRETT SIMBA",rank:11,riskLevel:80,riskClass:"high",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/brett.jpg",tags:["FAKE REVIEWS","TRADEIFY"],summary:"Caught adding fake customer reviews to Tradeify.",connections:["JDUN TRADES"],episodes:[
-{title:"EP 18 — FAKE TRADEIFY REVIEWS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep18.mp4",reelUrl:"https://www.instagram.com/p/DVZaxizDh0-/",evidence:[]}
-],verdict:"GUILTY — FAKE REVIEWS"}
+],verdict:"PHOTOSHOP FRAUD"}
 ];
 
 // ========== MATRIX ==========
@@ -661,13 +661,13 @@ function searchScammer(){
     // UMAR GROUP (right side)
     {idx:6,name:"UMAR\nASHRAF",x:.8,y:.2,r:24,color:'#ff6a00'},
     {idx:4,name:"SCARFACE",x:.68,y:.5,r:20,color:'#ff6a00'},
-    {idx:9,name:"MASI",x:.8,y:.55,r:18,color:'#ffd600'},
-    {idx:8,name:"USMAN",x:.92,y:.5,r:18,color:'#ffd600'},
+    {idx:10,name:"MASI",x:.8,y:.55,r:18,color:'#ffd600'},
+    {idx:9,name:"USMAN",x:.92,y:.5,r:18,color:'#ffd600'},
 
     // STANDALONE (bottom)
     {idx:5,name:"SCI",x:.5,y:.75,r:20,color:'#ff6a00'},
-    {idx:7,name:"JDUN",x:.42,y:.92,r:18,color:'#ffd600'},
-    {idx:10,name:"BRETT\nSIMBA",x:.58,y:.92,r:18,color:'#ff6a00'}
+    {idx:7,name:"BRETT\nSIMBA",x:.42,y:.92,r:18,color:'#ff6a00'},
+    {idx:8,name:"JDUN",x:.58,y:.92,r:18,color:'#ffd600'}
   ];
 
   // Connections - correct hierarchy
@@ -677,7 +677,7 @@ function searchScammer(){
     [4,5],  // UMAR -> SCARFACE (under Umar)
     [4,6],  // UMAR -> MASI (under Umar)
     [4,7],  // UMAR -> USMAN (under Umar)
-    [9,10], // JDUN -> BRETT SIMBA (under JDUN)
+    [10,9], // JDUN -> BRETT SIMBA (under JDUN)
   ];
 
   let hoveredNode=null;
