@@ -369,6 +369,47 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
   .forum-tab{font-size:8px;letter-spacing:1px;padding:10px 4px}
   .forum-tab .tab-count{font-size:14px}
 }
+
+/* BREAKING NEWS TICKER */
+.news-ticker{background:linear-gradient(90deg,rgba(255,23,68,.15),rgba(255,106,0,.1),rgba(255,23,68,.15));border-top:1px solid rgba(255,23,68,.3);border-bottom:1px solid rgba(255,23,68,.3);overflow:hidden;white-space:nowrap;position:relative;height:32px;display:flex;align-items:center}
+.news-ticker::before{content:'🚨 BREAKING';position:absolute;left:0;top:0;bottom:0;background:var(--cod-red);color:#fff;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;padding:0 14px;display:flex;align-items:center;z-index:2;box-shadow:4px 0 12px rgba(0,0,0,.8)}
+.news-ticker-text{display:inline-block;animation:ticker-scroll 30s linear infinite;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--cod-yellow);letter-spacing:1px;padding-left:120px}
+@keyframes ticker-scroll{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+
+/* ROAST BANNER */
+.roast-banner{background:rgba(255,23,68,.05);border:1px dashed var(--cod-red);padding:10px 16px;margin-top:12px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--cod-red);line-height:1.5;animation:roast-fade .5s ease}
+.roast-banner .roast-icon{font-size:18px;flex-shrink:0}
+.roast-banner .roast-text{flex:1}
+.roast-banner .roast-refresh{background:none;border:1px solid var(--cod-red);color:var(--cod-red);font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:2px;padding:4px 10px;cursor:pointer;transition:all .2s;flex-shrink:0}
+.roast-banner .roast-refresh:hover{background:var(--cod-red);color:#000}
+@keyframes roast-fade{0%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:translateY(0)}}
+
+/* SCREEN SHAKE */
+@keyframes screen-shake{0%,100%{transform:translateX(0)}10%{transform:translateX(-8px)}20%{transform:translateX(8px)}30%{transform:translateX(-6px)}40%{transform:translateX(6px)}50%{transform:translateX(-4px)}60%{transform:translateX(4px)}70%{transform:translateX(-2px)}80%{transform:translateX(2px)}90%{transform:translateX(-1px)}}
+.shake-it{animation:screen-shake .5s ease}
+
+/* GUILT VOTE FLASH */
+.guilt-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,23,68,.25);z-index:9999;pointer-events:none;animation:flash-out .6s ease forwards}
+@keyframes flash-out{0%{opacity:1}100%{opacity:0}}
+
+/* KONAMI CHAOS MODE */
+.chaos-mode .mugshot-card{animation:chaos-spin 1s ease infinite alternate!important}
+@keyframes chaos-spin{0%{transform:rotate(-3deg) scale(1)}50%{transform:rotate(3deg) scale(1.05)}100%{transform:rotate(-3deg) scale(1)}}
+.chaos-banner{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10000;font-family:'Teko',sans-serif;font-size:clamp(40px,10vw,100px);font-weight:700;color:var(--cod-red);text-shadow:0 0 30px var(--cod-red),0 0 60px rgba(255,23,68,.6);letter-spacing:10px;animation:chaos-text 2s ease forwards;pointer-events:none;white-space:nowrap}
+@keyframes chaos-text{0%{opacity:0;transform:translate(-50%,-50%) scale(3)}30%{opacity:1;transform:translate(-50%,-50%) scale(1)}80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;width:10px;height:10px;z-index:10001;pointer-events:none;animation:confetti-fall 3s ease-out forwards}
+@keyframes confetti-fall{0%{opacity:1;transform:translateY(-10vh) rotate(0deg)}100%{opacity:0;transform:translateY(110vh) rotate(720deg)}}
+
+/* SELF DESTRUCT */
+.self-destruct-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:10000;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:destruct-in .3s ease}
+@keyframes destruct-in{0%{opacity:0}100%{opacity:1}}
+.destruct-text{font-family:'Orbitron',sans-serif;font-size:clamp(14px,3vw,24px);letter-spacing:6px;color:var(--cod-red);text-shadow:0 0 20px rgba(255,23,68,.6);animation:threat-blink .5s step-end infinite}
+.destruct-timer{font-family:'Orbitron',sans-serif;font-size:clamp(60px,15vw,120px);font-weight:900;color:var(--cod-red);text-shadow:0 0 40px rgba(255,23,68,.8);margin-top:20px}
+.destruct-sub{font-size:11px;color:var(--matrix-dark);letter-spacing:3px;margin-top:20px}
+.destruct-glitch{animation:glitch-out .5s ease forwards}
+@keyframes glitch-out{0%{filter:none;transform:scale(1)}25%{filter:hue-rotate(90deg) blur(2px);transform:scale(1.02) skewX(2deg)}50%{filter:hue-rotate(180deg) blur(4px);transform:scale(0.98) skewX(-3deg)}75%{filter:hue-rotate(270deg) blur(8px);transform:scale(1.05) skewX(5deg)}100%{filter:blur(20px) brightness(5);transform:scale(3);opacity:0}}
 </style>
 </head>
 <body>
@@ -415,6 +456,11 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 
 <div class="main-container" id="mainContent" style="opacity:0;">
   <div class="declassified-bar">⚠ DECLASSIFIED — TSA INTELLIGENCE DIVISION — AUTHORIZED PERSONNEL ONLY ⚠</div>
+
+  <!-- BREAKING NEWS TICKER -->
+  <div class="news-ticker" id="newsTicker">
+    <div class="news-ticker-text" id="tickerText"></div>
+  </div>
 
   <!-- SITE NAV -->
   <nav class="site-nav">
@@ -596,6 +642,21 @@ const subjects=[
 ],verdict:"PHOTOSHOP FRAUD"}
 ];
 
+// ========== MEME DATA ==========
+var memeData={
+  'TJR':{alias:'THE RUG DOCTOR',catchphrase:'"Trust me bro, this coin is different"',lastSeen:'Last seen in a Wendy\'s parking lot launching $RUGCOIN4',superpower:'Can rug pull faster than you can say "blockchain"',wantedFor:'Serial rug pulling, meme coin genocide, prop firm homicide'},
+  'FXALEXG':{alias:'THE BROKER WHO CAN\'T TRADE',catchphrase:'"Just deposit more and you\'ll be fine"',lastSeen:'Last seen counting $25M in course revenue while his B-book eats your deposits',superpower:'Selling forex courses without ever placing a forex trade',wantedFor:'B-book brokerage fraud, $25M course scam, CFD crimes'},
+  'LAMBO RAUL':{alias:'SCAMBO RAUL',catchphrase:'"The algo works, you just need to deposit more"',lastSeen:'Last seen explaining why his algo lost your money but made him $7M',superpower:'Turning Math.random() into a $7M business model',wantedFor:'$7M algo fraud, identity crisis (Lambo vs Scambo)'},
+  'ETHAN DURAN':{alias:'THE BUGATTI RENTER',catchphrase:'"This Bugatti proves I\'m profitable" (returns it 30 days later)',lastSeen:'Last seen at Enterprise Rent-A-Car returning a Bugatti',superpower:'Getting his house raided and still selling courses',wantedFor:'Not being a trader, Bugatti rental fraud, house getting raided'},
+  'SCARFACE TRADES':{alias:'THE INSPECT ELEMENT WIZARD',catchphrase:'"Right click → Inspect → Change balance to $1,000,000"',lastSeen:'Last seen trading without touching his mouse (telekinesis)',superpower:'F12 Developer Tools mastery, hands-free trading via psychic powers',wantedFor:'Inspect Element fraud, telekinetic trading claims'},
+  'SCI':{alias:'THE OFFSHORE FANTASIST',catchphrase:'"I have $100M... in an unregulated broker... offshore... trust me"',lastSeen:'Last seen in a broker that has no regulation, no address, and no real money',superpower:'Making $100M appear in brokers nobody has heard of',wantedFor:'$100M offshore fabrication, unregulated broker promotion'},
+  'UMAR ASHRAF':{alias:'THE WHITE FLAG WAVER',catchphrase:'"I surrender" — literally his trading AND argument strategy',lastSeen:'Last seen waving a white flag from a leased McLaren',superpower:'Surrendering at record speed, selling courses since 2014',wantedFor:'Decade-long course selling while unprofitable, McLaren leasing'},
+  'BRETT SIMBA':{alias:'FAKE REVIEW SIMBA',catchphrase:'"5 stars — This product changed my life" — Brett, from Brett\'s account',lastSeen:'Last seen writing his own Trustpilot reviews from multiple burner accounts',superpower:'Writing fake reviews so obvious even bots are embarrassed',wantedFor:'Fake review manufacturing, Tradeify deception'},
+  'JDUN TRADES':{alias:'THE PAPER CHAMP',catchphrase:'"Those are REAL profits" (narrator: they were not real profits)',lastSeen:'Last seen getting a margin call on a paper trading account',superpower:'Getting his partner caught paper trading while selling funded accounts',wantedFor:'Paper trading partnership, funded account sales'},
+  'USMAN ASHRAF':{alias:'THE DISCOUNT CODE MACHINE',catchphrase:'"USE CODE USMAN99 FOR 99% OFF (still not worth it)"',lastSeen:'Last seen generating discount code #47 this month',superpower:'Creating more discount codes than actual trades',wantedFor:'26 discount codes in one week, signal spamming, cheap ad spending'},
+  'MASITRADES':{alias:'THE PHOTOSHOP PRODIGY',catchphrase:'"Those gains are real" (Photoshop file: gains_final_FINAL_v3.psd)',lastSeen:'Last seen getting kicked from a scam group for being too scammy',superpower:'Photoshop skills so bad, even scam communities kicked him out',wantedFor:'Photoshopping trades, getting expelled from Stock Market Lab'}
+};
+
 // ========== MATRIX ==========
 const canvas=document.getElementById('matrix-rain'),ctx=canvas.getContext('2d');
 function rc(){canvas.width=innerWidth;canvas.height=innerHeight}rc();addEventListener('resize',rc);
@@ -616,7 +677,11 @@ subjects.forEach((s,idx)=>{
   const riskColor=s.riskLevel>=90?'linear-gradient(90deg,#ff1744,#ff6a00)':s.riskLevel>=80?'linear-gradient(90deg,#ff6a00,#ffd600)':s.riskLevel>=60?'linear-gradient(90deg,#ffd600,#00ff41)':'linear-gradient(90deg,#00ff41,#00cc33)';
   const n=s.episodes.length,t=n===1?'1 EPISODE':n+' EPISODES';
   const sc=s.codename.replace(/\s+/g,'_').toLowerCase();
-  card.innerHTML=`<div class="declassified-stamp">DECLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span></div><div class="mugshot-name">${s.codename}</div><div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">${(s.markets||[]).map(m=>`<span class="market-tag market-${m.toLowerCase()}">${m}</span>`).join('')}</div><div class="mugshot-episodes">${t}</div><div class="risk-meter" id="riskmeter_${sc}"><span class="risk-meter-label">GUILT</span><div class="risk-meter-bar"><div class="risk-meter-fill" id="riskfill_${sc}" style="width:0%;background:#333"></div></div><span class="risk-meter-val" id="riskval_${sc}">—</span></div><button class="mugshot-btn">◈ OPEN DECLASSIFIED FILE</button></div>`;
+  const meme=memeData[s.codename]||{};
+  const aliasHtml=meme.alias?`<div style="font-size:10px;color:var(--cod-red);letter-spacing:2px;margin-top:4px;font-style:italic;">AKA "${meme.alias}"</div>`:'';
+  const lastSeenHtml=meme.lastSeen?`<div style="font-size:9px;color:var(--matrix-dark);margin-top:6px;line-height:1.4;border-top:1px solid rgba(255,255,255,.05);padding-top:6px;">📍 ${meme.lastSeen}</div>`:'';
+  const catchphraseHtml=meme.catchphrase?`<div style="font-size:10px;color:var(--cod-yellow);margin-top:6px;font-style:italic;line-height:1.4;opacity:.8">${meme.catchphrase}</div>`:'';
+  card.innerHTML=`<div class="declassified-stamp">DECLASSIFIED</div><div class="risk-badge risk-${s.riskClass}">${riskLabel}</div><div class="mugshot-photo"><img src="${s.image}" alt="${s.codename}" loading="lazy"><div class="mugshot-ruler">${'<div class="ruler-line"></div>'.repeat(20)}</div></div><div class="mugshot-info"><div class="mugshot-rank"><span class="rank-num">#${s.rank}</span></div><div class="mugshot-name">${s.codename}</div>${aliasHtml}<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">${(s.markets||[]).map(m=>`<span class="market-tag market-${m.toLowerCase()}">${m}</span>`).join('')}</div><div class="mugshot-episodes">${t}</div>${catchphraseHtml}${lastSeenHtml}<div class="risk-meter" id="riskmeter_${sc}"><span class="risk-meter-label">GUILT</span><div class="risk-meter-bar"><div class="risk-meter-fill" id="riskfill_${sc}" style="width:0%;background:#333"></div></div><span class="risk-meter-val" id="riskval_${sc}">—</span></div><button class="mugshot-btn">◈ OPEN DECLASSIFIED FILE</button></div>`;
   grid.appendChild(card)});
 
 // ========== FILE MODAL ==========
@@ -866,6 +931,19 @@ function openFile(idx){
   html+='<div class="file-subject-sub">RANK #'+s.rank+' // RISK: '+s.riskLevel+'% // '+s.episodes.length+' EP'+(s.episodes.length>1?'S':'')+'</div></div>';
   html+='<button class="file-close" onclick="closeFile()">✕</button></div>';
   html+='<div class="file-body">';
+
+  // MEME INTEL SECTION
+  var md=memeData[s.codename];
+  if(md){
+    html+='<div style="border:2px solid var(--cod-red);background:rgba(255,23,68,.03);padding:16px;margin-bottom:20px">';
+    html+='<div style="font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:3px;color:var(--cod-red);margin-bottom:12px;text-align:center">🎯 INTELLIGENCE BRIEF</div>';
+    if(md.alias)html+='<div style="display:flex;gap:8px;margin-bottom:8px;align-items:baseline"><span style="font-size:9px;letter-spacing:2px;color:var(--matrix-mid);min-width:80px">ALIAS:</span><span style="font-size:13px;color:var(--cod-orange);font-style:italic">"'+md.alias+'"</span></div>';
+    if(md.wantedFor)html+='<div style="display:flex;gap:8px;margin-bottom:8px;align-items:baseline"><span style="font-size:9px;letter-spacing:2px;color:var(--matrix-mid);min-width:80px">WANTED FOR:</span><span style="font-size:12px;color:var(--cod-red);line-height:1.5">'+md.wantedFor+'</span></div>';
+    if(md.superpower)html+='<div style="display:flex;gap:8px;margin-bottom:8px;align-items:baseline"><span style="font-size:9px;letter-spacing:2px;color:var(--matrix-mid);min-width:80px">SUPERPOWER:</span><span style="font-size:12px;color:var(--cod-yellow);line-height:1.5">'+md.superpower+'</span></div>';
+    if(md.lastSeen)html+='<div style="display:flex;gap:8px;margin-bottom:8px;align-items:baseline"><span style="font-size:9px;letter-spacing:2px;color:var(--matrix-mid);min-width:80px">LAST SEEN:</span><span style="font-size:12px;color:var(--matrix-green);line-height:1.5">'+md.lastSeen+'</span></div>';
+    if(md.catchphrase)html+='<div style="display:flex;gap:8px;align-items:baseline"><span style="font-size:9px;letter-spacing:2px;color:var(--matrix-mid);min-width:80px">CATCHPHRASE:</span><span style="font-size:12px;color:var(--cod-yellow);font-style:italic;line-height:1.5">'+md.catchphrase+'</span></div>';
+    html+='</div>';
+  }
 
   s.episodes.forEach(function(ep,i){
     html+='<div class="episode-block">';
@@ -1118,6 +1196,401 @@ document.getElementById('popupForm').addEventListener('submit', async function(e
       }
     });
   },100);
+})();
+</script>
+
+<!-- ========== 10X FUNNIER FEATURES ========== -->
+<script>
+// ========== SOUND EFFECTS (Web Audio API - no files needed) ==========
+(function(){
+  var audioCtx=null;
+  function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
+
+  window.playSFX=function(type){
+    try{
+      var ctx=getCtx();
+      if(ctx.state==='suspended')ctx.resume();
+      var osc=ctx.createOscillator();
+      var gain=ctx.createGain();
+      osc.connect(gain);gain.connect(ctx.destination);
+      gain.gain.value=0.15;
+
+      if(type==='jail'){
+        // Heavy metallic slam
+        osc.type='sawtooth';osc.frequency.setValueAtTime(120,ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40,ctx.currentTime+0.3);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.4);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.4);
+      }else if(type==='cashregister'){
+        // Cha-ching!
+        osc.type='square';osc.frequency.setValueAtTime(1200,ctx.currentTime);
+        osc.frequency.setValueAtTime(1600,ctx.currentTime+0.05);
+        osc.frequency.setValueAtTime(2000,ctx.currentTime+0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.25);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.25);
+      }else if(type==='dundun'){
+        // Law & Order style
+        osc.type='sine';
+        osc.frequency.setValueAtTime(400,ctx.currentTime);
+        gain.gain.setValueAtTime(0.2,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.3);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.3);
+        // Second note
+        var osc2=ctx.createOscillator();var g2=ctx.createGain();
+        osc2.connect(g2);g2.connect(ctx.destination);
+        osc2.type='sine';osc2.frequency.setValueAtTime(300,ctx.currentTime+0.35);
+        g2.gain.setValueAtTime(0.2,ctx.currentTime+0.35);
+        g2.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.7);
+        osc2.start(ctx.currentTime+0.35);osc2.stop(ctx.currentTime+0.7);
+      }else if(type==='siren'){
+        osc.type='sine';
+        osc.frequency.setValueAtTime(600,ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(1200,ctx.currentTime+0.25);
+        osc.frequency.linearRampToValueAtTime(600,ctx.currentTime+0.5);
+        osc.frequency.linearRampToValueAtTime(1200,ctx.currentTime+0.75);
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+1);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+1);
+      }else if(type==='explosion'){
+        // Low rumble
+        var bufSize=ctx.sampleRate*0.5;
+        var buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);
+        var data=buf.getChannelData(0);
+        for(var i=0;i<bufSize;i++)data[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*0.1));
+        var noise=ctx.createBufferSource();noise.buffer=buf;
+        var nGain=ctx.createGain();noise.connect(nGain);nGain.connect(ctx.destination);
+        nGain.gain.setValueAtTime(0.3,ctx.currentTime);
+        nGain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.5);
+        noise.start(ctx.currentTime);
+        osc.frequency.setValueAtTime(60,ctx.currentTime);
+        osc.type='sine';
+        gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.5);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.5);
+      }
+    }catch(e){}
+  };
+})();
+
+// Play jail door sound when opening dossier
+var origOpenFile=openFile;
+openFile=function(idx){
+  playSFX('jail');
+  origOpenFile(idx);
+};
+
+// ========== BREAKING NEWS TICKER ==========
+(function(){
+  var headlines=[
+    "TJR SPOTTED TRYING TO LAUNCH ANOTHER MEME COIN FROM A WENDY'S PARKING LOT",
+    "FXALEXG'S B-BOOK BROKER ACCIDENTALLY PAID OUT A REAL TRADER — INTERNAL PANIC ENSUES",
+    "LAMBO RAUL'S $7M ALGO BOT EXPOSED — IT'S LITERALLY JUST Math.random()",
+    "ETHAN DURAN'S BUGATTI REPOSSESSED DURING INSTAGRAM LIVE — 47,000 VIEWERS",
+    "SCARFACE TRADES CAUGHT USING INSPECT ELEMENT IN HIS OWN DISCORD TUTORIAL",
+    "UMAR ASHRAF THROWS ANOTHER WHITE FLAG — THIS TIME AT A SUBWAY SANDWICH ARTIST",
+    "BREAKING: USMAN ASHRAF RELEASES 26TH DISCOUNT CODE THIS WEEK — NOW OFFERING 150% OFF",
+    "MASITRADES PHOTOSHOPS HIMSELF INTO WARREN BUFFETT'S SHAREHOLDER MEETING",
+    "JDUN TRADES' PAPER TRADING ACCOUNT SOMEHOW STILL GOT A MARGIN CALL",
+    "SCI'S $100M OFFSHORE ACCOUNT FOUND TO CONTAIN EXACTLY $47.23 AND A COUPON",
+    "TSA INTELLIGENCE CONFIRMS: 94% OF TRADING GURUS CAN'T FIND THE BUY BUTTON",
+    "BRETT SIMBA'S FAKE REVIEWS TRACED BACK TO HIS MOM'S FACEBOOK ACCOUNT",
+    "ANONYMOUS TIP: NEXT EPISODE WILL FEATURE SOMEONE IN THIS CHAT RIGHT NOW 👀",
+    "REMINDER: CTRL+F 'PROFIT' IN ANY GURU'S BROKERAGE STATEMENT — 0 RESULTS FOUND"
+  ];
+  var el=document.getElementById('tickerText');
+  if(el)el.textContent=headlines.map(function(h){return'⚡ '+h}).join('     ◆     ');
+})();
+
+// ========== ROAST GENERATOR ==========
+var roasts={
+  'tjr':["TJR's trading strategy: Step 1: Create token. Step 2: Shill token. Step 3: Rug pull. Step 4: Repeat. It's literally a 4-step scam manual.","TJR has more rug pulls than an IKEA warehouse. At this point, even the carpet industry is filing complaints.","If TJR's meme coins lasted as long as his promises, they'd still be worthless — just for longer."],
+  'fxalexg':["FxAlexG made $25M selling courses on how to trade forex. Plot twist: he doesn't trade forex.","FxAlexG's B-book broker is basically a casino where the house always wins — and he IS the house.","The only thing FxAlexG is good at trading is his followers' trust for cash."],
+  'lambo_raul':["Lambo Raul's algo bot has a 100% win rate... at losing your money.","They call him Scambo Raul because even his nickname is more honest than his trading record.","Lambo Raul's $7M algo literally just flips a coin — except somehow it always lands on 'you lose.'"],
+  'ethan_duran':["Ethan Duran bought a Bugatti to flex on Instagram, then returned it like it was a rental from Enterprise.","Ethan's house got raided but they couldn't find any evidence of actual trading.","Not a trader, not a programmer, not even a good actor. Triple threat of nothing."],
+  'scarface_trades':["Scarface's trading superpower? Inspect Element. He's not a trader, he's a web developer with delusions.","Scarface trades without clicking the mouse. He's either psychic or a fraud. Spoiler: it's not psychic.","The only thing Scarface inspects more than elements is how much he can charge gullible followers."],
+  'sci':["SCI claims $100M in an offshore broker that even the SEC hasn't heard of. Suspicious.","SCI's offshore account has more red flags than a Chinese New Year parade.","$100M in an unregulated broker? That's not wealth, that's just creative fiction."],
+  'umar_ashraf':["Umar threw a white flag so fast it broke the sound barrier. Supersonic surrender.","Selling courses since 2014 while allegedly unprofitable. That's 10 years of 'trust me bro.'","Umar's McLaren was leased, just like his trading credibility — temporary and overpriced."],
+  'brett_simba':["Brett Simba's fake reviews are so obvious, even Amazon's algorithm flagged them.","The reviews were faker than his trading results. Which is saying something.","Brett added fake reviews to Tradeify. Tradeify removed them. The internet never forgets."],
+  'jdun_trades':["JDUN's partner got caught paper trading. Birds of a feather trade fake together.","Paper trading partner, real money courses. The math doesn't add up — which is ironic for a 'trader.'","JDUN sells funded accounts like they're Girl Scout cookies. Except cookies have more value."],
+  'usman_ashraf':["25 discount codes in one week. At that point, just give it away for free, bro.","Usman's Thanksgiving special: Buy 1 discount code, get 24 free. It's practically a Black Friday for BS.","Usman spends more on ads than most people make trading. The real ROI is in the grift."],
+  'masitrades':["Masi got kicked from Stock Market Lab for photoshopping trades. Even the scam community has standards.","Masi's Photoshop skills are better than his trading skills. Which isn't saying much for either.","Photoshopped trades so bad, even Instagram's filter algorithm was like 'nah this is fake.'"]
+};
+
+function getRoast(sc){
+  var r=roasts[sc];
+  if(!r)return null;
+  return r[Math.floor(Math.random()*r.length)];
+}
+
+function renderRoast(sc){
+  var existing=document.getElementById('roast_'+sc);
+  if(existing)existing.remove();
+  var r=getRoast(sc);
+  if(!r)return;
+  var div=document.createElement('div');
+  div.className='roast-banner';div.id='roast_'+sc;
+  div.innerHTML='<span class="roast-icon">🔥</span><span class="roast-text">'+r+'</span><button class="roast-refresh" onclick="event.stopPropagation();renderRoast(\''+sc+'\')">NEW ROAST</button>';
+  var verdictBox=document.querySelector('.verdict-box');
+  var guiltPoll=document.querySelector('.guilt-poll');
+  var target=verdictBox||guiltPoll;
+  if(target)target.parentNode.insertBefore(div,target);
+}
+
+// Inject roast into openFile
+var origOpenFile2=openFile;
+openFile=function(idx){
+  origOpenFile2(idx);
+  var sc=subjects[idx].codename.replace(/\s+/g,'_').toLowerCase();
+  setTimeout(function(){renderRoast(sc)},100);
+};
+
+// ========== GUILT VOTE DRAMA (screen shake + flash) ==========
+var origSubmitVote=submitVote;
+submitVote=async function(subjectCode){
+  await origSubmitVote(subjectCode);
+  // Screen shake
+  document.body.classList.add('shake-it');
+  setTimeout(function(){document.body.classList.remove('shake-it')},500);
+  // Red flash
+  var flash=document.createElement('div');
+  flash.className='guilt-flash';
+  document.body.appendChild(flash);
+  setTimeout(function(){flash.remove()},600);
+  // Sound
+  playSFX('dundun');
+};
+
+// ========== KONAMI CODE EASTER EGG ==========
+(function(){
+  var code=[38,38,40,40,37,39,37,39,66,65];// up up down down left right left right B A
+  var pos=0;
+  document.addEventListener('keydown',function(e){
+    if(e.keyCode===code[pos]){
+      pos++;
+      if(pos===code.length){
+        pos=0;
+        activateChaosMode();
+      }
+    }else{
+      pos=0;
+    }
+  });
+
+  window.activateChaosMode=function(){
+    playSFX('siren');
+    // Banner
+    var banner=document.createElement('div');
+    banner.className='chaos-banner';
+    banner.textContent='☠ CHAOS MODE ACTIVATED ☠';
+    document.body.appendChild(banner);
+    setTimeout(function(){banner.remove()},2500);
+
+    // Confetti explosion
+    var colors=['#ff1744','#ffd600','#00ff41','#ff6a00','#00aaff','#ff69b4'];
+    for(var i=0;i<80;i++){
+      (function(i){
+        setTimeout(function(){
+          var c=document.createElement('div');
+          c.className='confetti-piece';
+          c.style.left=Math.random()*100+'vw';
+          c.style.top='-10px';
+          c.style.background=colors[Math.floor(Math.random()*colors.length)];
+          c.style.width=(6+Math.random()*10)+'px';
+          c.style.height=(6+Math.random()*10)+'px';
+          c.style.borderRadius=Math.random()>0.5?'50%':'0';
+          c.style.animationDuration=(2+Math.random()*2)+'s';
+          document.body.appendChild(c);
+          setTimeout(function(){c.remove()},4000);
+        },i*30);
+      })(i);
+    }
+
+    // Chaos mode on cards
+    document.body.classList.add('chaos-mode');
+    setTimeout(function(){document.body.classList.remove('chaos-mode')},5000);
+
+    // Screen shake
+    document.body.classList.add('shake-it');
+    setTimeout(function(){document.body.classList.remove('shake-it')},500);
+
+    // Rainbow title
+    var title=document.querySelector('.title-main');
+    if(title){
+      var origColor=title.style.color;
+      var hue=0;
+      var rainbowInt=setInterval(function(){
+        hue=(hue+10)%360;
+        title.style.color='hsl('+hue+',100%,50%)';
+        title.style.textShadow='0 0 20px hsl('+hue+',100%,50%), 0 0 40px hsl('+hue+',100%,60%)';
+      },50);
+      setTimeout(function(){
+        clearInterval(rainbowInt);
+        title.style.color='';title.style.textShadow='';
+      },5000);
+    }
+  };
+})();
+
+// ========== SELF-DESTRUCT EASTER EGG (triple click on DECLASSIFIED watermark) ==========
+(function(){
+  var clickCount=0;var clickTimer=null;
+  var watermark=document.querySelector('.watermark');
+  if(!watermark){watermark=document.querySelector('.declassified-bar')}
+  if(!watermark)return;
+  watermark.style.pointerEvents='auto';watermark.style.cursor='default';
+  watermark.addEventListener('click',function(){
+    clickCount++;
+    if(clickTimer)clearTimeout(clickTimer);
+    clickTimer=setTimeout(function(){clickCount=0},600);
+    if(clickCount>=3){
+      clickCount=0;
+      triggerSelfDestruct();
+    }
+  });
+
+  window.triggerSelfDestruct=function(){
+    playSFX('explosion');
+    var ov=document.createElement('div');
+    ov.className='self-destruct-overlay';
+    ov.innerHTML='<div class="destruct-text">⚠ EVIDENCE DESTRUCTION IN PROGRESS ⚠</div><div class="destruct-timer" id="destructTimer">3</div><div class="destruct-sub">ALL FILES WILL BE PERMANENTLY DELETED</div>';
+    document.body.appendChild(ov);
+
+    var count=3;
+    var timer=setInterval(function(){
+      count--;
+      var el=document.getElementById('destructTimer');
+      if(el)el.textContent=count;
+      if(count<=0){
+        clearInterval(timer);
+        playSFX('explosion');
+        ov.classList.add('destruct-glitch');
+        setTimeout(function(){
+          ov.innerHTML='<div style="font-family:Orbitron,sans-serif;font-size:clamp(16px,3vw,28px);letter-spacing:6px;color:#00ff41;text-shadow:0 0 20px rgba(0,255,65,.6)">JK — EVIDENCE IS FOREVER 😈</div><div style="font-size:12px;color:var(--matrix-mid);margin-top:16px;letter-spacing:3px">CLICK ANYWHERE TO RETURN</div>';
+          ov.classList.remove('destruct-glitch');
+          ov.style.animation='none';
+          ov.onclick=function(){ov.remove()};
+        },600);
+      }
+    },1000);
+  };
+})();
+
+// ========== SCAM BINGO ==========
+(function(){
+  var bingoItems=[
+    'Fake P&L screenshot','Course seller who can\'t trade','Rug pull','B-book broker',
+    'Leased supercar flex','Discount code spam','FREE SPACE\n(They\'re all guilty)','Inspect Element fraud','Algo that\'s just Math.random()',
+    '"Trust me bro"','Paper trading exposed','Offshore account lie','Photoshopped trades',
+    'Bugatti rental','House got raided','White flag surrender','Fake reviews'
+  ];
+  var checked=JSON.parse(localStorage.getItem('tsaBingo')||'[]');
+
+  // Create bingo button
+  var bingoBtn=document.createElement('div');
+  bingoBtn.id='bingoBtn';
+  bingoBtn.style.cssText='position:fixed;bottom:20px;left:20px;z-index:998;background:rgba(10,10,10,.9);border:1px solid var(--cod-yellow);padding:8px 14px;font-family:Orbitron,sans-serif;font-size:9px;letter-spacing:2px;color:var(--cod-yellow);cursor:pointer;backdrop-filter:blur(6px);transition:all .3s;';
+  bingoBtn.textContent='🎰 SCAM BINGO';
+  bingoBtn.onclick=toggleBingo;
+  document.body.appendChild(bingoBtn);
+
+  // Create bingo card overlay
+  var bingoOv=document.createElement('div');
+  bingoOv.id='bingoOverlay';
+  bingoOv.style.cssText='display:none;position:fixed;bottom:70px;left:20px;z-index:999;background:rgba(10,10,10,.95);border:1px solid var(--cod-yellow);padding:16px;max-width:340px;backdrop-filter:blur(10px);';
+  bingoOv.innerHTML='<div style="font-family:Orbitron,sans-serif;font-size:11px;letter-spacing:3px;color:var(--cod-yellow);text-align:center;margin-bottom:12px">🎰 SCAM BINGO</div><div style="font-size:9px;color:var(--matrix-mid);text-align:center;margin-bottom:10px;letter-spacing:1px">TAP SQUARES AS YOU SPOT THEM IN THE DOSSIERS</div><div id="bingoGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"></div><div id="bingoStatus" style="font-size:10px;color:var(--matrix-mid);text-align:center;margin-top:10px;letter-spacing:2px"></div>';
+  document.body.appendChild(bingoOv);
+
+  function renderBingo(){
+    var grid=document.getElementById('bingoGrid');
+    if(!grid)return;
+    grid.innerHTML='';
+    var checkedCount=0;
+    bingoItems.forEach(function(item,i){
+      var isChecked=checked.indexOf(i)!==-1;
+      if(isChecked)checkedCount++;
+      var cell=document.createElement('div');
+      cell.style.cssText='padding:6px 4px;border:1px solid '+(isChecked?'var(--cod-red)':'var(--matrix-dark)')+';background:'+(isChecked?'rgba(255,23,68,.15)':'rgba(10,10,10,.3)')+';font-size:8px;text-align:center;cursor:pointer;color:'+(isChecked?'var(--cod-red)':'var(--matrix-mid)')+';line-height:1.3;transition:all .2s;min-height:40px;display:flex;align-items:center;justify-content:center;';
+      cell.textContent=(isChecked?'✅ ':'')+item;
+      cell.onclick=function(){
+        if(isChecked){checked=checked.filter(function(x){return x!==i})}
+        else{checked.push(i);playSFX('cashregister')}
+        localStorage.setItem('tsaBingo',JSON.stringify(checked));
+        renderBingo();
+        // Check for bingo
+        if(checked.length>=bingoItems.length){
+          showAchievement('🎰 FULL BINGO! You\'ve seen it all. These people are COOKED.');
+        }else if(checked.length>=8&&!sessionStorage.getItem('bingo8')){
+          sessionStorage.setItem('bingo8','1');
+          showAchievement('🎰 HALF BINGO! You\'re halfway to exposing the whole network.');
+        }
+      };
+      grid.appendChild(cell);
+    });
+    var status=document.getElementById('bingoStatus');
+    if(status)status.textContent=checkedCount+'/'+bingoItems.length+' SPOTTED';
+  }
+
+  function toggleBingo(){
+    var ov=document.getElementById('bingoOverlay');
+    if(ov.style.display==='none'){ov.style.display='block';renderBingo()}
+    else{ov.style.display='none'}
+  }
+  renderBingo();
+})();
+
+// ========== ACHIEVEMENT POPUP SYSTEM ==========
+var achievementsShown=JSON.parse(sessionStorage.getItem('tsaAchievements')||'[]');
+var dossiersOpened=JSON.parse(sessionStorage.getItem('tsaDossiersOpened')||'[]');
+
+function showAchievement(text){
+  if(achievementsShown.indexOf(text)!==-1)return;
+  achievementsShown.push(text);
+  sessionStorage.setItem('tsaAchievements',JSON.stringify(achievementsShown));
+  playSFX('cashregister');
+  var popup=document.createElement('div');
+  popup.style.cssText='position:fixed;top:80px;right:20px;z-index:10000;background:rgba(10,10,10,.95);border:2px solid var(--cod-yellow);padding:16px 20px;max-width:350px;animation:card-enter .5s ease;backdrop-filter:blur(10px);';
+  popup.innerHTML='<div style="font-family:Orbitron,sans-serif;font-size:9px;letter-spacing:3px;color:var(--cod-yellow);margin-bottom:6px">🏆 ACHIEVEMENT UNLOCKED</div><div style="font-size:12px;color:var(--matrix-green);line-height:1.5">'+text+'</div>';
+  document.body.appendChild(popup);
+  setTimeout(function(){popup.style.transition='opacity .5s';popup.style.opacity='0';setTimeout(function(){popup.remove()},500)},4000);
+}
+
+// Track dossier opens for achievements
+var origOpenFile3=openFile;
+openFile=function(idx){
+  origOpenFile3(idx);
+  var name=subjects[idx].codename;
+  if(dossiersOpened.indexOf(name)===-1){
+    dossiersOpened.push(name);
+    sessionStorage.setItem('tsaDossiersOpened',JSON.stringify(dossiersOpened));
+  }
+  if(dossiersOpened.length===1)showAchievement('🔍 FIRST INVESTIGATION — You opened your first dossier. The rabbit hole begins.');
+  if(dossiersOpened.length===3)showAchievement('🕵️ PATTERN RECOGNITION — 3 dossiers reviewed. You\'re seeing the connections.');
+  if(dossiersOpened.length===5)showAchievement('⚡ SCAM DETECTIVE — 5 dossiers down. You can spot a scammer from a mile away.');
+  if(dossiersOpened.length===8)showAchievement('🔥 TSA SENIOR ANALYST — 8 dossiers reviewed. You know more than the SEC at this point.');
+  if(dossiersOpened.length===11)showAchievement('☠️ FULL CLEARANCE — ALL 11 dossiers reviewed. You\'ve seen things that cannot be unseen.');
+};
+
+// ========== AUTO-UNMUTE ON FIRST INTERACTION ==========
+(function(){
+  var hasInteracted=false;
+  function onFirstInteraction(){
+    if(hasInteracted)return;
+    hasInteracted=true;
+    var m=document.getElementById('bgMusic');
+    var p=document.getElementById('musicPrompt');
+    if(m&&m.paused){
+      m.play().then(function(){
+        m.currentTime=7;
+        if(p)p.style.display='none';
+      }).catch(function(){});
+    }
+    document.removeEventListener('click',onFirstInteraction);
+    document.removeEventListener('scroll',onFirstInteraction);
+    document.removeEventListener('touchstart',onFirstInteraction);
+    document.removeEventListener('keydown',onFirstInteraction);
+  }
+  document.addEventListener('click',onFirstInteraction);
+  document.addEventListener('scroll',onFirstInteraction);
+  document.addEventListener('touchstart',onFirstInteraction);
+  document.addEventListener('keydown',onFirstInteraction);
 })();
 </script>
 
