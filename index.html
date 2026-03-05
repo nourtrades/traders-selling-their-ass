@@ -854,7 +854,38 @@ async function initGuiltPoll(subjectCode){
   }
 }
 
+// ========== JAIL DOOR SLAM SFX ==========
+(function(){
+  var ctx=null;
+  window.playJailSlam=function(){
+    try{
+      if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
+      if(ctx.state==='suspended')ctx.resume();
+      var t=ctx.currentTime;
+      // Low metallic slam
+      var osc=ctx.createOscillator();var g=ctx.createGain();
+      osc.connect(g);g.connect(ctx.destination);
+      osc.type='sawtooth';
+      osc.frequency.setValueAtTime(120,t);
+      osc.frequency.exponentialRampToValueAtTime(35,t+0.3);
+      g.gain.setValueAtTime(0.18,t);
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.4);
+      osc.start(t);osc.stop(t+0.4);
+      // Metallic rattle
+      var buf=ctx.createBuffer(1,ctx.sampleRate*0.15,ctx.sampleRate);
+      var d=buf.getChannelData(0);
+      for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*0.03));
+      var noise=ctx.createBufferSource();noise.buffer=buf;
+      var ng=ctx.createGain();noise.connect(ng);ng.connect(ctx.destination);
+      ng.gain.setValueAtTime(0.12,t);
+      ng.gain.exponentialRampToValueAtTime(0.001,t+0.15);
+      noise.start(t);
+    }catch(e){}
+  };
+})();
+
 function openFile(idx){
+  playJailSlam();
   const s=subjects[idx],ov=document.getElementById('modalOverlay'),ct=document.getElementById('fileContainer');
   const sc=s.codename.replace(/\s+/g,'_').toLowerCase();
   const nextIdx=(idx+1)%subjects.length;
@@ -1123,7 +1154,7 @@ document.getElementById('popupForm').addEventListener('submit', async function(e
 
 <!-- AUTOPLAY BACKGROUND MUSIC -->
 <audio id="bgMusic" src="https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/audio/background.mp3" loop preload="auto"></audio>
-<div id="musicPrompt" style="position:fixed;bottom:20px;right:20px;z-index:999;background:rgba(10,10,10,.9);border:1px solid var(--cod-orange);padding:10px 16px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);cursor:pointer;display:none;backdrop-filter:blur(6px);transition:opacity .3s" onclick="var m=document.getElementById('bgMusic');var pr=this;m.play().then(function(){m.currentTime=7});pr.style.display='none'">
+<div id="musicPrompt" style="position:fixed;bottom:20px;right:20px;z-index:1000;background:rgba(10,10,10,.9);border:1px solid var(--cod-orange);padding:10px 16px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);cursor:pointer;display:none;backdrop-filter:blur(6px);transition:opacity .3s" onclick="document.getElementById('bgMusic').play().then(function(){document.getElementById('bgMusic').currentTime=7});this.style.display='none'">
 &#9835; CLICK TO UNMUTE
 </div>
 <script>
@@ -1131,12 +1162,33 @@ document.getElementById('popupForm').addEventListener('submit', async function(e
   var a=document.getElementById('bgMusic');
   var p=document.getElementById('musicPrompt');
   a.volume=0.4;
+
+  // Try autoplay immediately
   var played=a.play();
   if(played!==undefined){
     played.then(function(){
       a.currentTime=7;
     }).catch(function(){
+      // Autoplay blocked — show unmute button on boot screen
       p.style.display='block';
+
+      // Also auto-play on scroll once they reach the landing page
+      function onScroll(){
+        if(a.paused){
+          a.play().then(function(){
+            a.currentTime=7;
+            p.style.display='none';
+          }).catch(function(){});
+        }
+        document.removeEventListener('scroll',onScroll);
+      }
+      document.addEventListener('scroll',onScroll);
+
+      // Hide prompt if they click it (already handled by onclick)
+      // Clean up scroll listener if they use the button instead
+      p.addEventListener('click',function(){
+        document.removeEventListener('scroll',onScroll);
+      });
     });
   }
 })();
