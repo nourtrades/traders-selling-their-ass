@@ -856,31 +856,11 @@ async function initGuiltPoll(subjectCode){
 
 // ========== JAIL DOOR SLAM SFX ==========
 (function(){
-  var ctx=null;
+  var jailAudio=new Audio('https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/audio/prison.mp3');
+  jailAudio.preload='auto';
+  jailAudio.volume=0.5;
   window.playJailSlam=function(){
-    try{
-      if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();
-      if(ctx.state==='suspended')ctx.resume();
-      var t=ctx.currentTime;
-      // Low metallic slam
-      var osc=ctx.createOscillator();var g=ctx.createGain();
-      osc.connect(g);g.connect(ctx.destination);
-      osc.type='sawtooth';
-      osc.frequency.setValueAtTime(120,t);
-      osc.frequency.exponentialRampToValueAtTime(35,t+0.3);
-      g.gain.setValueAtTime(0.18,t);
-      g.gain.exponentialRampToValueAtTime(0.001,t+0.4);
-      osc.start(t);osc.stop(t+0.4);
-      // Metallic rattle
-      var buf=ctx.createBuffer(1,ctx.sampleRate*0.15,ctx.sampleRate);
-      var d=buf.getChannelData(0);
-      for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*0.03));
-      var noise=ctx.createBufferSource();noise.buffer=buf;
-      var ng=ctx.createGain();noise.connect(ng);ng.connect(ctx.destination);
-      ng.gain.setValueAtTime(0.12,t);
-      ng.gain.exponentialRampToValueAtTime(0.001,t+0.15);
-      noise.start(t);
-    }catch(e){}
+    try{jailAudio.currentTime=0;jailAudio.play().catch(function(){});}catch(e){}
   };
 })();
 
