@@ -1154,29 +1154,41 @@ document.getElementById('popupForm').addEventListener('submit', async function(e
 
 <!-- AUTOPLAY BACKGROUND MUSIC -->
 <audio id="bgMusic" src="https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/audio/background.mp3" loop preload="auto"></audio>
+<div id="musicPrompt" style="position:fixed;bottom:20px;right:20px;z-index:1000;background:rgba(10,10,10,.9);border:1px solid var(--cod-orange);padding:10px 16px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--cod-orange);cursor:pointer;display:none;backdrop-filter:blur(6px);transition:opacity .3s" onclick="document.getElementById('bgMusic').play().then(function(){document.getElementById('bgMusic').currentTime=7});this.style.display='none'">
+&#9835; CLICK TO UNMUTE
+</div>
 <script>
 (function(){
   var a=document.getElementById('bgMusic');
+  var p=document.getElementById('musicPrompt');
   a.volume=0.4;
 
-  // Try autoplay immediately (works if browser allows it)
+  // Try autoplay immediately
   var played=a.play();
   if(played!==undefined){
     played.then(function(){
       a.currentTime=7;
     }).catch(function(){
-      // Browser blocked autoplay — start on first user interaction
-      function onFirstInteraction(){
-        a.play().then(function(){ a.currentTime=7 }).catch(function(){});
-        document.removeEventListener('click',onFirstInteraction);
-        document.removeEventListener('scroll',onFirstInteraction);
-        document.removeEventListener('touchstart',onFirstInteraction);
-        document.removeEventListener('keydown',onFirstInteraction);
+      // Autoplay blocked — show unmute button on boot screen
+      p.style.display='block';
+
+      // Also auto-play on scroll once they reach the landing page
+      function onScroll(){
+        if(a.paused){
+          a.play().then(function(){
+            a.currentTime=7;
+            p.style.display='none';
+          }).catch(function(){});
+        }
+        document.removeEventListener('scroll',onScroll);
       }
-      document.addEventListener('click',onFirstInteraction);
-      document.addEventListener('scroll',onFirstInteraction);
-      document.addEventListener('touchstart',onFirstInteraction);
-      document.addEventListener('keydown',onFirstInteraction);
+      document.addEventListener('scroll',onScroll);
+
+      // Hide prompt if they click it (already handled by onclick)
+      // Clean up scroll listener if they use the button instead
+      p.addEventListener('click',function(){
+        document.removeEventListener('scroll',onScroll);
+      });
     });
   }
 })();
