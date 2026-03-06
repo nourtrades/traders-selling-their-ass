@@ -46,6 +46,39 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .cta-banner-btn:hover{background:#fff;color:var(--cod-red);box-shadow:0 0 20px rgba(255,23,68,.4)}
 @keyframes cta-pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,23,68,.4)}50%{box-shadow:0 0 0 8px rgba(255,23,68,0)}}
 
+/* VANQUISH PROMO BANNER */
+.vq-banner{position:relative;width:100%;background:#0a0a0a;border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;font-family:'Rajdhani',sans-serif;cursor:pointer;transition:border-color .3s;text-decoration:none;display:block}
+.vq-banner:hover{border-color:rgba(0,210,120,.35)}
+.vq-banner::before{content:'';position:absolute;inset:-50%;background:repeating-linear-gradient(115deg,transparent,transparent 60px,rgba(0,210,120,.015) 60px,rgba(0,210,120,.015) 61px);animation:vqSlideGrain 12s linear infinite;pointer-events:none;z-index:0}
+@keyframes vqSlideGrain{0%{transform:translateX(0)}100%{transform:translateX(120px)}}
+.vq-banner::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00d278 30%,#00ffa3 50%,#00d278 70%,transparent);z-index:5}
+.vq-inner{position:relative;z-index:2;display:flex;align-items:center;gap:clamp(16px,3vw,40px);padding:clamp(14px,2vw,24px) clamp(20px,3vw,48px);flex-wrap:wrap}
+.vq-logo-wrap{flex:0 0 auto;display:flex;align-items:center;gap:14px}
+.vq-logo-wrap img{width:clamp(36px,4vw,48px);height:clamp(36px,4vw,48px);border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+.vq-logo-text{font-family:'Orbitron',sans-serif;font-size:clamp(16px,2vw,24px);letter-spacing:.06em;color:#fff;line-height:1}
+.vq-logo-text span{color:#00d278}
+.vq-divider{width:1px;height:44px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.15),transparent);flex:0 0 auto}
+.vq-copy{flex:1 1 240px;min-width:180px}
+.vq-tagline{font-size:clamp(9px,1vw,11px);font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:#00d278;margin-bottom:3px;font-family:'Orbitron',sans-serif}
+.vq-headline{font-family:'Orbitron',sans-serif;font-size:clamp(14px,1.8vw,22px);color:#fff;letter-spacing:.03em;line-height:1.2}
+.vq-headline em{font-style:normal;color:#00ffa3}
+.vq-sub{font-size:clamp(10px,.9vw,12px);color:rgba(255,255,255,.45);margin-top:3px;letter-spacing:.01em}
+.vq-actions{flex:0 0 auto;display:flex;align-items:center;gap:clamp(12px,1.5vw,20px);flex-wrap:wrap}
+.vq-code-box{display:flex;flex-direction:column;align-items:center;background:rgba(0,210,120,.06);border:1px dashed rgba(0,210,120,.35);border-radius:8px;padding:6px 16px;position:relative;overflow:hidden}
+.vq-code-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,210,120,.08),transparent 70%);pointer-events:none}
+.vq-code-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:rgba(0,210,120,.7);margin-bottom:2px;position:relative;font-family:'Orbitron',sans-serif}
+.vq-code-value{font-family:'Share Tech Mono',monospace;font-size:clamp(18px,2.2vw,26px);font-weight:700;color:#00ffa3;line-height:1;position:relative;text-shadow:0 0 20px rgba(0,255,163,.25);animation:vqPulse 2.5s ease-in-out infinite}
+@keyframes vqPulse{0%,100%{opacity:1}50%{opacity:.7}}
+.vq-code-discount{font-size:9px;font-weight:700;color:#fff;margin-top:2px;position:relative;letter-spacing:.08em}
+.vq-code-discount span{background:linear-gradient(90deg,#00d278,#00ffa3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@media(max-width:680px){
+  .vq-inner{justify-content:center;text-align:center}
+  .vq-logo-wrap{justify-content:center;width:100%}
+  .vq-divider{display:none}
+  .vq-copy{text-align:center}
+  .vq-actions{justify-content:center;width:100%}
+}
+
 /* EMAIL POPUP */
 .popup-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:500;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(4px)}
 .popup-overlay.active{display:flex}
@@ -430,6 +463,28 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
     <button class="site-nav-toggle" onclick="document.querySelector('.site-nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
   </nav>
 
+  <!-- VANQUISH PROMO BANNER -->
+  <a href="https://vanquish.stockhoursllc.com/" target="_blank" rel="noopener" class="vq-banner">
+    <div class="vq-inner">
+      <div class="vq-logo-wrap">
+        <img src="data:image/jpeg;base64,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" alt="Vanquish">
+        <div class="vq-logo-text">VANQUISH</div>
+      </div>
+      <div class="vq-divider"></div>
+      <div class="vq-copy">
+        <div class="vq-tagline">The First Regulated Stock & Options Prop Firm</div>
+        <div class="vq-headline">Get Funded Up to <em>$150K</em> — Keep <em>100%</em> Profits</div>
+        <div class="vq-sub">Stocks & options funded accounts · $10K–$150K · No hidden fees</div>
+      </div>
+      <div class="vq-actions">
+        <div class="vq-code-box">
+          <div class="vq-code-label">Use Code</div>
+          <div class="vq-code-value">NOUR</div>
+          <div class="vq-code-discount"><span>50% OFF</span> any package</div>
+        </div>
+      </div>
+    </div>
+  </a>
 
   <header class="header">
     <div class="title-main">TRADERS SELLING ASS</div>
