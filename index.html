@@ -142,7 +142,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .next-scammer{margin-top:24px;border:1px solid var(--cod-orange);background:rgba(255,106,0,.03);padding:16px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s}
 .next-scammer:hover{background:rgba(255,106,0,.08);box-shadow:0 0 15px rgba(255,106,0,.2)}
 .next-scammer-img{width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid var(--cod-orange);flex-shrink:0}
-.next-scammer-img img{width:100%;height:100%;object-fit:cover}
+.next-scammer-img img{width:100%;height:100%;object-fit:cover;object-position:top}
 .next-scammer-info{flex:1}
 .next-scammer-label{font-size:9px;letter-spacing:3px;color:var(--matrix-mid)}
 .next-scammer-name{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--cod-orange);letter-spacing:2px;margin-top:2px}
@@ -217,7 +217,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .risk-medium{background:rgba(255,214,0,.85);color:#000;border-color:var(--cod-yellow)}
 .risk-low{background:rgba(0,255,65,.85);color:#000;border-color:#00ff41}
 .mugshot-photo{width:100%;height:220px;overflow:hidden;position:relative;border-bottom:2px solid var(--matrix-dark)}
-.mugshot-photo img{width:100%;height:100%;object-fit:cover;image-rendering:auto;transition:filter .3s}
+.mugshot-photo img{width:100%;height:100%;object-fit:cover;object-position:top;image-rendering:auto;transition:filter .3s}
 .mugshot-card:hover .mugshot-photo img{filter:brightness(1.05)}
 .mugshot-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
 .mugshot-ruler{position:absolute;bottom:0;left:0;right:0;height:30px;display:flex;align-items:flex-end;padding:0 10px;z-index:2}
@@ -255,7 +255,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 .file-declassified-bar{background:var(--declassified-red);padding:4px 0;text-align:center;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:5px;color:#fff}
 .file-header{padding:24px 30px;border-bottom:2px solid var(--cod-red);display:flex;gap:20px;align-items:center;background:rgba(13,13,13,.95);position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}
 .file-mugshot{width:80px;height:80px;border-radius:50%;overflow:hidden;border:2px solid var(--cod-orange);flex-shrink:0}
-.file-mugshot img{width:100%;height:100%;object-fit:cover}
+.file-mugshot img{width:100%;height:100%;object-fit:cover;object-position:top}
 .file-meta{flex:1;min-width:0}
 .file-subject-name{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(20px,3.5vw,36px);color:var(--cod-orange);text-shadow:0 0 15px rgba(255,106,0,.4);letter-spacing:3px}
 .file-subject-sub{font-size:12px;color:var(--matrix-mid);letter-spacing:2px;margin-top:4px}
