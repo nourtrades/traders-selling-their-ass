@@ -493,8 +493,8 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
 
   <div class="section-header"><span class="section-title">◆ WANTED — RANKED BY RISK FACTOR ◆</span></div>
   <div class="stats-bar">
-    <div class="stat-item"><div class="stat-value">11</div><div class="stat-label">SUBJECTS IDENTIFIED</div></div>
-    <div class="stat-item"><div class="stat-value">19</div><div class="stat-label">EPISODES FILED</div></div>
+    <div class="stat-item"><div class="stat-value">13</div><div class="stat-label">SUBJECTS IDENTIFIED</div></div>
+    <div class="stat-item"><div class="stat-value">20</div><div class="stat-label">EPISODES FILED</div></div>
     <div class="stat-item"><div class="stat-value">$200M+</div><div class="stat-label">EST. COMMUNITY DAMAGE</div></div>
     <div class="stat-item"><div class="stat-value">ACTIVE</div><div class="stat-label">INVESTIGATION STATUS</div></div>
   </div>
@@ -647,7 +647,13 @@ const subjects=[
 ],verdict:"SIGNAL SPAMMER"},
 {codename:"MASITRADES",rank:11,riskLevel:72,riskClass:"medium",status:"EXPOSED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/masi.jpg",tags:["PHOTOSHOPPED TRADES","KICKED FROM SML"],summary:"Kicked from Stock Market Lab for photoshopping trades.",connections:["UMAR ASHRAF","USMAN ASHRAF"],episodes:[
 {title:"EP 8 — KICKED FROM STOCK MARKET LAB",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep8.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSLfXPVEyzg/",evidence:[]}
-],verdict:"PHOTOSHOP FRAUD"}
+],verdict:"PHOTOSHOP FRAUD"},
+{codename:"MAMBAFX",rank:12,riskLevel:85,riskClass:"high",status:"FLAGGED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/mambafx.png",tags:["PONZI SCHEME","FOREXPEACEARMY FLAGGED","SCAMADVISOR STAY AWAY","ONE-SIDED TRADES","SIGNALS SCAM"],summary:"Flagged as Ponzi by ForexPeaceArmy. ScamAdvisor stay away rating. Only shows winning side of trades.",connections:["COWBOYFX"],episodes:[
+{title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]}
+],verdict:"PONZI FLAGGED — ONE-SIDED SIGNALS"},
+{codename:"COWBOYFX",rank:13,riskLevel:91,riskClass:"critical",status:"EXPOSED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/cowboyfx.png",tags:["SURGE PROP FIRM","NOT PAYING TRADERS","PROP FIRM SCAM","ABOUT TO GO UNDER"],summary:"Brother of MambaFX. Runs Surge prop firm that's not paying out traders and about to go under.",connections:["MAMBAFX"],episodes:[
+{title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]}
+],verdict:"SURGE PROP FIRM — NOT PAYING OUT"}
 ];
 
 // ========== MATRIX ==========
@@ -658,7 +664,7 @@ function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,can
 setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Array(col).fill(1)});
 
 // ========== BOOT ==========
-async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> TSA INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 11 // EPISODES: 18","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease';triggerPopup()}
+async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> TSA INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 13 // EPISODES: 20","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease';triggerPopup()}
 if(!localStorage.getItem('tsaBooted')){localStorage.setItem('tsaBooted','1');runBoot()}else{document.getElementById('bootScreen').style.display='none';document.getElementById('mainContent').style.opacity='1';triggerPopup()}
 window.scrollTo(0,0);
 
