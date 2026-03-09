@@ -494,7 +494,7 @@ body{background:var(--bg-black);color:var(--matrix-green);font-family:'Share Tec
   <div class="section-header"><span class="section-title">◆ WANTED — RANKED BY RISK FACTOR ◆</span></div>
   <div class="stats-bar">
     <div class="stat-item"><div class="stat-value">13</div><div class="stat-label">SUBJECTS IDENTIFIED</div></div>
-    <div class="stat-item"><div class="stat-value">20</div><div class="stat-label">EPISODES FILED</div></div>
+    <div class="stat-item"><div class="stat-value">21</div><div class="stat-label">EPISODES FILED</div></div>
     <div class="stat-item"><div class="stat-value">$200M+</div><div class="stat-label">EST. COMMUNITY DAMAGE</div></div>
     <div class="stat-item"><div class="stat-value">ACTIVE</div><div class="stat-label">INVESTIGATION STATUS</div></div>
   </div>
@@ -622,7 +622,8 @@ const subjects=[
 {title:"EP 6 — $7M IN ALGO FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep6.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSDwt5pE3Dh/",evidence:[]}
 ],verdict:"SCAMBO — $7M ALGO FRAUD"},
 {codename:"COWBOYFX",rank:4,riskLevel:91,riskClass:"critical",status:"EXPOSED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/cowboyfx.png",tags:["SURGE PROP FIRM","NOT PAYING TRADERS","PROP FIRM SCAM","ABOUT TO GO UNDER"],summary:"Brother of MambaFX. Runs Surge prop firm that's not paying out traders and about to go under.",connections:["MAMBAFX"],episodes:[
-{title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]}
+{title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]},
+{title:"EP 21 — BROTHER'S KEEPER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep21.mp4",reelUrl:"https://www.instagram.com/p/DVpUBwBkbt9/",evidence:[]}
 ],verdict:"SURGE PROP FIRM — NOT PAYING OUT"},
 {codename:"ETHAN DURAN",rank:5,riskLevel:88,riskClass:"high",status:"WANTED",markets:["FOREX","CRYPTO"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/ethan.jpg",tags:["BUGATTI MARKETING","ALGO SCAM","HOUSE RAIDED","NOT A TRADER"],summary:"Not a trader. Bugatti bought for marketing, sold 1 month later. House raided.",connections:["FXALEXG","LAMBO RAUL"],episodes:[
 {title:"EP 7 — NON-TRADER SELLING ALGO",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep7.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSI_VqyE2Mi/",evidence:[]},
@@ -632,7 +633,8 @@ const subjects=[
 {title:"EP 15 — INSPECT ELEMENT FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep15.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUd-UrcDkvE/",evidence:[]}
 ],verdict:"INSPECT ELEMENT FRAUD"},
 {codename:"MAMBAFX",rank:7,riskLevel:85,riskClass:"high",status:"FLAGGED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/mambafx.png",tags:["PONZI SCHEME","FOREXPEACEARMY FLAGGED","SCAMADVISOR STAY AWAY","ONE-SIDED TRADES","SIGNALS SCAM"],summary:"Flagged as Ponzi by ForexPeaceArmy. ScamAdvisor stay away rating. Only shows winning side of trades.",connections:["COWBOYFX"],episodes:[
-{title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]}
+{title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]},
+{title:"EP 21 — BROTHER'S KEEPER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep21.mp4",reelUrl:"https://www.instagram.com/p/DVpUBwBkbt9/",evidence:[]}
 ],verdict:"PONZI FLAGGED — ONE-SIDED SIGNALS"},
 {codename:"SCI",rank:8,riskLevel:84,riskClass:"high",status:"WANTED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/sci.webp",tags:["$100M OFFSHORE LIE","UNREGULATED BROKER","PROMOTED BY UMAR"],summary:"Claims $100M in unregulated offshore broker. Makes money from deposits.",connections:["UMAR ASHRAF"],episodes:[
 {title:"EP 9 — THE $100M OFFSHORE LIE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep9.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSS9yJVidQB/",evidence:[]}
@@ -664,7 +666,7 @@ function dm(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,can
 setInterval(dm,35);addEventListener('resize',()=>{col=~~(canvas.width/fs);dr=Array(col).fill(1)});
 
 // ========== BOOT ==========
-async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> TSA INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 13 // EPISODES: 20","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease';triggerPopup()}
+async function runBoot(){const bt=document.getElementById('bootText'),bs=document.getElementById('bootScreen');const lines=["> TSA INTELLIGENCE SYSTEM v2.0","> LOADING DECLASSIFIED DOSSIERS............ [OK]","> SECURE CHANNEL....................... [CONNECTED]","> SUBJECTS: 13 // EPISODES: 21","> WHISTLEBLOWER CHANNEL: ENCRYPTED","> RISK ASSESSMENT: COMPLETE","","> ACCESS GRANTED."];for(let l of lines){const el=document.createElement('div');bt.appendChild(el);for(let i=0;i<l.length;i++){el.textContent=l.substring(0,i+1);await new Promise(r=>setTimeout(r,10+Math.random()*18))}await new Promise(r=>setTimeout(r,120))}await new Promise(r=>setTimeout(r,400));bs.classList.add('hidden');document.getElementById('mainContent').style.opacity='1';document.getElementById('mainContent').style.transition='opacity 1s ease';triggerPopup()}
 if(!localStorage.getItem('tsaBooted')){localStorage.setItem('tsaBooted','1');runBoot()}else{document.getElementById('bootScreen').style.display='none';document.getElementById('mainContent').style.opacity='1';triggerPopup()}
 window.scrollTo(0,0);
 
