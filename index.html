@@ -606,7 +606,7 @@ let supabaseClient = null;
 
 // ========== SUBJECT DATA ==========
 const subjects=[
-{codename:"TJR",rank:1,riskLevel:98,riskClass:"critical",status:"REPEAT OFFENDER",markets:["FOREX","CRYPTO"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/tjr.jpg",tags:["PROP FIRM SCAM","RUG PULLS","MEME COIN FRAUD","MARKET MANIPULATION","HEROFX","CHATGPT COURSE","FAKE SOB STORY"],summary:"6 episodes. Rug pulled One of One Funding, HeroFX revenue share, 4 meme coin rug pulls. Dad is president of family-owned school, lives in $5.2M house. Used ChatGPT to make course, calls students stupid.",connections:["FXALEXG","LAMBO RAUL"],episodes:[
+{codename:"TJR",rank:1,riskLevel:98,riskClass:"critical",status:"REPEAT OFFENDER",markets:["FOREX","CRYPTO"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/tjr.jpg",tags:["PROP FIRM SCAM","RUG PULLS","MEME COIN FRAUD","MARKET MANIPULATION","HEROFX","CHATGPT COURSE","FAKE SOB STORY"],summary:"6 episodes. Rug pulled One of One Funding, HeroFX revenue share, 4 meme coin rug pulls. Dad is president of family-owned school, lives in $5.2M house. Used ChatGPT to make course, calls students stupid.",connections:["FXALEXG","LAMBO RAUL","MAMBAFX","COWBOYFX"],episodes:[
 {title:"EP 1 — SELLING FUNDED ACCOUNTS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep1.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DR245vQkwN0/",evidence:[]},
 {title:"EP 11 — HEROFX REBATES & REVENUE SHARE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep11.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DS5mY7CDky3/",evidence:[]},
 {title:"EP 12 — THE HYPOCRITE",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep12.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DTYfO6Rjgg8/",evidence:[]},
@@ -622,7 +622,7 @@ const subjects=[
 {codename:"LAMBO RAUL",rank:3,riskLevel:90,riskClass:"critical",status:"WANTED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/lambo.png",tags:["$7M ALGO FRAUD","SCAMBO RAUL","PROP FIRM"],summary:"AKA Scambo Raul. $7M from fraudulent algo bot drops.",connections:["FXALEXG","ETHAN DURAN"],episodes:[
 {title:"EP 6 — $7M IN ALGO FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep6.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DSDwt5pE3Dh/",evidence:[]}
 ],verdict:"SCAMBO — $7M ALGO FRAUD"},
-{codename:"COWBOYFX",rank:4,riskLevel:91,riskClass:"critical",status:"EXPOSED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/cowboyfx.png",tags:["SURGE PROP FIRM","NOT PAYING TRADERS","PROP FIRM SCAM","ABOUT TO GO UNDER"],summary:"Brother of MambaFX. Runs Surge prop firm that's not paying out traders and about to go under.",connections:["MAMBAFX"],episodes:[
+{codename:"COWBOYFX",rank:4,riskLevel:91,riskClass:"critical",status:"EXPOSED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/cowboyfx.png",tags:["SURGE PROP FIRM","NOT PAYING TRADERS","PROP FIRM SCAM","ABOUT TO GO UNDER"],summary:"Brother of MambaFX. Runs Surge prop firm that's not paying out traders and about to go under.",connections:["MAMBAFX","TJR"],episodes:[
 {title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]},
 {title:"EP 21 — BROTHER'S KEEPER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep21.mp4",reelUrl:"https://www.instagram.com/p/DVpUBwBkbt9/",evidence:[]}
 ],verdict:"SURGE PROP FIRM — NOT PAYING OUT"},
@@ -633,7 +633,7 @@ const subjects=[
 {codename:"SCARFACE TRADES",rank:6,riskLevel:86,riskClass:"high",status:"WANTED",markets:["STOCKS"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/scarface.jpg",tags:["INSPECT ELEMENT","FAKE P&L","TELEKINESIS TRADING"],summary:"Faked January statements with Inspect Element. Caught 'trading' without clicking.",connections:[],episodes:[
 {title:"EP 15 — INSPECT ELEMENT FRAUD",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep15.mp4",reelUrl:"https://www.instagram.com/nourtrades/reel/DUd-UrcDkvE/",evidence:[]}
 ],verdict:"INSPECT ELEMENT FRAUD"},
-{codename:"MAMBAFX",rank:7,riskLevel:85,riskClass:"high",status:"FLAGGED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/mambafx.png",tags:["PONZI SCHEME","FOREXPEACEARMY FLAGGED","SCAMADVISOR STAY AWAY","ONE-SIDED TRADES","SIGNALS SCAM"],summary:"Flagged as Ponzi by ForexPeaceArmy. ScamAdvisor stay away rating. Only shows winning side of trades.",connections:["COWBOYFX"],episodes:[
+{codename:"MAMBAFX",rank:7,riskLevel:85,riskClass:"high",status:"FLAGGED",markets:["FOREX"],image:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/images/mambafx.png",tags:["PONZI SCHEME","FOREXPEACEARMY FLAGGED","SCAMADVISOR STAY AWAY","ONE-SIDED TRADES","SIGNALS SCAM"],summary:"Flagged as Ponzi by ForexPeaceArmy. ScamAdvisor stay away rating. Only shows winning side of trades.",connections:["COWBOYFX","TJR"],episodes:[
 {title:"EP 20 — PONZI BROTHERS",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep20.mp4",reelUrl:"https://www.instagram.com/p/DVonv6TEX8U/",evidence:[]},
 {title:"EP 21 — BROTHER'S KEEPER",video:"https://kjeqzwfxtshgerzkaiqg.supabase.co/storage/v1/object/public/videos/ep21.mp4",reelUrl:"https://www.instagram.com/p/DVpUBwBkbt9/",evidence:[]}
 ],verdict:"PONZI FLAGGED — ONE-SIDED SIGNALS"},
@@ -720,31 +720,38 @@ function searchScammer(){
     // LAMBO RAUL GROUP (left side)
     {idx:2,name:"LAMBO\nRAUL",x:.2,y:.2,r:28,color:'#ff1744'},
     {idx:1,name:"FXALEXG",x:.2,y:.45,r:24,color:'#ff1744'},
-    {idx:3,name:"ETHAN\nDURAN",x:.2,y:.7,r:22,color:'#ff6a00'},
+    {idx:4,name:"ETHAN\nDURAN",x:.2,y:.7,r:22,color:'#ff6a00'},
 
-    // TJR (center, alone)
-    {idx:0,name:"TJR",x:.5,y:.4,r:28,color:'#ff1744'},
+    // TJR GROUP (center)
+    {idx:0,name:"TJR",x:.5,y:.25,r:28,color:'#ff1744'},
+    {idx:6,name:"MAMBAFX",x:.43,y:.48,r:20,color:'#ff6a00'},
+    {idx:3,name:"COWBOYFX",x:.57,y:.48,r:20,color:'#ff1744'},
 
     // UMAR GROUP (right side)
-    {idx:6,name:"UMAR\nASHRAF",x:.8,y:.2,r:24,color:'#ff6a00'},
-    {idx:4,name:"SCARFACE",x:.68,y:.5,r:20,color:'#ff6a00'},
-    {idx:10,name:"MASI",x:.8,y:.55,r:18,color:'#ffd600'},
-    {idx:9,name:"USMAN",x:.92,y:.5,r:18,color:'#ffd600'},
+    {idx:8,name:"UMAR\nASHRAF",x:.8,y:.2,r:24,color:'#ff6a00'},
+    {idx:5,name:"SCARFACE",x:.68,y:.5,r:20,color:'#ff6a00'},
+    {idx:12,name:"MASI",x:.8,y:.55,r:18,color:'#ffd600'},
+    {idx:11,name:"USMAN",x:.92,y:.5,r:18,color:'#ffd600'},
 
     // STANDALONE (bottom)
-    {idx:5,name:"SCI",x:.5,y:.7,r:20,color:'#ff6a00'},
-    {idx:7,name:"BRETT\nSIMBA",x:.35,y:.85,r:18,color:'#ff6a00'},
-    {idx:8,name:"JDUN",x:.35,y:.96,r:18,color:'#ffd600'}
+    {idx:7,name:"SCI",x:.5,y:.7,r:20,color:'#ff6a00'},
+    {idx:9,name:"BRETT\nSIMBA",x:.35,y:.85,r:18,color:'#ff6a00'},
+    {idx:10,name:"JDUN",x:.35,y:.96,r:18,color:'#ffd600'},
+
+    // TORI TRADES (standalone)
+    {idx:13,name:"TORI\nTRADES",x:.5,y:.85,r:20,color:'#ff6a00'}
   ];
 
   // Connections - correct hierarchy
   const edges=[
     [0,1],  // LAMBO RAUL -> FXALEXG (hired him)
     [1,2],  // FXALEXG -> ETHAN DURAN (under Alex)
-    [4,5],  // UMAR -> SCARFACE (under Umar)
-    [4,6],  // UMAR -> MASI (under Umar)
-    [4,7],  // UMAR -> USMAN (under Umar)
-    [10,9], // JDUN -> BRETT SIMBA (under JDUN)
+    [3,4],  // TJR -> MAMBAFX
+    [3,5],  // TJR -> COWBOYFX
+    [6,7],  // UMAR -> SCARFACE (under Umar)
+    [6,8],  // UMAR -> MASI (under Umar)
+    [6,9],  // UMAR -> USMAN (under Umar)
+    [11,12], // BRETT SIMBA -> JDUN
   ];
 
   let hoveredNode=null;
